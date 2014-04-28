@@ -6,10 +6,10 @@ A content viewer for historical texts
 
 Easiest setup is using Homebrew. From the root folder:
 
-  brew install node
-  npm install -g grunt
-  npm install
-  grunt server
+    brew install node
+    npm install -g grunt
+    npm install
+    grunt server
 
 ## Getting Started (Ember app toolkit stuff)
 
