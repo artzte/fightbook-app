@@ -1,0 +1,13 @@
+{{#each}}
+<div class="large-6 columns">
+  <h3>{{title}}</h3>
+  <p>
+    {{#link-to 'treatise' key}}
+      {{title}}
+    {{/link-to}}
+  </p>
+  <div class="content">
+    {{content}}
+  </div>
+</div>
+{{/each}}

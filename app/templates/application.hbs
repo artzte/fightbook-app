@@ -1,0 +1,39 @@
+<div class="off-canvas-wrap">
+  <div class="inner-wrap">
+    <nav class="tab-bar">
+      <section class="left-small">
+        <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+      </section>
+
+      <section class="middle tab-bar-section">
+        <h1 class="title">la incrossada</h1>
+      </section>
+    </nav>
+
+    <aside class="left-off-canvas-menu">
+      {{outlet leftMenu}}
+    </aside>
+
+
+    <section class="main-section">
+
+      <!-- Content -->
+      <div {{bind-attr class=":row pageClass"}}>
+        <div class="large-12 columns">
+          {{outlet}}
+        </div>
+      </div>  
+
+      <footer {{bind-attr class=":row pageClass"}}>
+        <div class="large-12 columns">
+          {{outlet footer}}
+        </div>
+      </footer>
+    </section>
+
+  <a class="exit-off-canvas"></a>
+
+  </div>
+</div>
+
+
