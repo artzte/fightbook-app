@@ -1,5 +1,5 @@
 var generator = require('../../loom/generators/index');
-var stubIndex = require('../helpers/stub_index');
+var stubIndex = require('../helpers/stub-index');
 
 describe('default generator', function() {
   describe('savePath', function() {

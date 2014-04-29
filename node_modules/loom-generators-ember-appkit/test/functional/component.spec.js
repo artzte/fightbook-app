@@ -11,7 +11,7 @@ describe('component', function() {
                   humanizedObjectName: 'X foo component'};
     render('app/components/component.js.hbs', locals, function(component) {
       render('app/templates/components/component.hbs.hbs', locals, function(template) {
-        render('tests/unit/components/component_tests.js.hbs', locals, function(test) {
+        render('tests/unit/components/component-tests.js.hbs', locals, function(test) {
           loom('-sq component x-foo', function(env) {
             env.out.should.equal(component + template + test);
             done();

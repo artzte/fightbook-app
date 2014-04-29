@@ -21,7 +21,7 @@ describe('component generator', function() {
 
     it('saves the tests to the right place', function(done) {
       generator.savePath(function(path) {
-        path.should.equal('tests/unit/components/x_foo_tests.js');
+        path.should.equal('tests/unit/components/x-foo-tests.js');
         done();
       }, env, generator.templates[2]);
     });

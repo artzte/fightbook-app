@@ -1,6 +1,6 @@
-var componentize = require('../../lib/componentize_template');
-var testerize = require('../../lib/testerize_template');
-var validateComponent = require('../../lib/validate_component');
+var componentize = require('../../lib/componentize-template');
+var testerize = require('../../lib/testerize-template');
+var validateComponent = require('../../lib/validate-component');
 var parent = require('./default');
 var path = require('path');
 var generator = module.exports = Object.create(parent);
@@ -16,7 +16,7 @@ generator.before = function(next, env) {
 generator.templates = [
   app+'/components/component.js.hbs',
   app+'/templates/components/component.hbs.hbs',
-  'tests/unit/components/component_tests.js.hbs'
+  'tests/unit/components/component-tests.js.hbs'
 ];
 
 generator.savePath = function(next, env, template) {
@@ -40,5 +40,5 @@ function isTemplate(savePath) {
 };
 
 function isTest(savePath) {
-  return /(_tests.js)/.test(savePath);
+  return /(-tests.js)/.test(savePath);
 };

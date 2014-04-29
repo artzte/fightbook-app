@@ -1,6 +1,6 @@
 var loom = require('loom');
 var render = require('../helpers/render');
-var stubIndex = require('../helpers/stub_index');
+var stubIndex = require('../helpers/stub-index');
 
 describe('index build', function() {
   it('renders the template correctly', function(done) {

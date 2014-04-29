@@ -1,7 +1,7 @@
 var path = require('path');
 var parent = require('./default');
-var componentize = require('../../lib/componentize_template');
-var validateComponent = require('../../lib/validate_component');
+var componentize = require('../../lib/componentize-template');
+var validateComponent = require('../../lib/validate-component');
 var generator = module.exports = Object.create(parent);
 var app = parent.appPath;
 
