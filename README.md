@@ -11,6 +11,10 @@ Easiest setup is using Homebrew. From the root folder:
     npm install
     grunt server
 
+## API stubs
+
+See APIMethod entry in package.json
+
 ## Getting Started (Ember app toolkit stuff)
 
 * [Project Documentation Site](http://stefanpenner.github.io/ember-app-kit/)
