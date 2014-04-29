@@ -2,8 +2,6 @@
 
 Route = Ember.Route.extend
   model: (params) ->
-    @get('store').all('treatise').findProperty('key', params.treatise_key)
-
     store = @get 'store'
     treatise = store.all('treatise').findProperty('key', params.treatise_key)
 
