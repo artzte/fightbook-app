@@ -15,9 +15,4 @@ Route = Ember.Route.extend
     controller.set 'controllers.page/section.content', {}
     controller.set 'controllers.page/section.page', model
 
-  renderTemplate: ->
-    @render 'page/index',
-      into: 'application'
-      outlet: 'footer'
-
 `export default Route`

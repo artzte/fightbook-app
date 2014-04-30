@@ -20,9 +20,7 @@ Route = Ember.Route.extend
     controller.set 'controllers.page.bounds', model.get('bounds')
 
   renderTemplate: ->
-    @render 'page/section',
-      into: 'application'
-      outlet: 'footer'
+    @_super()
 
     @render 'page/section-controls',
       into: 'page'

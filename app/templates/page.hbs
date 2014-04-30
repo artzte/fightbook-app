@@ -23,14 +23,13 @@
       </ul>    
     </div>
   </div>
-  <div class="row">
-    <div class="columns large-12 small-12 page-title">
-      <h2>{{title}}</h2>
-    </div>
-  </div>
 </header>
 <div class="row content-row">
-  <div class="large-12 small-12 columns">
+  <div class="medium-9 small-12 columns">
+    <h2 class="page-title">
+      {{#link-to 'page' content}}{{title}}{{/link-to}}
+    </h2>
+
     <ul id="sections-nav" class="no-bullet">
       {{#each s in sectionsSorted}}
         {{section-item section=s page=page}}
@@ -46,9 +45,12 @@
         </a>
       </li>
       {{outlet section-controls}}
-    </div>
+    </ul>
     {{#if dziPath}}
       {{seadragon-image dziUrl=dziUrl zoom=zoom bounds=bounds sdZoom="sdZoom" sdBounds="sdBounds"}}
     {{/if}}
+  </div>
+  <div class="medium-3 small-12 columns size-to">
+    {{outlet}}
   </div>
 </div>

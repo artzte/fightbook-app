@@ -6,8 +6,8 @@
 </ul>
 <ul class="off-canvas-list">
   <li><label>{{title}}</label></li>
-  {{#each section in sections}}
-  <li>{{#link-to 'page.section' id section.slug}}{{section.title}}{{/link-to}}</li>
+  {{#each section in page.sections}}
+  <li>{{#link-to 'page.section' id section.slug}}Panel {{section.sortOrder}}{{/link-to}}</li>
   {{/each}}
 </ul>
 <ul class="off-canvas-list">

@@ -37,28 +37,28 @@ form {
   max-width: 82rem;
 }
 
-.content-row {
-  padding-top: 2.5rem;
+h1,h2 {
+  a {
+      color: inherit;
+    }
+}
+
+h2.page-title {
+  position: absolute;
+  z-index: 1;
 }
 
 $leaderheadVerticalMargin: .4rem;
 
 header {
-  position: absolute;
-  width: 100%;
-  z-index: 1;
 
   h1 {
     font-size: 1.2rem;
     margin: $leaderheadVerticalMargin;
-    a {
-      color: inherit;
-    }
   }
 
   .page-links {
     margin: $leaderheadVerticalMargin;
-    padding: 0 2rem 0 0;
     li {
       margin-left: 1rem;
     }
@@ -74,31 +74,14 @@ header {
 }
 
 #section-content {
-  max-height: 5rem;
   overflow-y: scroll;
-  margin: 1rem;
+  height: inherit;
   .translation {
     font-size: 0.8rem;
     p {
       font-size: inherit;
     }
   }
-  .section-form  {
-    margin: 1rem 0;
-    padding: 0.5rem;
-    font-size: 0.8rem;
-
-    input, button {
-      font-size: inherit;
-      display: inline-block;
-      margin: 4px;
-    }
-    input {
-      padding: 2px;
-      width: 2rem;
-      text-align: right;
-    }
-  }  
 }
 
 #sections-nav {

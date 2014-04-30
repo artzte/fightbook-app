@@ -4,10 +4,10 @@ PageView = Em.View.extend
     dbContext =
       name: 'debouncePageResize'
     doResize = =>
-      $dzOuter = view.$().find('.dz-outer')
       $innerWrap = $('.inner-wrap')
-      $dzOuter.height $innerWrap.height()-85
-
+      headerHeight = $('nav').height() + $('header').height()
+      height = $innerWrap.height() - headerHeight
+      $('.size-to').height height
     Em.run.scheduleOnce 'afterRender', =>
       doResize()
 
