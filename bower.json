@@ -9,7 +9,8 @@
     "ember-resolver": "git://github.com/stefanpenner/ember-jj-abrams-resolver.git#master",
     "ic-ajax": "~0.3.0",
     "ember-testing-httpRespond": "~0.1.1",
-    "foundation": "5.2.2"
+    "foundation": "5.2.2",
+    "ember-responsive": "~0.2.10"
   },
   "resolutions": {
     "jquery": "~1.9.1"

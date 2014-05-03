@@ -75,7 +75,7 @@ header {
 
 #section-content {
   overflow-y: scroll;
-  height: inherit;
+  height: 99%;
   .translation {
     font-size: 0.8rem;
     p {
@@ -83,6 +83,21 @@ header {
     }
   }
 }
+
+.section-column {
+  position: absolute;
+  bottom: 0;
+  background: $backgroundScreen;
+  max-height: 18%;
+}
+@media #{$medium-up} {
+  .section-column {
+    background: transparent;
+    position: static;
+    bottom: auto;
+  }
+}
+
 
 #sections-nav {
   z-index: 2;

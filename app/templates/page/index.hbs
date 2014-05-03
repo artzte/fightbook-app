@@ -1,7 +1,7 @@
 <div id="section-content">
-  {{#each sections}}
-  <div class="translation">
-    <p>{{translation.md}}</p>
+  {{#each section in sections}}
+  <div class="translation" {{action 'navSection' section}}>
+    <p>{{section.translation.md}}</p>
   </div>
   {{/each}}
 </div>

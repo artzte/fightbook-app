@@ -7,7 +7,17 @@ PageView = Em.View.extend
       $innerWrap = $('.inner-wrap')
       headerHeight = $('nav').height() + $('header').height()
       height = $innerWrap.height() - headerHeight
-      $('.size-to').height height
+
+      # always set .dz-outer, the seadragon container, to the height
+      $('.dz-outer').height height
+
+      # the section column is only set to height if we are in the medium
+      # media query - this is a hard value from _foundation_default.scss
+      if @get 'media.isMedium'
+        $('.section-column').height height
+      else
+        $('.section-column').css 'height', ''
+
     Em.run.scheduleOnce 'afterRender', =>
       doResize()
 

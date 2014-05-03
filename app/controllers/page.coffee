@@ -24,11 +24,9 @@ Controller = Em.ObjectController.extend
       false
 
     sdZoom: (zoom) ->
-      Em.Logger.debug "Zoomed to", zoom
       @set 'sdZoom', zoom
 
     sdBounds: (bounds) ->
-      Em.Logger.debug "Bounds to", bounds
       @set 'sdBounds', bounds
 
     zoomIn: ->

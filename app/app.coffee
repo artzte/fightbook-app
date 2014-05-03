@@ -14,10 +14,16 @@ App = Ember.Application.extend
   ready: ->
     $(document).foundation()
 
+App.responsive
+  media:
+    medium: "(min-width: 40.063em)"
+    small: "(max-width: 40em)"
+
 DS.RESTAdapter.reopen
   namespace: 'api'
 
 DS.RESTSerializer.reopen
   primaryKey: '_id'
+
 
 `export default App`
