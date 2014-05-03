@@ -7,7 +7,7 @@
 # dependencies
 /vendor/*
 !/vendor/loader.js
-!vendor/openseadragon
+!/vendor/openseadragon
 
 # misc
 /.sass-cache
