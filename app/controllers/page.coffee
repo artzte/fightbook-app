@@ -14,9 +14,9 @@ Controller = Em.ObjectController.extend
       @get('treatise').prevPage @get('content')
     ).property('content', 'treatise.isSettled', 'treatise.pages.@each')
 
-  redraw: ( ->
-      console.log 'redrawing with', arguments
-    ).observes('sdZoom', 'sdOriginX', 'sdOriginY')
+  #redraw: ( ->
+  #    console.log 'redrawing with', arguments
+  #  ).observes('sdZoom', 'sdOriginX', 'sdOriginY')
 
   actions: {
     'submit': ->
