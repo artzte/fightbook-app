@@ -37,6 +37,27 @@ form {
   max-width: 82rem;
 }
 
+.thumbs-wrapper {
+  overflow-y: scroll;
+  padding: 1rem 0;
+  box-model: border-box;
+}
+
+.page-thumbnail {
+  position: relative;
+  margin-bottom: 1rem;
+  a {
+    color: inherit;
+  }
+  .caption {
+    position: absolute;
+    bottom: 2rem;
+    margin-left: 25%;
+    width: 50%;
+    text-align: center;
+  }
+}
+
 h1,h2 {
   a {
       color: inherit;

@@ -22,4 +22,11 @@ Page = DS.Model.extend
       "#{ENV.DZI_BASE_URL}/#{@get('dziPath')}"
     ).property('dziPath')
 
+  thumbUrl: (->
+      thumb = @get('dziPath')
+        .replace(/getty-dz/, 'getty-thumbs')
+        .replace(/dzi/, 'jpg')
+      "#{ENV.DZI_BASE_URL}/#{thumb}"
+    ).property('dziPath')
+
 `export default Page`

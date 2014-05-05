@@ -1,6 +1,35 @@
 `import Resolver from 'resolver'`
 
-App = Ember.Application.extend
+# This method sizes elements that are required to be of a certain height.
+Em.Application.reopenClass
+  doResize: ->
+    $innerWrap = $('.inner-wrap')
+    headerHeight = $('nav').height() + $('header').height()
+    height = $innerWrap.height() - headerHeight
+
+    # get height-targeted containers - those with a sizeWhen data attribute
+    # are conditionally sized based on responsive media query. if the query
+    # does not match it removes the forced height attribute
+    containers = $('.size-to-height')
+    containers.each (index, container) =>
+      el = $(container)
+      sizeWhen = el.data 'sizeWhen'
+      if !sizeWhen? || @get "media.#{sizeWhen}"
+        el.height height
+      else
+        el.css 'height', ''
+
+# Make the resize method available in views
+Em.Application.initializer
+  name: 'doResizeInitializer',
+  initialize: (container, app) ->
+    app.register 'doResizeInitializer:doResize', app.constructor.doResize,
+      instantiate: false
+
+    app.inject 'view', 'doResize', 'doResizeInitializer:doResize'
+
+
+App = Em.Application.extend
   LOG_ACTIVE_GENERATION: true
   LOG_MODULE_RESOLVER: true
   LOG_TRANSITIONS: true
@@ -13,6 +42,7 @@ App = Ember.Application.extend
   # init the foundation JS
   ready: ->
     $(document).foundation()
+
 
 App.responsive
   media:

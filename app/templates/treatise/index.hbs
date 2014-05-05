@@ -12,11 +12,16 @@
 </header>
 
 <row class="content-row">
-  {{#each p in pagesSorted}}
-  <div class="large-2 medium-3 small-6 columns" role='content'>
-    <article>
-      {{#link-to 'page' key p.id}}{{p.title}}{{/link-to}}
-    </article>
+  <div class="thumbs-wrapper size-to-height">
+    {{#each p in pagesSorted}}
+    <div class="large-2 medium-3 small-4 columns" role='content'>
+      <article class="page-thumbnail">
+          {{#link-to 'page' key p.id class='th'}}
+            <img class="dt" {{bind-attr src=p.thumbUrl}}>
+            <div class="caption">{{p.title}}</div>
+          {{/link-to}}
+      </article>
+    </div>
+    {{/each}}
   </div>
-  {{/each}}
 </row>
