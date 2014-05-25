@@ -9,7 +9,6 @@
 !/vendor/loader.js
 !/vendor/openseadragon
 !/vendor/openseadragonimaginghelper
-!/vendor/openseadragonviewerinputhook
 
 # misc
 /.sass-cache
