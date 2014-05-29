@@ -18,7 +18,7 @@ h1, h2, h3  {
 
 form {
   font-family: $form-font-family;
-  button.button, input {
+  .button, input {
     font-family: inherit;
   }
   .button {
@@ -31,6 +31,30 @@ form {
   canvas {
     background-color: #c7bfac;
   }
+}
+
+.section-area {
+  background: $backgroundScreen;
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+
+  &:hover {
+    border: 1px solid red;
+  }
+  &.selected {
+    border: 3px solid black;
+  }
+}
+
+
+
+.dz-stats {
+  position: fixed;
+  top: 10%;
+  left: 40%;
+  font-size: .8rem;
 }
 
 .row {
@@ -153,9 +177,11 @@ body,html{
 .application-wrapper {
   height: 100%;
 }
+
 .off-canvas-wrap,.inner-wrap{
-    height:100%;   
+  height:100%;   
 }
+
 
 footer {
   background: $backgroundScreen;

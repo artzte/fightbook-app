@@ -1,1 +1,8 @@
-<div class= "dz-outer size-to-height"></div>
+<div class="dz-outer size-to-height"></div>
+<div class="dz-stats">
+  bounds: {{bounds-rect.x}}, {{bounds-rect.y}}, {{bounds-rect.width}}, {{bounds-rect.height}}
+  mouse: {{mouseLogX}}, {{mouseLogY}}
+</div>
+{{#each s in sections}}
+{{section-area section=s current-section=section bounds=s.bounds dzi-timestamp=dziTimestamp sd-imaging-helper=sdImagingHelper viewer=sdViewer zoom=zoom sectionDragStart='sectionDragStart'}}
+{{/each}}
