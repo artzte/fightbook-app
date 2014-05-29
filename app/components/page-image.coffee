@@ -1,5 +1,5 @@
 Component = Ember.Component.extend
-  classNames: ['seadragon-image']
+  classNames: ['page-image']
 
   updateSource: (->
       @get('sdViewer').open @get 'dziUrl'
@@ -46,7 +46,7 @@ Component = Ember.Component.extend
     Ember.run.scheduleOnce 'afterRender', @, =>
       sdViewer = new OpenSeadragon
         hash: @elementId
-        element: @$().find('.dz-outer')[0]
+        element: @$().find('.page-outer')[0]
         tileSources: @get('dziUrl')
         showNavigationControl: false
         showNavigator: false
