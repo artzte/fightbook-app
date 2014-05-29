@@ -17,6 +17,7 @@ Route = Ember.Route.extend
     page = @modelFor 'page'
     controller.set 'page', page
     controller.set 'section', model
+    controller.set 'controllers.page.section', model
     controller.set 'controllers.page.boundsRect', model.get('bounds')
 
   renderTemplate: ->
