@@ -29,4 +29,23 @@ Page = DS.Model.extend
       "#{ENV.DZI_BASE_URL}/#{thumb}"
     ).property('dziPath')
 
+  bounds: (->
+      bounds = @get 'sections.@each.bounds'
+      if bounds.get('length')>0
+        top = null
+        bottom = null
+        left = null
+        right = null
+        bounds.forEach (bound) ->
+          boundRight = bound.x + bound.width
+          boundBottom = bound.y + bound.height
+          top = bound.y if !top? || bound.y < top
+          left = bound.x if !left? || bound.x < left
+          bottom = boundBottom if !bottom? || boundBottom > bottom
+          right = boundRight if !right? || boundRight > right
+        new OpenSeadragon.Rect top, left, bottom-top, right-left
+      else
+        null
+    ).property('sections.@each.bounds')
+
 `export default Page`
