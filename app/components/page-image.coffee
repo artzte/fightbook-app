@@ -36,9 +36,12 @@ Component = Ember.Component.extend
 
   # this is just debug code currently
   mouseMove: (e) ->
-    pos = @$().offset()
-    @set 'mouseLogX', @get('sdImagingHelper').physicalToLogicalX(e.originalEvent.pageX - pos.left)
-    @set 'mouseLogY', @get('sdImagingHelper').physicalToLogicalY(e.originalEvent.pageY - pos.top)
+    point = new OpenSeadragon.Point()
+    point.x = e.offsetX
+    point.y = e.offsetY
+    converted = @get('sdViewer').viewport.viewerElementToViewportCoordinates point
+    @set 'mouseLogX', converted.x
+    @set 'mouseLogY', converted.y
 
   didInsertElement: ->
     component = @
