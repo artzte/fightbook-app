@@ -55,7 +55,6 @@ Component = Ember.Component.extend
         showNavigator: false
         defaultZoomLevel: 1
         minZoomLevel: 1
-        autoResize: false # can disable the resize on viewer resize
       imagingHelper = sdViewer.activateImagingHelper
         onImageViewChanged: (info) =>
           return if @isDestroying
