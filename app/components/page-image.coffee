@@ -15,7 +15,7 @@ Component = Ember.Component.extend
 
   dragOver: (ev) ->
     ev.preventDefault()
-  
+
   # surfaces a section-moved message when the section rectangle is dopped
   drop: (ev) ->
     sectionId = ev.dataTransfer.getData('text/data')
@@ -26,7 +26,7 @@ Component = Ember.Component.extend
 
     dx = sectionDragEndPosition.x - sectionDragStartPosition.x
     dy = sectionDragEndPosition.y - sectionDragStartPosition.y
-
+    console.log "dx is", dx, "dy is", dy
     sdImagingHelper = @get 'sdImagingHelper'
 
     dxLogical = sdImagingHelper.physicalToLogicalDistance dx
@@ -36,10 +36,12 @@ Component = Ember.Component.extend
 
   # this is just debug code currently
   mouseMove: (e) ->
-    point = new OpenSeadragon.Point()
-    point.x = e.offsetX
-    point.y = e.offsetY
-    converted = @get('sdViewer').viewport.viewerElementToViewportCoordinates point
+    viewport = @get 'sdViewport'
+    return unless viewport
+
+    offset = @$('.page-outer').offset()
+    point = new OpenSeadragon.Point(e.pageX - offset.top, e.pageY - offset.left)
+    converted = viewport.viewerElementToViewportCoordinates point
     @set 'mouseLogX', converted.x
     @set 'mouseLogY', converted.y
 
@@ -63,9 +65,9 @@ Component = Ember.Component.extend
         component.sendAction 'sdBounds', sdViewer.viewport.getBounds()
       sdViewer.addHandler 'zoom', (info) =>
         component.sendAction 'sdZoom', info.zoom
-        if sdViewer.viewport 
+        if sdViewer.viewport
           component.sendAction 'sdBounds', sdViewer.viewport.getBounds()
-      
+
       sdViewer.addHandler 'open', (viewer, source) =>
         component.sendAction 'sdOpen', source
         @set 'sdViewport', @get('sdViewer').viewport
@@ -103,7 +105,7 @@ Component = Ember.Component.extend
       bounds = @get 'bounds-rect'
       viewport = @get 'sdViewport'
       return unless bounds && viewport
-  
+
       Em.run.debounce @, @_fitTo, 300
     ).observes('bounds-rect', 'sdViewport')
 

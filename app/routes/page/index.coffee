@@ -15,5 +15,6 @@ Route = Ember.Route.extend
     controller.set 'controllers.page/section.content', {}
     controller.set 'controllers.page/section.page', model
     controller.set 'controllers.page.boundsRect', model.get('bounds')
+    controller.set 'controllers.page.section', undefined
 
 `export default Route`

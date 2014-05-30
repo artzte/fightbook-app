@@ -10,31 +10,23 @@ Component = Ember.Component.extend
 
   positionElement: (->
       bounds = @get 'bounds'
-      imagingHelper = @get 'sd-imaging-helper'
-      viewer = @get 'viewer'
+      viewport = @get 'viewport'
       ts = @get 'dzi-timestamp'
       overlay = @$()
 
-      return unless overlay && bounds && imagingHelper && viewer && @get('dzi-timestamp')
+      return unless overlay && bounds && viewport && ts
 
       redraw = ->
-        # Adjusts the bounds element so that it matches the new image
-        point = imagingHelper.logicalToPhysicalPoint
-          x: bounds.x
-          y: bounds.y
-        width = Math.floor imagingHelper.logicalToPhysicalDistance(bounds.width)
-        height = Math.floor imagingHelper.logicalToPhysicalDistance(bounds.height)
+        base = viewport.viewportToViewerElementCoordinates new OpenSeadragon.Point(bounds.x, bounds.y)
+        end = viewport.viewportToViewerElementCoordinates new OpenSeadragon.Point(bounds.x+bounds.width, bounds.y+bounds.height)
         overlay.css
-          left: point.x
-          top: point.y
-          width: width
-          height: height
-        
-        viewer.updateOverlay overlay[0], point
+          left: base.x
+          top: base.y
+          width: end.x - base.x
+          height: end.y - base.y
 
       Em.run.debounce @, redraw, 500
-
-    ).observes('bounds', 'sd-imaging-helper', 'viewer', 'dzi-timestamp', 'zoom')
+    ).observes('bounds', 'viewport', 'dzi-timestamp', 'zoom')
 
   getClientOffset: (e) ->
     target = e.target || e.srcElement

@@ -32,18 +32,18 @@ Page = DS.Model.extend
   bounds: (->
       bounds = @get 'sections.@each.bounds'
       if bounds.get('length')>0
-        top = null
-        bottom = null
-        left = null
-        right = null
-        bounds.forEach (bound) ->
-          boundRight = bound.x + bound.width
-          boundBottom = bound.y + bound.height
-          top = bound.y if !top? || bound.y < top
-          left = bound.x if !left? || bound.x < left
-          bottom = boundBottom if !bottom? || boundBottom > bottom
-          right = boundRight if !right? || boundRight > right
-        new OpenSeadragon.Rect top, left, bottom-top, right-left
+        lefts = bounds.getEach 'x'
+        tops = bounds.getEach 'y'
+        rights = bounds.map (bound) ->
+          bound.x + bound.width
+        bottoms = bounds.map (bound) ->
+          bound.y + bound.height
+
+        top = tops.sort().shift()
+        left = lefts.sort().shift()
+        bottom = bottoms.sort().pop()
+        right = rights.sort().pop()
+        new OpenSeadragon.Rect left, top, right-left, bottom-top
       else
         null
     ).property('sections.@each.bounds')
