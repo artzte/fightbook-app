@@ -1,0 +1,16 @@
+<header>
+  <div class="row">
+    <div class="small-12 medium-6 columns">
+      <h2>Welcome</h2>
+      <p>Please sign in.</p>
+      <form {{action 'signin' on='submit'}}>
+        <label>Email
+          {{input type="text" value=email}}
+        </label>
+        <label>Password
+          {{input type='password' value=password}}
+        </label>
+        {{input type='submit' value='Submit' class='button'}}
+      </form>
+    </div>
+</div>

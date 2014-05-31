@@ -1,8 +1,7 @@
 Router = Ember.Router.extend()
 
 Router.map ->
-  @route 'component-test'
-  @route 'helper-test'
+  @route 'signin'
   @resource 'treatises', path: '/t', ->
     @route 'index', path: '/'
     @resource 'treatise', path: ':treatise_key', ->
