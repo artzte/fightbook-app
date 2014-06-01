@@ -7,12 +7,19 @@ Controller = Em.Controller.extend
         data:
           email: @get 'email'
           password: @get 'password'
-      promise.done (result) ->
-        console.log result
+      promise.done (result) =>
+        @set('session.currentUser', Em.Object.create(result))
+        @set('session.isAnon', false)
+        transition = @get 'afterLoginTransition'
+        if transition
+          @set 'afterLoginTransition', null
+          transition.retry()
+        else
+          @transitionTo 'treatises'
       promise.fail (result) ->
         try
-          console.log JSON.parse(result.responseText)
+          result = JSON.parse(result.responseText)
         catch
-          console.log "error"
+          result = {error: 'sign-in was unsuccessful'}
 
 `export default Controller`

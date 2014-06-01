@@ -25,9 +25,11 @@ Em.Application.initializer
   initialize: (container, app) ->
     app.register 'doResizeInitializer:doResize', app.constructor.doResize,
       instantiate: false
-
     app.inject 'view', 'doResize', 'doResizeInitializer:doResize'
-
+    app.Session = Ember.Object.extend()
+    app.register('session:current', app.Session, {singleton: true});
+    app.inject('controller', 'session', 'session:current');
+    app.inject('route', 'session', 'session:current');
 
 App = Em.Application.extend
   LOG_ACTIVE_GENERATION: true
