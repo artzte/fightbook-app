@@ -5,6 +5,7 @@ Section = DS.Model.extend
   sequences: DS.hasMany 'sequence'
   translation: DS.attr 'markdown'
   bounds: DS.attr 'rect'
+  physicalBounds: DS.attr 'rect'
   state: DS.attr 'string'
   createdAt: DS.attr 'date'
 
