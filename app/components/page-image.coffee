@@ -16,7 +16,7 @@ Component = Ember.Component.extend
   dragOver: (ev) ->
     ev.preventDefault()
 
-  # surfaces a section-moved message when the section rectangle is dopped
+  # surfaces a section-moved message when the section rectangle is dropped
   drop: (ev) ->
     sectionId = ev.dataTransfer.getData('text/data')
     sectionDragEndPosition =
@@ -26,13 +26,19 @@ Component = Ember.Component.extend
 
     dx = sectionDragEndPosition.x - sectionDragStartPosition.x
     dy = sectionDragEndPosition.y - sectionDragStartPosition.y
-    console.log "dx is", dx, "dy is", dy
+
     sdImagingHelper = @get 'sdImagingHelper'
 
     dxLogical = sdImagingHelper.physicalToLogicalDistance dx
     dyLogical = sdImagingHelper.physicalToLogicalDistance dy
 
-    @sendAction 'sectionMoved', sectionId, dxLogical, dyLogical
+    section = @get('sections').findBy('id', sectionId)
+    bounds = section.get 'bounds'
+
+    newBounds = new OpenSeadragon.Rect(bounds.x + dxLogical, bounds.y + dyLogical, bounds.width, bounds.height)
+
+    # send the section, the new logical bounds, and the new physical bounds
+    @sendAction 'sectionMoved', section, newBounds, @get('sdViewport').viewportToImageRectangle(newBounds)
 
   # this is just debug code currently
   mouseMove: (e) ->

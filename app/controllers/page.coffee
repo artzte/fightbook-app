@@ -23,11 +23,9 @@ Controller = Em.ObjectController.extend
       @set 'zoom', @get 'sdZoom'
       false
 
-    sectionMoved: (sectionId, dxLogical, dyLogical) ->
-      section = @get('model.sections').findProperty 'id', sectionId
-      bounds = section.get('bounds')
-      newBounds = new OpenSeadragon.Rect(bounds.x + dxLogical, bounds.y + dyLogical, bounds.width, bounds.height)
+    sectionMoved: (section, newBounds, newPhysicalBounds) ->
       section.set 'bounds', newBounds
+      section.set 'physicalBounds', newPhysicalBounds
       section.save()
 
     sdZoom: (zoom) ->
@@ -56,5 +54,3 @@ Controller = Em.ObjectController.extend
   }
 
 `export default Controller`
-
-
