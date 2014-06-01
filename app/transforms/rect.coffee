@@ -1,6 +1,9 @@
 Transform = DS.Transform.extend
   deserialize: (serialized) ->
-    new OpenSeadragon.Rect(serialized.x, serialized.y, serialized.width, serialized.height)
+    if serialized
+      new OpenSeadragon.Rect(serialized.x, serialized.y, serialized.width, serialized.height)
+    else
+      new OpenSeadragon.Rect()
   serialize: (deserialized) ->
     {
       x: deserialized.get('x')
