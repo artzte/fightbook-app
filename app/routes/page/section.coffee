@@ -4,7 +4,7 @@ Route = Ember.Route.extend
     store = @get 'store'
 
     getSection = ->
-      Em.RSVP.resolve page.get('sections').findProperty('id', params.section_id)
+      Em.RSVP.resolve page.get('sections').findProperty('sortOrder', parseInt(params.sort_order, 10))
 
     if Em.isEmpty(page.get('sections'))
       store.reloadRecord(page).then ->

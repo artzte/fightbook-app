@@ -16,7 +16,7 @@
     {{#each p in pagesSorted}}
     <div class="large-2 medium-3 small-4 columns" role='content'>
       <article class="page-thumbnail">
-          {{#link-to 'page' key p.id class='th'}}
+          {{#link-to 'page' key p.slug class='th'}}
             <img class="dt" {{bind-attr src=p.thumbUrl}}>
             <div class="caption">{{p.title}}</div>
           {{/link-to}}
