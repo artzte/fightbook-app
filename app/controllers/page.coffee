@@ -14,19 +14,16 @@ Controller = Em.ObjectController.extend
       @get('treatise').prevPage @get('content')
     ).property('content', 'treatise.isSettled', 'treatise.pages.@each')
 
-  #redraw: ( ->
-  #    console.log 'redrawing with', arguments
-  #  ).observes('sdZoom', 'sdOriginX', 'sdOriginY')
-
   actions: {
     'submit': ->
       @set 'zoom', @get 'sdZoom'
       false
 
-    sectionMoved: (section, newBounds, newPhysicalBounds) ->
+    sectionMoved: (section, newBounds, newPhysicalBounds, performSave = true) ->
       section.set 'bounds', newBounds
       section.set 'physicalBounds', newPhysicalBounds
-      section.save()
+      if performSave
+        section.save()
 
     sdZoom: (zoom) ->
       @set 'sdZoom', zoom
