@@ -13,29 +13,57 @@ Component = Ember.Component.extend
         x: e.originalEvent.pageX
         y: e.originalEvent.pageY
 
+    sectionSizeStart: (section, handle, e) ->
+      @sendAction 'sectionSizeStart', section, handle, e
+      @set 'handleDragStartPosition',
+        handle: handle
+        x: e.originalEvent.pageX
+        y: e.originalEvent.pageY
+      console.log @get('handleDragStartPosition')
+
   dragOver: (ev) ->
     ev.preventDefault()
 
   # surfaces a section-moved message when the section rectangle is dropped
   drop: (ev) ->
     sectionId = ev.dataTransfer.getData('text/data')
-    sectionDragEndPosition =
-      x: ev.originalEvent.pageX
-      y: ev.originalEvent.pageY
-    sectionDragStartPosition = @get 'sectionDragStartPosition'
-
-    dx = sectionDragEndPosition.x - sectionDragStartPosition.x
-    dy = sectionDragEndPosition.y - sectionDragStartPosition.y
-
-    sdImagingHelper = @get 'sdImagingHelper'
-
-    dxLogical = sdImagingHelper.physicalToLogicalDistance dx
-    dyLogical = sdImagingHelper.physicalToLogicalDistance dy
-
     section = @get('sections').findBy('id', sectionId)
     bounds = section.get 'bounds'
 
-    newBounds = new OpenSeadragon.Rect(bounds.x + dxLogical, bounds.y + dyLogical, bounds.width, bounds.height)
+    dragEndPosition =
+      x: ev.originalEvent.pageX
+      y: ev.originalEvent.pageY
+
+    handleDragStartPosition = @get 'handleDragStartPosition'
+    sectionDragStartPosition = @get 'sectionDragStartPosition'
+    dragStartPosition = handleDragStartPosition || sectionDragStartPosition
+    dx = dragEndPosition.x - dragStartPosition.x
+    dy = dragEndPosition.y - dragStartPosition.y
+
+    sdImagingHelper = @get 'sdImagingHelper'
+    dxLogical = sdImagingHelper.physicalToLogicalDistance dx
+    dyLogical = sdImagingHelper.physicalToLogicalDistance dy
+
+    newBounds = new OpenSeadragon.Rect(bounds.x, bounds.y, bounds.width, bounds.height)
+
+    if handleDragStartPosition
+      console.log handleDragStartPosition
+      switch handleDragStartPosition.handle
+        when 'tl'
+          newBounds.x += dxLogical
+          newBounds.y += dyLogical
+        when 'tr'
+          newBounds.y += dyLogical
+        when 'bl'
+          newBounds.x += dxLogical
+      newBounds.width += dxLogical
+      newBounds.height += dyLogical
+    else
+      newBounds.x += dxLogical
+      newBounds.y += dyLogical
+
+    @set 'handleDragStartPosition', undefined
+    @set 'sectionDragStartPosition', undefined
 
     # send the section, the new logical bounds, and the new physical bounds
     @sendAction 'sectionMoved', section, newBounds, @get('sdViewport').viewportToImageRectangle(newBounds)

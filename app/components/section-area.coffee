@@ -34,7 +34,12 @@ Component = Ember.Component.extend
     [e.clientX - rect.left, e.clientY - rect.top]
 
   dragStart: (e) ->
+    dragged = $(e.target)
+    if dragged.is('.handle')
+      @sendAction 'sectionSizeStart', @get('section'), dragged.data('handle'), e
+    else
+      @sendAction 'sectionDragStart', @get('section'), e
+
     e.dataTransfer.setData('text/data', @get('section.id'))
-    @sendAction 'sectionDragStart', @get('section'), e
 
 `export default Component`
