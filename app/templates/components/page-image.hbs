@@ -1,8 +1,4 @@
 <div class="page-outer size-to-height"></div>
-<div class="page-stats">
-  bounds: {{bounds-rect.x}}, {{bounds-rect.y}}, {{bounds-rect.width}}, {{bounds-rect.height}}<br/>
-  mouse: {{mouseLogX}}, {{mouseLogY}}
-</div>
 {{#each s in sections}}
-{{section-area section=s current-section=section bounds=s.bounds dzi-timestamp=dziTimestamp viewer=sdViewer viewport=sdViewport zoom=zoom sectionSizeStart='sectionSizeStart' sectionDragStart='sectionDragStart'}}
+{{section-area section=s current-section=section bounds=s.bounds dzi-timestamp=dziTimestamp viewer=sdViewer viewport=sdViewport zoom=zoom sectionSizeStart='sectionSizeStart' sectionDragStart='sectionDragStart' visible=editMode}}
 {{/each}}

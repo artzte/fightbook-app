@@ -1,6 +1,6 @@
 Component = Ember.Component.extend
   classNames: ['section-area']
-  classNameBindings: ['selected']
+  classNameBindings: ['selected', 'visible']
   tagName: ['div']
   attributeBindings: ['draggable']
   draggable: "true"
@@ -25,7 +25,7 @@ Component = Ember.Component.extend
           width: end.x - base.x
           height: end.y - base.y
 
-      Em.run.debounce @, redraw, 500
+      Em.run.debounce @, redraw, 100
     ).observes('bounds', 'viewport', 'dzi-timestamp', 'zoom')
 
   getClientOffset: (e) ->

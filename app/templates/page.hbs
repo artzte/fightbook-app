@@ -44,11 +44,17 @@
           <i class="zoom-control icon-zoomout"></i>
         </a>
       </li>
-      {{outlet section-controls}}
+      {{#if session.currentUser.isAdmin}}
+      <li>
+        <a {{action 'toggleEditMode'}}>
+          <i {{bindAttr class=":icon-pencil :edit-mode-toggle editMode:active"}}></i>
+        </a>
+      </li>
+      {{/if}}
     </ul>
 
     {{#if dziPath}}
-      {{page-image bounds-rect=boundsRect sections=sections section=section dziUrl=dziUrl zoom=zoom sdZoom="sdZoom" sdBounds="sdBounds" sectionMoved="sectionMoved"}}
+      {{page-image bounds-rect=boundsRect sections=sections section=section dziUrl=dziUrl zoom=zoom sdZoom="sdZoom" sdBounds="sdBounds" sectionMoved="sectionMoved" editMode=editMode}}
     {{/if}}
 
   </div>

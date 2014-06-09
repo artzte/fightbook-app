@@ -3,8 +3,9 @@ Controller = Em.ObjectController.extend
   zoomStops: [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 5]
   init: ->
     @_super()
-    Em.run.scheduleOnce 'afterRender', ->
-      $(window).trigger('resize')
+    Em.run ->
+      Em.run.scheduleOnce 'afterRender', ->
+        $(window).trigger('resize')
   nextPage: (->
       treatise = @get 'treatise'
       @get('treatise').nextPage @get('content')
@@ -14,25 +15,25 @@ Controller = Em.ObjectController.extend
       @get('treatise').prevPage @get('content')
     ).property('content', 'treatise.isSettled', 'treatise.pages.@each')
 
-  #redraw: ( ->
-  #    console.log 'redrawing with', arguments
-  #  ).observes('sdZoom', 'sdOriginX', 'sdOriginY')
-
-  actions: {
-    'submit': ->
-      @set 'zoom', @get 'sdZoom'
-      false
-
-    sectionMoved: (section, newBounds, newPhysicalBounds) ->
+  actions:
+    sectionMoved: (section, newBounds, newPhysicalBounds, performSave = true) ->
       section.set 'bounds', newBounds
       section.set 'physicalBounds', newPhysicalBounds
-      section.save()
+      if performSave
+        section.save()
+      false
+
+    toggleEditMode: ->
+      @toggleProperty 'editMode'
+      false
 
     sdZoom: (zoom) ->
       @set 'sdZoom', zoom
+      false
 
     sdBounds: (bounds) ->
       @set 'sdBounds', bounds
+      false
 
     zoomIn: ->
       sdZoom = @get 'sdZoom'
@@ -51,6 +52,5 @@ Controller = Em.ObjectController.extend
       if newZoom?
         @set 'zoom', newZoom
       false
-  }
 
 `export default Controller`

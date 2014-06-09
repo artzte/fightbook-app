@@ -9,75 +9,81 @@ Component = Ember.Component.extend
     # proxy the drag start through to the container view and record the start position
     sectionDragStart: (section, e) ->
       @sendAction 'sectionDragStart', section, e
+      @set 'sectionEdited', section
       @set 'sectionDragStartPosition',
         x: e.originalEvent.pageX
         y: e.originalEvent.pageY
 
     sectionSizeStart: (section, handle, e) ->
       @sendAction 'sectionSizeStart', section, handle, e
+      @set 'sectionEdited', section
       @set 'handleDragStartPosition',
         handle: handle
         x: e.originalEvent.pageX
         y: e.originalEvent.pageY
-      console.log @get('handleDragStartPosition')
-
   dragOver: (ev) ->
     ev.preventDefault()
 
-  # surfaces a section-moved message when the section rectangle is dropped
+  # surfaces a section-moved message when the section rectangle is moved or sized
   drop: (ev) ->
-    sectionId = ev.dataTransfer.getData('text/data')
-    section = @get('sections').findBy('id', sectionId)
-    bounds = section.get 'bounds'
+    section = @get 'sectionEdited'
+    return unless @get 'sectionEdited'
 
-    dragEndPosition =
-      x: ev.originalEvent.pageX
-      y: ev.originalEvent.pageY
-
-    handleDragStartPosition = @get 'handleDragStartPosition'
-    sectionDragStartPosition = @get 'sectionDragStartPosition'
-    dragStartPosition = handleDragStartPosition || sectionDragStartPosition
-    dx = dragEndPosition.x - dragStartPosition.x
-    dy = dragEndPosition.y - dragStartPosition.y
-
-    sdImagingHelper = @get 'sdImagingHelper'
-    dxLogical = sdImagingHelper.physicalToLogicalDistance dx
-    dyLogical = sdImagingHelper.physicalToLogicalDistance dy
-
-    newBounds = new OpenSeadragon.Rect(bounds.x, bounds.y, bounds.width, bounds.height)
-
-    if handleDragStartPosition
-      console.log handleDragStartPosition
-      switch handleDragStartPosition.handle
-        when 'tl'
-          newBounds.x += dxLogical
-          newBounds.y += dyLogical
-        when 'tr'
-          newBounds.y += dyLogical
-        when 'bl'
-          newBounds.x += dxLogical
-      newBounds.width += dxLogical
-      newBounds.height += dyLogical
-    else
-      newBounds.x += dxLogical
-      newBounds.y += dyLogical
+    newBounds = @recalcSectionArea section, ev.originalEvent.pageX, ev.originalEvent.pageY
 
     @set 'handleDragStartPosition', undefined
     @set 'sectionDragStartPosition', undefined
+    @set 'sectionEdited', undefined
 
     # send the section, the new logical bounds, and the new physical bounds
     @sendAction 'sectionMoved', section, newBounds, @get('sdViewport').viewportToImageRectangle(newBounds)
 
-  # this is just debug code currently
-  mouseMove: (e) ->
-    viewport = @get 'sdViewport'
-    return unless viewport
+  # converts the distance moved to a logical distance. The returned values are end minus start
+  diffPoint: (startX, startY, endX, endY) ->
+    sdImagingHelper = @get 'sdImagingHelper'
 
-    offset = @$('.page-outer').offset()
-    point = new OpenSeadragon.Point(e.pageX - offset.top, e.pageY - offset.left)
-    converted = viewport.viewerElementToViewportCoordinates point
-    @set 'mouseLogX', converted.x
-    @set 'mouseLogY', converted.y
+    dx = endX - startX
+    dy = endY - startY
+
+    [sdImagingHelper.physicalToLogicalDistance(dx), sdImagingHelper.physicalToLogicalDistance(dy)]
+
+  recalcSectionArea: (section, x, y) ->
+    bounds = section.get 'bounds'
+
+    handleDragStartPosition = @get 'handleDragStartPosition'
+    sectionDragStartPosition = @get 'sectionDragStartPosition'
+    dragStartPosition = handleDragStartPosition || sectionDragStartPosition
+
+    [dxLogical, dyLogical] = @diffPoint(dragStartPosition.x, dragStartPosition.y, x, y)
+
+    newBounds = new OpenSeadragon.Rect(bounds.x, bounds.y, bounds.width, bounds.height)
+
+    if handleDragStartPosition
+      switch handleDragStartPosition.handle
+        when 'tl'
+          newBounds.x += dxLogical
+          newBounds.y += dyLogical
+          newBounds.width -= dxLogical
+          newBounds.height -= dyLogical
+
+        when 'bl'
+          newBounds.x += dxLogical
+          newBounds.width -= dxLogical
+          newBounds.height += dyLogical
+
+        when 'tr'
+          newBounds.y += dyLogical
+          newBounds.width += dxLogical
+          newBounds.height -= dyLogical
+
+        when 'br'
+          newBounds.width += dxLogical
+          newBounds.height += dyLogical
+    else
+      newBounds.x += dxLogical
+      newBounds.y += dyLogical
+
+    newBounds
 
   didInsertElement: ->
     component = @

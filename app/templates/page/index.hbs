@@ -1,6 +1,7 @@
 <div id="section-content">
   {{#each section in sections}}
-  <div class="translation" {{action 'navSection' section}}>
+  {{#link-to 'page.section' page.slug section.sortOrder class='section-link'}}{{/link-to}}
+  <div class="translation">
     <p>{{section.translation.md}}</p>
   </div>
   {{/each}}
