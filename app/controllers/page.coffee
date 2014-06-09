@@ -3,8 +3,9 @@ Controller = Em.ObjectController.extend
   zoomStops: [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 5]
   init: ->
     @_super()
-    Em.run.scheduleOnce 'afterRender', ->
-      $(window).trigger('resize')
+    Em.run ->
+      Em.run.scheduleOnce 'afterRender', ->
+        $(window).trigger('resize')
   nextPage: (->
       treatise = @get 'treatise'
       @get('treatise').nextPage @get('content')
