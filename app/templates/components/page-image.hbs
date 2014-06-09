@@ -1,4 +1,4 @@
 <div class="page-outer size-to-height"></div>
 {{#each s in sections}}
-{{section-area section=s current-section=section bounds=s.bounds dzi-timestamp=dziTimestamp viewer=sdViewer viewport=sdViewport zoom=zoom sectionSizeStart='sectionSizeStart' sectionDragStart='sectionDragStart'}}
+{{section-area section=s current-section=section bounds=s.bounds dzi-timestamp=dziTimestamp viewer=sdViewer viewport=sdViewport zoom=zoom sectionSizeStart='sectionSizeStart' sectionDragStart='sectionDragStart' visible=editMode}}
 {{/each}}

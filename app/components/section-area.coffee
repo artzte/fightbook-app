@@ -1,6 +1,6 @@
 Component = Ember.Component.extend
   classNames: ['section-area']
-  classNameBindings: ['selected']
+  classNameBindings: ['selected', 'visible']
   tagName: ['div']
   attributeBindings: ['draggable']
   draggable: "true"

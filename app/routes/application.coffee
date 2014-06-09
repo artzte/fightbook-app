@@ -6,7 +6,7 @@ Route = Ember.Route.extend
         url: '/api/me'
         dataType: 'json'
       promise.done (result) =>
-        user = new Ember.Object(result)
+        user = Ember.Object.create(result)
         if result.isAnon
           @set 'session.isAnon', true
           @set 'session.currentUser', null

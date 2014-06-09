@@ -46,6 +46,11 @@ $sectionBorderSelected: #888;
   z-index: 1;
   width: 100px;
   height: 100px;
+  display: none;
+
+  &.visible {
+    display: block;
+  }
 
   .handle {
     height: $handleSize;
@@ -215,6 +220,9 @@ header {
   }
   li {
     margin-bottom: 1rem;
+  }
+  .edit-mode-toggle.active {
+    color: red;
   }
 }
 
