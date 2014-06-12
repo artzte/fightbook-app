@@ -31,8 +31,17 @@
     </h2>
 
     <ul id="sections-nav" class="no-bullet">
-      {{#each s in sectionsSorted}}
-        {{section-item section=s page=page}}
+      <li>
+        {{#link-to 'page.index' page.slug class="page-link"}}
+          <i class="icon-file"></i>
+        {{/link-to}}
+      </li>
+      {{#each s in sectionsSorted itemController='section'}}
+        <li class="section-number">
+          {{#link-to 'page.section' page.slug s.sortOrder}}
+            {{s.sortOrder}}
+          {{/link-to}}
+        </li>
       {{/each}}
       <li>
         <a {{action 'zoomIn'}}>
@@ -47,7 +56,7 @@
       {{#if session.currentUser.isAdmin}}
       <li>
         <a {{action 'toggleEditMode'}}>
-          <i {{bindAttr class=":icon-pencil :edit-mode-toggle editMode:active"}}></i>
+          <i {{bind-attr class=":icon-pencil :edit-mode-toggle editMode:active"}}></i>
         </a>
       </li>
       {{/if}}

@@ -10,6 +10,7 @@ $backgroundScreen: rgba(255,255,255,0.5);
 // .ember-view { animation: domChanged 1s; -webkit-animation: domChanged 1s; }
 
 $accentColor: #a8614B;
+$creamColor: lighten($accentColor, 80);
 
 h1, h2, h3  {
   font-family: $heading-font-family;
@@ -204,12 +205,33 @@ header {
   right: 2rem;
   top: 1rem;
 
+  li {
+    text-align: center;
+    font-size: 1rem;
+
+    a {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      color: $accentColor;
+      &.active {
+        border-radius: 3rem;
+        background: $accentColor;
+        color: $creamColor;
+        &.page-link {
+          background: none;
+        }
+        i {
+          color: lighten($accentColor, 30);
+        }
+      }
+    }
+  }
+
   i {
     display: block;
-    font-size: 2rem;
     color: $accentColor;
-    width: 2rem;
-    height: 2rem;
+    font-size: 1.2rem;
 
     &.bordered {
       border: 1px solid $accentColor;
