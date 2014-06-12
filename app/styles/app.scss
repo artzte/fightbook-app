@@ -167,19 +167,22 @@ header {
   height: 99%;
   .translation {
     font-size: 0.8rem;
+    padding-left: 1.5rem;
     p {
       font-size: inherit;
     }
   }
-  .section-link {
-    position: absolute;
-    margin-left: -1.2rem;
-    margin-top: 0.2rem;
-    width: .75rem;
-    height: .75rem;
-    background: $accentColor;
-    &:hover {
-      background: lighten($accentColor, 10);
+  .section-wrapper {
+    .section-link {
+      display: block;
+      float: left;
+      width: .75rem;
+      height: .75rem;
+      margin-top: 0.2rem;
+      background: $accentColor;
+      &:hover {
+        background: lighten($accentColor, 10);
+      }
     }
   }
 }
@@ -189,6 +192,7 @@ header {
   bottom: 0;
   background: $backgroundScreen;
   max-height: 18%;
+  padding: 0 1rem 0 0;
 }
 @media #{$medium-up} {
   .section-column {
