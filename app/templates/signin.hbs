@@ -27,7 +27,6 @@
     --}}
     <div class="small-12 medium-6 columns">
       <p>Sign in.</p>
-      {{#with user}}
       <form {{action 'signin' on='submit'}}>
         <label>Email
           {{input type="text" value=email}}
@@ -37,6 +36,5 @@
         </label>
         {{input type='submit' value='Submit' class='button'}}
       </form>
-      {{/with}}
     </div>
 </div>
