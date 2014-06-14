@@ -36,7 +36,10 @@ Component = Ember.Component.extend
     @set 'sectionEdited', undefined
 
     # send the section, the new logical bounds, and the new physical bounds
-    @sendAction 'sectionMoved', section, newBounds, @get('sdViewport').viewportToImageRectangle(newBounds)
+    physical = @get('sdViewport').viewportToImageRectangle(newBounds)
+    Em.keys(physical).forEach (key) ->
+      physical[key] = Math.round(physical[key])
+    @sendAction 'sectionMoved', section, newBounds, physical
 
   # converts the distance moved to a logical distance. The returned values are end minus start
   diffPoint: (startX, startY, endX, endY) ->
@@ -86,8 +89,6 @@ Component = Ember.Component.extend
     newBounds
 
   didInsertElement: ->
-    component = @
-
     Ember.run.scheduleOnce 'afterRender', @, =>
       sdViewer = new OpenSeadragon
         hash: @elementId
@@ -102,14 +103,13 @@ Component = Ember.Component.extend
           return if @isDestroying
           Em.run.debounce @, @timestampImage, 200
       sdViewer.addHandler 'canvas-drag', (info) =>
-        component.sendAction 'sdBounds', sdViewer.viewport.getBounds()
+        @sendAction 'sdBounds', sdViewer.viewport.getBounds()
       sdViewer.addHandler 'zoom', (info) =>
-        component.sendAction 'sdZoom', info.zoom
+        @sendAction 'sdZoom', info.zoom
         if sdViewer.viewport
-          component.sendAction 'sdBounds', sdViewer.viewport.getBounds()
-
+          @sendAction 'sdBounds', sdViewer.viewport.getBounds()
       sdViewer.addHandler 'open', (viewer, source) =>
-        component.sendAction 'sdOpen', source
+        @sendAction 'sdOpen', source
         @set 'sdViewport', @get('sdViewer').viewport
 
         @timestampImage()
@@ -138,7 +138,6 @@ Component = Ember.Component.extend
     bounds = @get 'bounds-rect'
     viewport = @get 'sdViewport'
     newBounds = new OpenSeadragon.Rect(bounds.x, bounds.y, bounds.width, bounds.height)
-    console.log "centering on newBounds", newBounds
     viewport.fitBounds newBounds
 
   fitToBounds: ( ->
