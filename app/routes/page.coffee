@@ -15,4 +15,11 @@ Route = Ember.Route.extend
       outlet: 'leftMenu'
       controller: @get 'controller'
 
+  actions:
+    willTransition: ->
+      return unless @get('session.currentUser.isAdmin')
+      updateQueue = @get('updateQueue')
+      while updateQueue.get('length')
+        section = updateQueue.popObject()
+        section.save()
 `export default Route`

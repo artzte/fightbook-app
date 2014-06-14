@@ -16,11 +16,13 @@ Controller = Em.ObjectController.extend
     ).property('content', 'treatise.isSettled', 'treatise.pages.@each')
 
   actions:
-    sectionMoved: (section, newBounds, newPhysicalBounds, performSave = true) ->
+    sectionMoved: (section, newBounds, newPhysicalBounds) ->
       section.set 'bounds', newBounds
       section.set 'physicalBounds', newPhysicalBounds
-      if performSave
-        section.save()
+      updateQueue = @get 'updateQueue'
+      updateQueue.set('content', []) unless updateQueue.get('content')
+      unless updateQueue.findProperty 'id', section.get('id')
+        updateQueue.pushObject section
       false
 
     toggleEditMode: ->

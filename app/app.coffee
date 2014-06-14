@@ -31,6 +31,10 @@ Em.Application.initializer
     app.inject('controller', 'session', 'session:current');
     app.inject('route', 'session', 'session:current');
 
+    app.register('updateQueue:current', Em.ArrayProxy, {singleton: true})
+    app.inject('controller', 'updateQueue', 'updateQueue:current')
+    app.inject('route', 'updateQueue', 'updateQueue:current')
+
 App = Em.Application.extend
   LOG_ACTIVE_GENERATION: true
   LOG_MODULE_RESOLVER: true
