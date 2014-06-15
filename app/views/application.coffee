@@ -1,10 +1,10 @@
 View = Em.View.extend
   classNames: ['application-wrapper']
   didInsertElement: ->
-    Em.run.scheduleOnce 'afterRender', =>
-      @doResize()
-
-      $(window).on 'resize', =>
+    $(window).on 'resize', =>
+      Em.run @, ->
         Em.run.debounce @, @doResize, 200
+        Em.run.scheduleOnce 'afterRender', @, ->
+          @doResize()
 
 `export default View`
