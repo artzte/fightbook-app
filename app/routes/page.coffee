@@ -16,10 +16,15 @@ Route = Ember.Route.extend
       controller: @get 'controller'
 
   actions:
-    willTransition: ->
+    flushUpdateQueue: ->
       return unless @get('session.currentUser.isAdmin')
       updateQueue = @get('updateQueue')
       while updateQueue.get('length')
         section = updateQueue.popObject()
         section.save()
+    willTransition: ->
+      @send 'flushUpdateQueue'
+    sectionClicked: (section) ->
+      @transitionTo 'page.section', @get('currentModel'), section.get('sortOrder')
+
 `export default Route`

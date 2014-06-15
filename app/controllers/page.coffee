@@ -27,6 +27,7 @@ Controller = Em.ObjectController.extend
 
     toggleEditMode: ->
       @toggleProperty 'editMode'
+      @send 'flushUpdateQueue'
       false
 
     sdZoom: (zoom) ->
