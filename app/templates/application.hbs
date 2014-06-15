@@ -1,24 +1,26 @@
 <div class="off-canvas-wrap">
   <div class="inner-wrap">
-    <nav class="tab-bar top-bar">
+    <nav class="tab-bar">
       <section class="left-small">
-        <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+        <ul class="inline-list">
+          <li>
+            <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+          </li>
+        </ul>
       </section>
 
-      <ul class="title-area">
-        <li class="name">
-          <h1 class="title">{{#link-to 'application'}}la incrossada{{/link-to}}</h1>
-        </li>
-      </ul>
+      <section class="middle tab-bar-section">
+        <h1 class="title">{{#link-to 'index'}}la incrossada{{/link-to}}</h1>
+      </section>
 
-      <section class="top-bar-section">
-        <ul class="right">
+      <section class="right top-bar-section">
+        <ul class="inline-list">
           <li>
-            {{#if session.isAnon}}
-              {{#link-to 'signin'}}Sign in{{/link-to}}
-            {{else}}
-              {{#link-to 'signout'}}Sign out{{/link-to}}
-            {{/if}}
+          {{#if session.isAnon}}
+            {{#link-to 'signin'}}Sign in{{/link-to}}
+          {{else}}
+            {{#link-to 'signout'}}Sign out{{/link-to}}
+          {{/if}}
           </li>
         </ul>
       </section>

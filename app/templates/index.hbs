@@ -1,2 +1,11 @@
-<h1>Welcome to la Incrossada</h1>
-<p>So hello.</p>
+<div class="row">
+  <div class="large-12">
+    <p>
+    {{#if session.isAnon}}
+      Please {{#link-to 'signin'}}sign in{{/link-to}}.
+    {{else}}
+      {{#link-to 'treatises'}}Step into the crossing{{/link-to}}
+    {{/if}}
+    </p>
+  </div>
+</div>

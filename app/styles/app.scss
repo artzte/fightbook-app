@@ -107,8 +107,7 @@ $sectionBorderSelected: #888;
 
 .thumbs-wrapper {
   overflow-y: scroll;
-  padding: 1rem 0;
-  box-model: border-box;
+  box-sizing: border-box;
 }
 
 .page-thumbnail {
