@@ -23,8 +23,6 @@ Route = Ember.Route.extend
       while updateQueue.get('length')
         section = updateQueue.popObject()
         section.save()
-    signout: ->
-      console.log "signout"
     error: (result, transition) ->
       if result.status is 403
         signinController = @controllerFor 'signin'
