@@ -17,6 +17,12 @@ Route = Ember.Route.extend
       promise.fail (result) ->
         reject()
   actions:
+    flushUpdateQueue: ->
+      return unless @get('session.currentUser.isAdmin')
+      updateQueue = @get('updateQueue')
+      while updateQueue.get('length')
+        section = updateQueue.popObject()
+        section.save()
     signout: ->
       console.log "signout"
     error: (result, transition) ->
