@@ -1,7 +1,6 @@
 Page = DS.Model.extend
   slug: DS.attr 'string'
   title: DS.attr 'string'
-  dziPath: DS.attr 'string'
   visibility: DS.attr 'string'
   state: DS.attr 'string'
   createdAt: DS.attr 'date'
@@ -19,15 +18,19 @@ Page = DS.Model.extend
     ).property('sections.@each.sortOrder')
 
   dziUrl: (->
-      "#{ENV.DZI_BASE_URL}/#{@get('dziPath')}"
-    ).property('dziPath')
+      "#{ENV.DZI_BASE_URL}/#{@get('treatise.key')}/dz/#{@get('slug')}.dzi"
+    ).property('slug')
 
-  thumbUrl: (->
-      thumb = @get('dziPath')
-        .replace(/getty-dz/, 'getty-thumbs')
-        .replace(/dzi/, 'jpg')
-      "#{ENV.DZI_BASE_URL}/#{thumb}"
-    ).property('dziPath')
+  thumbUrl: (vSize) ->
+    "#{ENV.DZI_BASE_URL}/#{@get('treatise.key')}/thumbs/pages/#{@get('slug')}-#{vSize}.jpg"
+
+  thumbSmall: (->
+      @thumbUrl(150)
+    ).property('slug', 'treatise.key')
+
+  thumbLarge: (->
+      @thumbUrl(300)
+    ).property('slug', 'treatise.key')
 
   bounds: (->
       bounds = @get 'sections.@each.bounds'
