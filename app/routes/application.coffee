@@ -16,6 +16,9 @@ Route = Ember.Route.extend
         resolve(user)
       promise.fail (result) ->
         reject()
+  clearSession: ->
+    @set 'session.currentUser', undefined
+    @set 'session.isAnon', true
   actions:
     flushUpdateQueue: ->
       return unless @get('session.currentUser.isAdmin')
@@ -25,7 +28,6 @@ Route = Ember.Route.extend
         section.save()
     error: (result, transition) ->
       if result.status is 403
-        signinController = @controllerFor 'signin'
-        signinController.set 'afterLoginTransition', transition
-        @transitionTo 'signin'
+        @clearSession()
+        @transitionTo 'signout'
 `export default Route`
