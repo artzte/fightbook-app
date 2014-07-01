@@ -27,9 +27,14 @@ Em.Application.initializer
       instantiate: false
     app.inject 'view', 'doResize', 'doResizeInitializer:doResize'
     app.Session = Ember.Object.extend()
-    app.register('session:current', app.Session, {singleton: true});
-    app.inject('controller', 'session', 'session:current');
-    app.inject('route', 'session', 'session:current');
+    app.register('session:current', app.Session, {singleton: true})
+    app.inject('controller', 'session', 'session:current')
+    app.inject('route', 'session', 'session:current')
+
+    app.Settings = Ember.Object.extend()
+    app.register('settings:current', app.Settings, {singleton: true})
+    app.inject('controller', 'settings', 'settings:current')
+    app.inject('route', 'settings', 'settings:current')
 
     app.register('updateQueue:current', Em.ArrayProxy, {singleton: true})
     app.inject('controller', 'updateQueue', 'updateQueue:current')

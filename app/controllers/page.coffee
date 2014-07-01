@@ -25,11 +25,6 @@ Controller = Em.ObjectController.extend
         updateQueue.pushObject section
       false
 
-    toggleEditMode: ->
-      @toggleProperty 'editMode'
-      @send 'flushUpdateQueue'
-      false
-
     sdZoom: (zoom) ->
       @set 'sdZoom', zoom
       false

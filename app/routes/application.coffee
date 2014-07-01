@@ -19,7 +19,11 @@ Route = Ember.Route.extend
   clearSession: ->
     @set 'session.currentUser', undefined
     @set 'session.isAnon', true
+    @set 'settings.editMode', false
   actions:
+    toggleEditMode: ->
+      @toggleProperty 'settings.editMode'
+      @send 'flushUpdateQueue'
     flushUpdateQueue: ->
       return unless @get('session.currentUser.isAdmin')
       updateQueue = @get('updateQueue')
