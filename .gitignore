@@ -5,10 +5,8 @@
 /tmp
 
 # dependencies
+/node_modules
 /vendor/*
-!/vendor/loader.js
-!/vendor/openseadragon
-!/vendor/openseadragonimaginghelper
 
 # misc
 /.sass-cache
@@ -17,6 +15,5 @@
 .DS_Store
 Thumbs.db
 /coverage/*
-
-/config/environments/*.js
-
+npm-debug.log
+testem.log
