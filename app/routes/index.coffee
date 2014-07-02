@@ -1,3 +1,4 @@
+
 Route = Ember.Route.extend
   model: ->
     {}

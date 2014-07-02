@@ -18,11 +18,11 @@ Page = DS.Model.extend
     ).property('sections.@each.sortOrder')
 
   dziUrl: (->
-      "#{ENV.DZI_BASE_URL}/#{@get('treatise.key')}/dz/#{@get('slug')}.dzi"
+      "#{FbENV.APP.dziBaseUrl}/#{@get('treatise.key')}/dz/#{@get('slug')}.dzi"
     ).property('slug')
 
   thumbUrl: (vSize) ->
-    "#{ENV.DZI_BASE_URL}/#{@get('treatise.key')}/thumbs/pages/#{@get('slug')}-#{vSize}.jpg"
+    "#{FbENV.APP.dziBaseUrl}/#{@get('treatise.key')}/thumbs/pages/#{@get('slug')}-#{vSize}.jpg"
 
   thumbSmall: (->
       @thumbUrl(150)
