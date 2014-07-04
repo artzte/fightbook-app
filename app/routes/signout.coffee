@@ -1,7 +1,11 @@
+`import ajax from 'ic-ajax'`
+
 Route = Ember.Route.extend
   beforeModel: ->
-    $.get('/api/signout').done =>
-      @transitionTo '/'
-      @set 'session.isAnon', true
-      @set 'session.currentUser', null
+    ajax
+        url: '/api/signout'
+      .then =>
+        @transitionTo '/'
+        @set 'session.isAnon', true
+        @set 'session.currentUser', null
 `export default Route`
