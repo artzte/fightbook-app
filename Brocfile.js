@@ -50,7 +50,7 @@ app.import('vendor/ic-ajax/dist/named-amd/main.js', {
 
 app.import('vendor/foundation/js/foundation.js');
 app.import('vendor/ember-responsive/dist/ember-responsive.js');
-app.import('vendor/openseadragon/openseadragon.js');
+app.import('vendor/openseadragon/built-openseadragon/openseadragon/openseadragon.js');
 app.import('vendor/openseadragonimaginghelper/openseadragon-imaginghelper.js');
 
 
