@@ -1,7 +1,7 @@
 Route = Ember.Route.extend
   model: ->
     # return the current user as the model if authenticated, otherwise a blank object
-    new Promise (resolve, reject) =>
+    new Ember.RSVP.Promise (resolve, reject) =>
       promise = $.ajax
         url: '/api/me'
         dataType: 'json'
