@@ -125,6 +125,13 @@ $sectionBorderSelected: #888;
   }
 }
 
+.copyright {
+  text-align: right;
+  margin-top: 3rem;
+  color: $accentColor;
+  font-size: 0.8rem;
+}
+
 h1,h2 {
   a {
       color: inherit;
