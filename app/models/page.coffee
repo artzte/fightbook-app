@@ -22,14 +22,18 @@ Page = DS.Model.extend
     ).property('slug')
 
   thumbUrl: (vSize) ->
-    "#{FbENV.APP.dziBaseUrl}/#{@get('treatise.key')}/thumbs/pages/#{@get('slug')}-#{vSize}.jpg"
+    "#{FbENV.APP.dziBaseUrl}/#{@get('treatise.key')}/thumbs/#{@get('slug')}/page-#{vSize}.jpg"
 
   thumbSmall: (->
       @thumbUrl(150)
     ).property('slug', 'treatise.key')
 
-  thumbLarge: (->
+  thumbMedium: (->
       @thumbUrl(300)
+    ).property('slug', 'treatise.key')
+
+  thumbLarge: (->
+      @thumbUrl(600)
     ).property('slug', 'treatise.key')
 
   bounds: (->
