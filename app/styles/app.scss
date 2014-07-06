@@ -119,10 +119,9 @@ $sectionBorderSelected: #888;
   }
   .caption {
     position: absolute;
-    bottom: 2rem;
-    margin-left: 25%;
-    width: 50%;
-    text-align: center;
+    top: 1rem;
+    left: 2rem;
+    color: $accentColor;
   }
 }
 

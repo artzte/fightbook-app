@@ -5,6 +5,7 @@ Treatise = DS.Model.extend
   state: DS.attr 'string'
   createdAt: DS.attr 'date'
   pages: DS.hasMany 'page'
+  copyright: DS.attr 'markdown'
 
   pagesSorted: (->
       @get('pages').sortBy('sortOrder')
