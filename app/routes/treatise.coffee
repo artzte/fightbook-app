@@ -6,16 +6,10 @@ Route = BaseRoute.extend
     store = @get 'store'
     treatise = store.all('treatise').findProperty('key', params.treatise_key)
 
-    if treatise.get('pages.length')||0 > 0
-      Ember.RSVP.Promise.resolve treatise
     @set 'title', treatise.get('title')
+    if treatise.get('pages.length')
+      return treatise
     else
-      store.reloadRecord treatise
+      return treatise.reload()
 
-  setupController: (controller, treatise) ->
-    @_super controller, treatise
-    # @get('store').find('treatise', treatise.get('key'))
-    
 `export default Route`
-
-

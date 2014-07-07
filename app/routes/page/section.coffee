@@ -4,24 +4,15 @@ Route = BaseRoute.extend
   model: (params) ->
     page = @modelFor 'page'
     store = @get 'store'
+    page.get('sections').findProperty('sortOrder', parseInt(params.sort_order, 10))
 
-    getSection = ->
-      Em.RSVP.resolve page.get('sections').findProperty('sortOrder', parseInt(params.sort_order, 10))
-
-    if Em.isEmpty(page.get('sections'))
-      store.reloadRecord(page).then ->
-        getSection()
-    else
-      getSection()
-  afterModel: ->
-    @set 'title', [@get('context.page.treatise.title'), @get('context.page.title'), "Section #{@get('context.sortOrder')}"].join ' - '
-
-  setupController: (controller, model) ->
-    @_super controller, model
+  setupController: (controller, section) ->
+    @_super controller, section
     page = @modelFor 'page'
+    @set 'title', [page.get('treatise.title'), page.get('title'), "Section #{section.get('sortOrder')}"].join ' - '
     controller.set 'page', page
-    controller.set 'section', model
-    controller.set 'controllers.page.section', model
-    controller.set 'controllers.page.boundsRect', model.get('bounds')
+    controller.set 'section', section
+    controller.set 'controllers.page.section', section
+    controller.set 'controllers.page.boundsRect', section.get('bounds')
 
 `export default Route`

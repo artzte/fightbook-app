@@ -4,7 +4,13 @@ Route = BaseRoute.extend
   model: (params) ->
     store = @get 'store'
     treatise = @modelFor 'treatise'
-    store.find 'page', "#{treatise.get('id')}-#{params.page_id}"
+    page = treatise.get('pages').findProperty('slug', params.page_id)
+    new Ember.RSVP.Promise (resolve, reject) ->
+      if Em.isEmpty(page.get('sections'))
+        store.reloadRecord(page).then ->
+          resolve(page)
+      else
+        resolve(page)
 
   setupController: (controller, model) ->
     @_super controller, model

@@ -1,6 +1,6 @@
 <ul class="off-canvas-list">
   <li><label>Treatises</label></li>
-  {{#each treatise in treatises}}
+  {{#each treatise in controllers.treatises}}
   <li>{{#link-to 'treatise' treatise}}{{treatise.title}}{{/link-to}}</li>
   {{/each}}
 </ul>
@@ -12,9 +12,11 @@
     {{/each}}
   </ul>
 {{/if}}
-<ul class="off-canvas-list">
-  <li><label>{{treatise.title}}</label></li>
-  {{#each page in treatise.pagesSorted}}
-  <li>{{#link-to 'page' page}}{{page.title}}{{/link-to}}</li>
-  {{/each}}
-</ul>
+{{#if controllers.treatise}}
+  <ul class="off-canvas-list">
+    <li><label>{{treatise.title}}</label></li>
+    {{#each page in treatise.pagesSorted}}
+    <li>{{#link-to 'page' page}}{{page.title}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+{{/if}}

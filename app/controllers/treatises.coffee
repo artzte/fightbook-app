@@ -1,4 +1,4 @@
-Controller = Em.ObjectController.extend
+Controller = Em.ArrayController.extend
   needs: ['application']
   init: ->
     @_super()
