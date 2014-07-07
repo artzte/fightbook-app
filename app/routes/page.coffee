@@ -1,4 +1,6 @@
-Route = Ember.Route.extend
+`import BaseRoute from './_base'`
+
+Route = BaseRoute.extend
   model: (params) ->
     store = @get 'store'
     treatise = @modelFor 'treatise'

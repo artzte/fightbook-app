@@ -1,4 +1,6 @@
-Route = Ember.Route.extend
+`import BaseRoute from '../_base'`
+
+Route = BaseRoute.extend
   model: (params) ->
     page = @modelFor 'page'
     store = @get 'store'
@@ -11,6 +13,8 @@ Route = Ember.Route.extend
         getSection()
     else
       getSection()
+  afterModel: ->
+    @set 'title', [@get('context.page.treatise.title'), @get('context.page.title'), "Section #{@get('context.sortOrder')}"].join ' - '
 
   setupController: (controller, model) ->
     @_super controller, model

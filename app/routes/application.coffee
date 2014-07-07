@@ -1,4 +1,6 @@
-Route = Ember.Route.extend
+`import BaseRoute from './_base'`
+
+Route = BaseRoute.extend
   model: ->
     # return the current user as the model if authenticated, otherwise a blank object
     new Ember.RSVP.Promise (resolve, reject) =>

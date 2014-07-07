@@ -12,7 +12,8 @@ module.exports = function(environment) {
     },
 
     APP: {
-      dziBaseUrl: '//s3-us-west-2.amazonaws.com/media.incrossada.org'
+      dziBaseUrl: '//s3-us-west-2.amazonaws.com/media.incrossada.org',
+      title: 'la incrossada'
     }
   };
 

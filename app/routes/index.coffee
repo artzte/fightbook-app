@@ -1,5 +1,7 @@
+`import BaseRoute from './_base'`
 
-Route = Ember.Route.extend
+Route = BaseRoute.extend
+  title: "Home"
   model: ->
     {}
 `export default Route`

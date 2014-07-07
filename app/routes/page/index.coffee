@@ -1,4 +1,6 @@
-Route = Ember.Route.extend
+`import BaseRoute from '../_base'`
+
+Route = BaseRoute.extend
   model: (params) ->
     store = @get 'store'
     page = @modelFor 'page'
@@ -7,6 +9,8 @@ Route = Ember.Route.extend
       store.reloadRecord(page)
     else
       page
+    treatise = page.get 'treatise'
+    @set 'title', [page.get('treatise.title'), page.get('title')].join ' - '
 
   setupController: (controller, model) ->
     @_super controller, model
