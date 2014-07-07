@@ -3,5 +3,5 @@
     <p>{{translation.md}}</p>
     <p class="right">{{#link-to 'page' page}}Back to {{page.title}}{{/link-to}}</p>
   </div>
-  <div class="copyright">{{treatise.copyright.md}}</div>
+  {{copyright-slug content=page.treatise.copyright.html}}
 </div>
