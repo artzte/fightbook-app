@@ -1,23 +1,30 @@
 `import BaseRoute from './_base'`
+`import ajax from 'ic-ajax'`
 
 Route = BaseRoute.extend
   model: ->
+    mePath = '/api/me'
+
     # return the current user as the model if authenticated, otherwise a blank object
     new Ember.RSVP.Promise (resolve, reject) =>
-      promise = $.ajax
-        url: '/api/me'
-        dataType: 'json'
-      promise.done (result) =>
-        user = Ember.Object.create(result)
-        if result.isAnon
-          @set 'session.isAnon', true
-          @set 'session.currentUser', null
-        else
-          @set 'session.isAnon', false
-          @set 'session.currentUser', user
-        resolve(user)
-      promise.fail (result) ->
-        reject()
+      ajax
+          url: mePath
+          dataType: 'json'
+        .then (result) =>
+            user = Ember.Object.create(result)
+            if result.isAnon
+              @set 'session.isAnon', true
+              @set 'session.currentUser', null
+            else
+              @set 'session.isAnon', false
+              @set 'session.currentUser', user
+            resolve(user)
+            ajax
+              url: mePath
+              method: 'post'
+          ,
+            (result) ->
+              reject()
   clearSession: ->
     @set 'session.currentUser', undefined
     @set 'session.isAnon', true
