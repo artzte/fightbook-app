@@ -1,7 +1,11 @@
 Controller = Ember.ObjectController.extend
   needs: ['page']
 
-  actions: 
+  adminEditLink: (->
+    FbENV.APP.keystonePath + "/sections/#{@get('id')}"
+  ).property('content.id')
+
+  actions:
     setActive: ->
       @content.get('page.sections')
         .setEach('isActive', false)

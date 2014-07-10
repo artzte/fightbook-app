@@ -1,7 +1,14 @@
 <div id="section-content">
   <div class="translation">
     <p>{{translation.md}}</p>
-    <p class="right">{{#link-to 'page' page}}Back to {{page.title}}{{/link-to}}</p>
+    <ul class="inline-list right">
+      {{#if settings.editMode}}
+        <li>
+          <a {{bind-attr href=adminEditLink}} target="_blank">Admin edit page</a>
+        </li>
+      {{/if}}
+      <li>{{#link-to 'page' page}}Back to {{page.title}}{{/link-to}}</li>
+    </li>
   </div>
   {{copyright-slug content=page.treatise.copyright.html}}
 </div>

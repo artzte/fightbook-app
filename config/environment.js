@@ -13,7 +13,8 @@ module.exports = function(environment) {
 
     APP: {
       dziBaseUrl: '//s3-us-west-2.amazonaws.com/media.incrossada.org',
-      title: 'la incrossada'
+      title: 'la incrossada',
+      keystonePath: '/keystone'
     }
   };
 
@@ -27,6 +28,8 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.APP.dziBaseUrl = '/media';
+    ENV.APP.keystonePath = 'http://localhost:3004/keystone'
   }
 
   if (environment === 'production') {
