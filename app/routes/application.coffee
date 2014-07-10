@@ -43,4 +43,7 @@ Route = BaseRoute.extend
       if result.status is 403
         @clearSession()
         @transitionTo 'signout'
+        return false
+      else
+        return true
 `export default Route`
