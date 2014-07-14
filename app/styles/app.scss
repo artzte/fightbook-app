@@ -17,6 +17,13 @@ h1, h2, h3  {
   color: $accentColor;
 }
 
+nav.tab-bar a {
+  color: white;
+  &:hover {
+    color: #aaa;
+  }
+}
+
 form {
   font-family: $form-font-family;
   .button, input {
