@@ -18,10 +18,10 @@ Route = BaseRoute.extend
             else
               @set 'session.isAnon', false
               @set 'session.currentUser', user
+              ajax
+                url: mePath
+                method: 'post'
             resolve(user)
-            ajax
-              url: mePath
-              method: 'post'
           ,
             (result) ->
               reject()
