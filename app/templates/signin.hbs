@@ -1,40 +1,48 @@
 <header>
   <div class="row">
-    <div class="small-12 columns"><h2>Welcome</h2></div>
+    <div class="small-12 columns">
+      <h2>Welcome</h2>
+    </div>
   </div>
-  <div class="row">
-    {{!--
-    <div class="small-12 medium-6 columns">
-      <p>Sign up.</p>
-      {{#with newUser}}
-      <form {{action 'signup' on='submit'}}>
-        <label>Name
-          {{input type="text" value=name}}
-        </label>
-        <label>Email
-          {{input type="text" value=email}}
-        </label>
-        <label>Password
-          {{input type='password' value=password}}
-        </label>
-        <label>Confirm password
-          {{input type='password' value=passwordConfirmation}}
-        </label>
-        {{input type='submit' value='Submit' class='button'}}
-      </form>
-      {{/with}}
-    </div>
-    --}}
-    <div class="small-12 medium-6 columns">
-      <p>Sign in.</p>
-      <form {{action 'signin' on='submit'}}>
-        <label>Email
-          {{input type="text" value=email}}
-        </label>
-        <label>Password
-          {{input type='password' value=password}}
-        </label>
-        {{input type='submit' value='Submit' class='button'}}
-      </form>
-    </div>
+</header>
+<div class="row">
+  {{!--
+  <div class="small-12 medium-6 columns">
+    <p>Sign up.</p>
+    {{#with newUser}}
+    <form {{action 'signup' on='submit'}}>
+      <label>Name
+        {{input type="text" value=name}}
+      </label>
+      <label>Email
+        {{input type="email" value=email}}
+      </label>
+      <label>Password
+        {{input type='password' value=password}}
+      </label>
+      <label>Confirm password
+        {{input type='password' value=passwordConfirmation}}
+      </label>
+      {{input type='submit' value='Submit' class='button'}}
+    </form>
+    {{/with}}
+  </div>
+  --}}
+  <div class="small-12 medium-6 columns">
+    <h3>Sign in</h3>
+    <form {{action 'signin' on='submit'}}>
+      <label>Email
+        {{input type="email" value=email}}
+      </label>
+      <label>Password
+        {{input type='password' value=password}}
+      </label>
+      {{#if errorResult}}
+      <div data-alert class="alert-box warning">
+        {{errorResult.message}}
+      </div>
+      {{/if}}
+      {{input type='submit' value='Submit' class='button'}}
+    </form>
+  </div>
 </div>

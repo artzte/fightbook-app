@@ -3,26 +3,25 @@
 Controller = Em.Controller.extend
   actions:
     signin: ->
+      controller = @
       ajax
           url: '/api/signin'
           method: 'post'
           data:
             email: @get 'email'
             password: @get 'password'
-        .then (result) =>
-              @set('session.currentUser', Em.Object.create(result))
-              @set('session.isAnon', false)
-              transition = @get 'afterLoginTransition'
+        .then (result) ->
+              controller.set('session.currentUser', Em.Object.create(result))
+              controller.set('session.isAnon', false)
+              controller.set('errorResult', undefined)
+              transition = controller.get 'afterLoginTransition'
               if transition
-                @set 'afterLoginTransition', null
+                controller.set 'afterLoginTransition', null
                 transition.retry()
               else
-                @transitionTo 'treatises'
+                controller.transitionTo 'treatises'
           ,
-            (result) =>
-              try
-                result = JSON.parse(result.responseText)
-              catch
-                result = {error: 'sign-in was unsuccessful'}
-
+            (result) ->
+              Em.run ->
+                controller.set 'errorResult', result.jqXHR.responseJSON
 `export default Controller`

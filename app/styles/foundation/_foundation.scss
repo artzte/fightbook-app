@@ -2,7 +2,7 @@
 @import "settings";
 
 @import "../../../vendor/foundation/scss/foundation/components/accordion";
-// @import "../../../vendor/foundation/scss/foundation/components/alert-boxes";
+@import "../../../vendor/foundation/scss/foundation/components/alert-boxes";
 @import "../../../vendor/foundation/scss/foundation/components/block-grid";
 // @import "../../../vendor/foundation/scss/foundation/components/breadcrumbs";
 // @import "../../../vendor/foundation/scss/foundation/components/button-groups";
@@ -28,7 +28,7 @@
 // @import "../../../vendor/foundation/scss/foundation/components/split-buttons";
 // @import "../../../vendor/foundation/scss/foundation/components/sub-nav";
 // @import "../../../vendor/foundation/scss/foundation/components/switch";
-// @import "../../../vendor/foundation/scss/foundation/components/tables";
+@import "../../../vendor/foundation/scss/foundation/components/tables";
 // @import "../../../vendor/foundation/scss/foundation/components/tabs";
 @import "../../../vendor/foundation/scss/foundation/components/thumbs";
 @import "../../../vendor/foundation/scss/foundation/components/tooltips";
