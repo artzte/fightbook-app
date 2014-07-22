@@ -33,20 +33,34 @@ app.import({
   development: 'vendor/ember-data/ember-data.js',
   production:  'vendor/ember-data/ember-data.prod.js'
 }, {
-  'ember-data': [
-    'default'
-  ]
+  exports: {
+    'ember-data': [
+      'default'
+    ]
+  }
 });
 
 app.import('vendor/ic-ajax/dist/named-amd/main.js', {
-  'ic-ajax': [
-    'default',
-    'defineFixture',
-    'lookupFixture',
-    'raw',
-    'request',
-  ]
+  exports: {
+    'ic-ajax': [
+      'default',
+      'defineFixture',
+      'lookupFixture',
+      'raw',
+      'request',
+    ]
+  }
 });
+
+app.import('vendor/openseadragon/built-openseadragon/openseadragon/openseadragon.js', {
+  exports: {
+    'openseadragon': [
+      'default'
+    ]
+  }
+});
+
+
 
 app.import('vendor/foundation/js/foundation.js');
 app.import('vendor/ember-google-analytics/ember-google-analytics.js');
