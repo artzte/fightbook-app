@@ -193,7 +193,6 @@ module.exports = function(grunt) {
   grunt.registerTask('buildScripts', filterAvailable([
                      'jshint:app',
                      'jshint:tests',
-                     'coffee',
                      'emberscript',
                      'copy:javascriptToTmp',
                      'transpile',
