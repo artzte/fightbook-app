@@ -1,15 +1,20 @@
-Transform = DS.Transform.extend
-  deserialize: (serialized) ->
-    if serialized
-      new OpenSeadragon.Rect(serialized.x, serialized.y, serialized.width, serialized.height)
-    else
-      new OpenSeadragon.Rect()
-  serialize: (deserialized) ->
-    {
-      x: deserialized.get('x')
-      y: deserialized.get('y')
-      width: deserialized.get('width')
-      height: deserialized.get('height')
-    }
+/* global OpenSeadragon */
 
-`export default Transform`
+export default DS.Transform.extend({
+  deserialize: function(serialized) {
+    if (serialized) {
+      return new OpenSeadragon.Rect(serialized.x, serialized.y, serialized.width, serialized.height);
+    } else {
+      return new OpenSeadragon.Rect();
+    }
+  },
+  serialize: function(deserialized) {
+    return {
+      x: deserialized.get('x'),
+      y: deserialized.get('y'),
+      width: deserialized.get('width'),
+      height: deserialized.get('height')
+    };
+  }
+});
+

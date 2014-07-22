@@ -1,58 +1,64 @@
-Page = DS.Model.extend
-  slug: DS.attr 'string'
-  title: DS.attr 'string'
-  visibility: DS.attr 'string'
-  state: DS.attr 'string'
-  createdAt: DS.attr 'date'
-  sections: DS.hasMany 'section'
-  treatise: DS.belongsTo 'treatise'
-  sortOrder: DS.attr 'number'
+/* global FbENV */
+/* global OpenSeadragon */
 
-  # needed for store's reloadRecord to work
-  id: (->
-      @get '_id'
-    ).property('_id')
+export default DS.Model.extend({
+  slug: DS.attr('string'),
+  title: DS.attr('string'),
+  visibility: DS.attr('string'),
+  state: DS.attr('string'),
+  createdAt: DS.attr('date'),
+  sections: DS.hasMany('section'),
+  treatise: DS.belongsTo('treatise'),
+  sortOrder: DS.attr('number'),
 
-  sectionsSorted: (->
-      @get('sections').sortBy 'sortOrder'
-    ).property('sections.@each.sortOrder')
+  //TODO may be superfluous
+  //id: (function() {
+    //return this.get('_id');
+  //}).property('_id'),
 
-  dziUrl: (->
-      "#{FbENV.APP.dziBaseUrl}/#{@get('treatise.key')}/dz/#{@get('slug')}.dzi"
-    ).property('slug')
+  sectionsSorted: (function() {
+    return this.get('sections').sortBy('sortOrder');
+  }).property('sections.@each.sortOrder'),
 
-  thumbUrl: (vSize) ->
-    "#{FbENV.APP.dziBaseUrl}/#{@get('treatise.key')}/thumbs/#{@get('slug')}/page-#{vSize}.jpg"
+  dziUrl: (function() {
+    return "" + FbENV.APP.dziBaseUrl + "/" + (this.get('treatise.key')) + "/dz/" + (this.get('slug')) + ".dzi";
+  }).property('slug'),
 
-  thumbSmall: (->
-      @thumbUrl(150)
-    ).property('slug', 'treatise.key')
+  thumbUrl: function(vSize) {
+    return "" + FbENV.APP.dziBaseUrl + "/" + (this.get('treatise.key')) + "/thumbs/" + (this.get('slug')) + "/page-" + vSize + ".jpg";
+  },
 
-  thumbMedium: (->
-      @thumbUrl(300)
-    ).property('slug', 'treatise.key')
+  thumbSmall: (function() {
+    return this.thumbUrl(150);
+  }).property('slug', 'treatise.key'),
 
-  thumbLarge: (->
-      @thumbUrl(600)
-    ).property('slug', 'treatise.key')
+  thumbMedium: (function() {
+    return this.thumbUrl(300);
+  }).property('slug', 'treatise.key'),
 
-  bounds: (->
-      bounds = @get 'sections.@each.bounds'
-      if bounds.get('length')>0
-        lefts = bounds.getEach 'x'
-        tops = bounds.getEach 'y'
-        rights = bounds.map (bound) ->
-          bound.x + bound.width
-        bottoms = bounds.map (bound) ->
-          bound.y + bound.height
+  thumbLarge: (function() {
+    return this.thumbUrl(600);
+  }).property('slug', 'treatise.key'),
 
-        top = tops.sort().shift()
-        left = lefts.sort().shift()
-        bottom = bottoms.sort().pop()
-        right = rights.sort().pop()
-        new OpenSeadragon.Rect left, top, right-left, bottom-top
-      else
-        null
-    ).property('sections.@each.bounds')
-
-`export default Page`
+  bounds: (function() {
+    var bottom, bottoms, bounds, left, lefts, right, rights, top, tops;
+    bounds = this.get('sections.@each.bounds');
+    if (bounds.get('length') > 0) {
+      lefts = bounds.getEach('x');
+      tops = bounds.getEach('y');
+      rights = bounds.map(function(bound) {
+        return bound.x + bound.width;
+      });
+      bottoms = bounds.map(function(bound) {
+        return bound.y + bound.height;
+      });
+      top = tops.sort().shift();
+      left = lefts.sort().shift();
+      bottom = bottoms.sort().pop();
+      right = rights.sort().pop();
+      return new OpenSeadragon.Rect(left, top, right - left, bottom - top);
+    } else {
+      return null;
+    }
+  }).property('sections.@each.bounds')
+});

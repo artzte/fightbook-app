@@ -1,4 +1,3 @@
-Controller = Em.ObjectController.extend
+export default Em.ObjectController.extend({
   needs: ['page']
-
-`export default Controller`
+});

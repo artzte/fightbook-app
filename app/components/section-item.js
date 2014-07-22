@@ -1,31 +1,35 @@
-Component = Ember.Component.extend
-  classNameBindings: 'isActive'
-  tagName: 'li'
+export default Ember.Component.extend({
+  classNameBindings: 'isActive',
+  tagName: 'li',
 
-  isActive: (->
-      'active' if @get('section') is @get('current-section')
-    ).property('section', 'current-section')
+  isActive: (function() {
+    if (this.get('section') === this.get('current-section')) {
+      return 'active';
+    }
+  }).property('section', 'current-section'),
 
-  iconClass: (->
-      "icon-" + switch @get 'section.sortOrder'
-        when 1
-          'top-left'
-        when 2
-          'top-right'
-        when 3
-          'bottom-left'
-        when 4
-          'bottom-right'
-        else
-          'bottom-right'
-    ).property('section.sortOrder')
+  iconClass: (function() {
+    switch (this.get('section.sortOrder')) {
+      case 1:
+        return 'icon-top-left';
+      case 2:
+        return 'icon-top-right';
+      case 3:
+        return 'icon-bottom-left';
+      case 4:
+        return 'icon-bottom-right';
+      default:
+        return 'icon-bottom-right';
+    }
+  }).property('section.sortOrder'),
 
-  actions: 
-    select: ->
-      if @get 'isActive' 
-        @sendAction 'sdBounds', @get('section.bounds')
-      else
-        $(@get('element')).find('a:first-child').click()
-
-
-`export default Component`
+  actions: {
+    select: function() {
+      if (this.get('isActive')) {
+        this.sendAction('sdBounds', this.get('section.bounds'));
+      } else {
+        $(this.get('element')).find('a:first-child').click();
+      }
+    }
+  }
+});

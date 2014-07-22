@@ -1,5 +1,3 @@
-Component = Ember.Component.extend
+export default Ember.Component.extend({
   classNames: ['copyright']
-
-`export default Component`
-
+});

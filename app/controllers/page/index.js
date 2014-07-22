@@ -1,3 +1,4 @@
-Controller = Ember.ObjectController.extend
+export default Ember.ObjectController.extend({
   needs: ['page/section', 'page']
-`export default Controller`
+});
+

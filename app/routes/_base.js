@@ -1,5 +1,3 @@
-`import DocumentTitleMixin from '../mixins/document-title-mixin'`
+import DocumentTitleMixin from '../mixins/document-title-mixin';
 
-BaseRoute = Ember.Route.extend(DocumentTitleMixin)
-
-`export default BaseRoute`
+export default Ember.Route.extend(DocumentTitleMixin);

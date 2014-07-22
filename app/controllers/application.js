@@ -1,5 +1,7 @@
-Controller = Em.Controller.extend
-  setPageClass: (cls) ->
-    @set 'pageClass', cls
+export default Em.Controller.extend({
+  setPageClass: function(cls) {
+    return this.set('pageClass', cls);
+  }
+});
 
-`export default Controller`
+

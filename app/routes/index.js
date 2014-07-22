@@ -1,7 +1,10 @@
-`import BaseRoute from './_base'`
+import BaseRoute from "./_base";
 
-Route = BaseRoute.extend
-  title: "Home"
-  model: ->
-    {}
-`export default Route`
+var Route = BaseRoute.extend({
+  title: "Home",
+  model: function() {
+    return {};
+  }
+});
+
+export default Route;

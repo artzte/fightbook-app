@@ -1,25 +1,25 @@
-Controller = Ember.ObjectController.extend
-  needs: ['page']
-
-  adminEditLink: (->
-    FbENV.APP.keystonePath + "/sections/#{@get('id')}"
-  ).property('content.id')
-
-  actions:
-    setActive: ->
-      @content.get('page.sections')
-        .setEach('isActive', false)
-      @content.toggleProperty 'isActive'
-      false
-
-    getBounds: ->
-      @set 'bounds', @get('controllers.page.sdBounds')
-      false
-
-    saveBounds: ->
-      section = @get 'content'
-      section.set 'bounds', @get('controllers.page.sdBounds')
-      section.save()
-      false
-
-`export default Controller`
+/* global FbENV */
+export default Ember.ObjectController.extend({
+  needs: ['page'],
+  adminEditLink: (function() {
+    return FbENV.APP.keystonePath + ("/sections/" + (this.get('id')));
+  }).property('content.id'),
+  actions: {
+    setActive: function() {
+      this.content.get('page.sections').setEach('isActive', false);
+      this.content.toggleProperty('isActive');
+      return false;
+    },
+    getBounds: function() {
+      this.set('bounds', this.get('controllers.page.sdBounds'));
+      return false;
+    },
+    saveBounds: function() {
+      var section;
+      section = this.get('content');
+      section.set('bounds', this.get('controllers.page.sdBounds'));
+      section.save();
+      return false;
+    }
+  }
+});

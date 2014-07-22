@@ -1,8 +1,10 @@
-`import BaseRoute from './_base'`
+import BaseRoute from './_base';
 
-Route = BaseRoute.extend
-  title: 'Treatises'
-  model: ->
-    @get('store').find 'treatise'
+var Route = BaseRoute.extend({
+  title: 'Treatises',
+  model: function() {
+    return this.get('store').find('treatise');
+  }
+});
 
-`export default Route`
+export default Route;

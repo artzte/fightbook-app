@@ -1,32 +1,42 @@
-`import BaseRoute from './_base'`
+import BaseRoute from './_base';
 
-Route = BaseRoute.extend
-  model: (params) ->
-    store = @get 'store'
-    treatise = @modelFor 'treatise'
-    page = treatise.get('pages').findProperty('slug', params.page_id)
-    new Ember.RSVP.Promise (resolve, reject) ->
-      if Em.isEmpty(page.get('sections'))
-        store.reloadRecord(page).then ->
-          resolve(page)
-      else
-        resolve(page)
+var Route = BaseRoute.extend({
+  model: function(params) {
+    var page, store, treatise;
+    store = this.get('store');
+    treatise = this.modelFor('treatise');
+    page = treatise.get('pages').findProperty('slug', params.page_id);
 
-  setupController: (controller, model) ->
-    @_super controller, model
-    controller.set 'page', model
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      if (Em.isEmpty(page.get('sections'))) {
+        return store.reloadRecord(page).then(function() {
+          return resolve(page);
+        });
+      } else {
+        return resolve(page);
+      }
+    });
+  },
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    controller.set('page', model);
+  },
+  renderTemplate: function() {
+    this._super();
+    return this.render('page/menu', {
+      into: 'application',
+      outlet: 'leftMenu',
+      controller: this.get('controller')
+    });
+  },
+  actions: {
+    sectionClicked: function(section) {
+      this.transitionTo('page.section', this.get('currentModel'), section.get('sortOrder'));
+    },
+    willTransition: function() {
+      this.send('flushUpdateQueue');
+    }
+  }
+});
 
-  renderTemplate: ->
-    @_super()
-    @render 'page/menu',
-      into: 'application'
-      outlet: 'leftMenu'
-      controller: @get 'controller'
-
-  actions:
-    sectionClicked: (section) ->
-      @transitionTo 'page.section', @get('currentModel'), section.get('sortOrder')
-    willTransition: ->
-      @send 'flushUpdateQueue'
-
-`export default Route`
+export default Route;

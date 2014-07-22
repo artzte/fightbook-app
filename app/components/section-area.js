@@ -1,45 +1,50 @@
-Component = Ember.Component.extend
-  classNames: ['section-area']
-  classNameBindings: ['selected', 'visible']
-  tagName: ['div']
-  attributeBindings: ['draggable']
-  draggable: "true"
-  selected: (->
-      'selected' if @get('current-section') == @get('section')
-    ).property('current-section', 'section')
+/* global OpenSeadragon */
 
-  positionElement: (->
-      bounds = @get 'bounds'
-      viewport = @get 'viewport'
-      ts = @get 'dzi-timestamp'
-      overlay = @$()
+export default Ember.Component.extend({
+  classNames: ['section-area'],
+  classNameBindings: ['selected', 'visible'],
+  tagName: ['div'],
+  attributeBindings: ['draggable'],
+  draggable: "true",
 
-      return unless overlay && bounds && viewport && ts
+  selected: (function() {
+    if (this.get('current-section') === this.get('section')) {
+      return 'selected';
+    }
+  }).property('current-section', 'section'),
 
-      redraw = ->
-        base = viewport.viewportToViewerElementCoordinates new OpenSeadragon.Point(bounds.x, bounds.y)
-        end = viewport.viewportToViewerElementCoordinates new OpenSeadragon.Point(bounds.x+bounds.width, bounds.y+bounds.height)
-        overlay.css
-          left: base.x
-          top: base.y
-          width: end.x - base.x
-          height: end.y - base.y
+  positionElement: (function() {
+    var bounds = this.get('bounds'),
+        overlay = this.$(),
+        ts = this.get('dzi-timestamp'),
+        viewport = this.get('viewport');
 
-      Em.run.debounce @, redraw, 100
-    ).observes('bounds', 'viewport', 'dzi-timestamp', 'zoom')
+    if (!(overlay && bounds && viewport && ts)) {
+      return;
+    }
 
-  getClientOffset: (e) ->
-    target = e.target || e.srcElement
-    rect = target.getBoundingClientRect()
-    [e.clientX - rect.left, e.clientY - rect.top]
+    function redraw() {
+      var base, end;
+      base = viewport.viewportToViewerElementCoordinates(new OpenSeadragon.Point(bounds.x, bounds.y));
+      end = viewport.viewportToViewerElementCoordinates(new OpenSeadragon.Point(bounds.x + bounds.width, bounds.y + bounds.height));
+      overlay.css({
+        left: base.x,
+        top: base.y,
+        width: end.x - base.x,
+        height: end.y - base.y
+      });
+    }
+    Em.run.debounce(this, redraw, 100);
+  }).observes('bounds', 'viewport', 'dzi-timestamp', 'zoom'),
 
-  dragStart: (e) ->
-    dragged = $(e.target)
-    if dragged.is('.handle')
-      @sendAction 'sectionSizeStart', @get('section'), dragged.data('handle'), e
-    else
-      @sendAction 'sectionDragStart', @get('section'), e
+  dragStart: function(e) {
+    var dragged = $(e.target);
+    if (dragged.is('.handle')) {
+      this.sendAction('sectionSizeStart', this.get('section'), dragged.data('handle'), e);
+    } else {
+      this.sendAction('sectionDragStart', this.get('section'), e);
+    }
+    e.dataTransfer.setData('text/data', this.get('section.id'));
+  }
+});
 
-    e.dataTransfer.setData('text/data', @get('section.id'))
-
-`export default Component`

@@ -1,6 +1,7 @@
-View = Em.View.extend
-  didInsertElement: ->
-    Em.run.scheduleOnce 'afterRender', =>
-      @doResize()
-
-`export default View`
+export default Em.View.extend({
+  didInsertElement: function() {
+    Em.run.scheduleOnce('afterRender', this, function() {
+      this.doResize();
+    });
+  }
+});

@@ -1,5 +1,10 @@
-Route = Ember.Route.extend
-  model: ->
-    @modelFor 'treatises'
+import BaseRoute from '../_base';
 
-`export default Route`
+export default BaseRoute.extend({
+  model: function() {
+    return this.modelFor('treatises');
+  },
+  afterModel: function() {
+    this.set('title', 'Treatises');
+  }
+});

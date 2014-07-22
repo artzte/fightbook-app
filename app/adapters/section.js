@@ -1,3 +1,1 @@
-Adapter = DS.RESTAdapter.extend()
-
-`export default Adapter`
+export default DS.RESTAdapter.extend();

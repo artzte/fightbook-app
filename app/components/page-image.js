@@ -1,151 +1,183 @@
-Component = Ember.Component.extend
-  classNames: ['page-image']
+/* global OpenSeadragon */
 
-  updateSource: (->
-      @get('sdViewer').open @get 'dziUrl'
-    ).observes('dziUrl')
-
-  actions:
-    # proxy the drag start through to the container view and record the start position
-    sectionDragStart: (section, e) ->
-      @sendAction 'sectionDragStart', section, e
-      @set 'sectionEdited', section
-      @set 'sectionDragStartPosition',
-        x: e.originalEvent.pageX
+export default Ember.Component.extend({
+  classNames: ['page-image'],
+  actions: {
+    sectionDragStart: function(section, e) {
+      this.sendAction('sectionDragStart', section, e);
+      this.set('sectionEdited', section);
+      this.set('sectionDragStartPosition', {
+        x: e.originalEvent.pageX,
         y: e.originalEvent.pageY
-
-    sectionSizeStart: (section, handle, e) ->
-      @sendAction 'sectionSizeStart', section, handle, e
-      @set 'sectionEdited', section
-      @set 'handleDragStartPosition',
-        handle: handle
-        x: e.originalEvent.pageX
+      });
+    },
+    sectionSizeStart: function(section, handle, e) {
+      this.sendAction('sectionSizeStart', section, handle, e);
+      this.set('sectionEdited', section);
+      this.set('handleDragStartPosition', {
+        handle: handle,
+        x: e.originalEvent.pageX,
         y: e.originalEvent.pageY
-  dragOver: (ev) ->
-    ev.preventDefault()
+      });
+    }
+  },
 
-  # surfaces a section-moved message when the section rectangle is moved or sized
-  drop: (ev) ->
-    section = @get 'sectionEdited'
-    return unless @get 'sectionEdited'
+  updateSource: (function() {
+    this.get('sdViewer').open(this.get('dziUrl'));
+  }).observes('dziUrl'),
 
-    newBounds = @recalcSectionArea section, ev.originalEvent.pageX, ev.originalEvent.pageY
+  dragOver: function(ev) {
+    ev.preventDefault();
+  },
 
-    @set 'handleDragStartPosition', undefined
-    @set 'sectionDragStartPosition', undefined
-    @set 'sectionEdited', undefined
+  drop: function(ev) {
+    var newBounds, physical, section;
 
-    # send the section, the new logical bounds, and the new physical bounds
-    physical = @get('sdViewport').viewportToImageRectangle(newBounds)
-    Em.keys(physical).forEach (key) ->
-      physical[key] = Math.round(physical[key])
-    @sendAction 'sectionMoved', section, newBounds, physical
+    section = this.get('sectionEdited');
 
-  # converts the distance moved to a logical distance. The returned values are end minus start
-  diffPoint: (startX, startY, endX, endY) ->
-    sdImagingHelper = @get 'sdImagingHelper'
+    if (!this.get('sectionEdited')) {
+      return;
+    }
 
-    dx = endX - startX
-    dy = endY - startY
+    newBounds = this.recalcSectionArea(section, ev.originalEvent.pageX, ev.originalEvent.pageY);
 
-    [sdImagingHelper.physicalToLogicalDistance(dx), sdImagingHelper.physicalToLogicalDistance(dy)]
+    this.set('handleDragStartPosition', void 0);
+    this.set('sectionDragStartPosition', void 0);
+    this.set('sectionEdited', void 0);
 
-  recalcSectionArea: (section, x, y) ->
-    bounds = section.get 'bounds'
+    physical = this.get('sdViewport').viewportToImageRectangle(newBounds);
+    Em.keys(physical).forEach(function(key) {
+      physical[key] = Math.round(physical[key]);
+    });
 
-    handleDragStartPosition = @get 'handleDragStartPosition'
-    sectionDragStartPosition = @get 'sectionDragStartPosition'
-    dragStartPosition = handleDragStartPosition || sectionDragStartPosition
+    this.sendAction('sectionMoved', section, newBounds, physical);
 
-    [dxLogical, dyLogical] = @diffPoint(dragStartPosition.x, dragStartPosition.y, x, y)
+    return true;
+  },
 
-    newBounds = new OpenSeadragon.Rect(bounds.x, bounds.y, bounds.width, bounds.height)
+  diffPoint: function(startX, startY, endX, endY) {
+    var sdImagingHelper = this.get('sdImagingHelper');
+    return {
+      dx: sdImagingHelper.physicalToLogicalDistance(endX - startX),
+      dy: sdImagingHelper.physicalToLogicalDistance(endY - startY)
+    };
+  },
 
-    if handleDragStartPosition
-      switch handleDragStartPosition.handle
-        when 'tl'
-          newBounds.x += dxLogical
-          newBounds.y += dyLogical
-          newBounds.width -= dxLogical
-          newBounds.height -= dyLogical
+  recalcSectionArea: function(section, x, y) {
+    var bounds, dragStartPosition, dxLogical, dyLogical, handleDragStartPosition, newBounds, sectionDragStartPosition, diff;
 
-        when 'bl'
-          newBounds.x += dxLogical
-          newBounds.width -= dxLogical
-          newBounds.height += dyLogical
+    bounds = section.get('bounds');
+    handleDragStartPosition = this.get('handleDragStartPosition');
+    sectionDragStartPosition = this.get('sectionDragStartPosition');
+    dragStartPosition = handleDragStartPosition || sectionDragStartPosition;
 
-        when 'tr'
-          newBounds.y += dyLogical
-          newBounds.width += dxLogical
-          newBounds.height -= dyLogical
+    diff = this.diffPoint(dragStartPosition.x, dragStartPosition.y, x, y);
+    dxLogical = diff.dx;
+    dyLogical = diff.dy;
 
-        when 'br'
-          newBounds.width += dxLogical
-          newBounds.height += dyLogical
-    else
-      newBounds.x += dxLogical
-      newBounds.y += dyLogical
+    newBounds = new OpenSeadragon.Rect(bounds.x, bounds.y, bounds.width, bounds.height);
 
-    newBounds
+    if (handleDragStartPosition) {
+      switch (handleDragStartPosition.handle) {
+        case 'tl':
+          newBounds.x += dxLogical;
+          newBounds.y += dyLogical;
+          newBounds.width -= dxLogical;
+          newBounds.height -= dyLogical;
+          break;
+        case 'bl':
+          newBounds.x += dxLogical;
+          newBounds.width -= dxLogical;
+          newBounds.height += dyLogical;
+          break;
+        case 'tr':
+          newBounds.y += dyLogical;
+          newBounds.width += dxLogical;
+          newBounds.height -= dyLogical;
+          break;
+        case 'br':
+          newBounds.width += dxLogical;
+          newBounds.height += dyLogical;
+          break;
+      }
+    } else {
+      newBounds.x += dxLogical;
+      newBounds.y += dyLogical;
+    }
+    return newBounds;
+  },
 
-  didInsertElement: ->
-    Ember.run.scheduleOnce 'afterRender', @, =>
-      sdViewer = new OpenSeadragon
-        hash: @elementId
-        element: @$().find('.page-outer')[0]
-        tileSources: @get('dziUrl')
-        showNavigationControl: false
-        showNavigator: false
-        defaultZoomLevel: 1
-        minZoomLevel: 1
-      imagingHelper = sdViewer.activateImagingHelper
-        onImageViewChanged: (info) =>
-          return if @isDestroying
-          Em.run.debounce @, @timestampImage, 200
-      sdViewer.addHandler 'canvas-drag', (info) =>
-        @sendAction 'sdBounds', sdViewer.viewport.getBounds()
-      sdViewer.addHandler 'zoom', (info) =>
-        @sendAction 'sdZoom', info.zoom
-        if sdViewer.viewport
-          @sendAction 'sdBounds', sdViewer.viewport.getBounds()
-      sdViewer.addHandler 'open', (viewer, source) =>
-        @sendAction 'sdOpen', source
-        @set 'sdViewport', @get('sdViewer').viewport
+  didInsertElement: function() {
+    Ember.run.scheduleOnce('afterRender', this, function() {
+        var imagingHelper, sdViewer;
+        sdViewer = new OpenSeadragon({
+          hash: this.elementId,
+          element: this.$().find('.page-outer')[0],
+          tileSources: this.get('dziUrl'),
+          showNavigationControl: false,
+          showNavigator: false,
+          defaultZoomLevel: 1,
+          minZoomLevel: 1
+        });
 
-        @timestampImage()
+        imagingHelper = sdViewer.activateImagingHelper({
+          onImageViewChanged: function(info) {
+            if (this.isDestroying) {
+              return;
+            }
+            return Em.run.debounce(this, this.timestampImage, 200);
+          }
+        });
 
-      sdViewer.addHandler 'close', ->
-        # close, @canvas.off events, etc.
-        # @canvas.off('mouseenter.osdimaginghelper', @mouseEnter);
-        # @canvas.off('mousemove.osdimaginghelper', @mouseMove);
-        # @canvas.off('mouseleave.osdimaginghelper', @mouseLeave);
+        sdViewer.addHandler('canvas-drag', function(info) {
+          this.sendAction('sdBounds', sdViewer.viewport.getBounds());
+        });
 
-      @set 'sdViewer', sdViewer
-      @set 'sdImagingHelper', imagingHelper
+        sdViewer.addHandler('zoom', function(info) {
+          this.sendAction('sdZoom', info.zoom);
+          if (sdViewer.viewport) {
+            this.sendAction('sdBounds', sdViewer.viewport.getBounds());
+          }
+        });
 
-      window.sdViewer = sdViewer
+        sdViewer.addHandler('open', function(viewer, source) {
+          this.sendAction('sdOpen', source);
+          this.set('sdViewport', this.get('sdViewer').viewport);
+          return this.timestampImage();
+        });
 
-  # An indicator that a new image was opened at a particular time, or that the
-  # viewer has redrawn the image
-  timestampImage: ->
-    @set 'dziTimestamp', "#{@get('dziUrl')}#{new Date().getTime()}"
+        sdViewer.addHandler('close', function() {});
+        this.set('sdViewer', sdViewer);
+        this.set('sdImagingHelper', imagingHelper);
+        window.sdViewer = sdViewer;
+      });
+  },
 
-  setZoom: ( ->
-      sdViewer.viewport.zoomTo @get('zoom')
-    ).observes('zoom')
+  timestampImage: function() {
+    this.set('dziTimestamp', "" + (this.get('dziUrl')) + (new Date().getTime()));
+  },
 
-  _fitTo: ->
-    bounds = @get 'bounds-rect'
-    viewport = @get 'sdViewport'
-    newBounds = new OpenSeadragon.Rect(bounds.x, bounds.y, bounds.width, bounds.height)
-    viewport.fitBounds newBounds
+  setZoom: (function() {
+    this.sdViewer.viewport.zoomTo(this.get('zoom'));
+  }).observes('zoom'),
 
-  fitToBounds: ( ->
-      bounds = @get 'bounds-rect'
-      viewport = @get 'sdViewport'
-      return unless bounds && viewport
+  _fitTo: function() {
+    var bounds, newBounds, viewport;
+    bounds = this.get('bounds-rect');
+    viewport = this.get('sdViewport');
+    newBounds = new OpenSeadragon.Rect(bounds.x, bounds.y, bounds.width, bounds.height);
+    return viewport.fitBounds(newBounds);
+  },
 
-      Em.run.debounce @, @_fitTo, 300
-    ).observes('bounds-rect', 'sdViewport')
+  fitToBounds: (function() {
+    var bounds = this.get('bounds-rect'),
+        viewport = this.get('sdViewport');
 
-`export default Component`
+    if (!(bounds && viewport)) {
+      return;
+    }
+
+    Em.run.debounce(this, this._fitTo, 300);
+  }).observes('bounds-rect', 'sdViewport')
+});
+

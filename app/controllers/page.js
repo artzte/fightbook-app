@@ -1,54 +1,75 @@
-Controller = Em.ObjectController.extend
-  needs: ['application', 'page/section', 'treatises', 'treatise']
-  zoomStops: [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 5]
-  init: ->
-    @_super()
-    Em.run ->
-      Em.run.scheduleOnce 'afterRender', ->
-        $(window).trigger('resize')
-  nextPage: (->
-      treatise = @get 'treatise'
-      @get('treatise').nextPage @get('content')
-    ).property('content', 'treatise.isSettled', 'treatise.pages.@each')
-  prevPage: (->
-      treatise = @get 'treatise'
-      @get('treatise').prevPage @get('content')
-    ).property('content', 'treatise.isSettled', 'treatise.pages.@each')
+/* global FbENV */
 
-  actions:
-    sectionMoved: (section, newBounds, newPhysicalBounds) ->
-      section.set 'bounds', newBounds
-      section.set 'physicalBounds', newPhysicalBounds
-      updateQueue = @get 'updateQueue'
-      updateQueue.set('content', []) unless updateQueue.get('content')
-      unless updateQueue.findProperty 'id', section.get('id')
-        updateQueue.pushObject section
-      false
+export default Em.ObjectController.extend({
+  needs: ['application', 'page/section', 'treatises', 'treatise'],
+  zoomStops: [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 5],
 
-    sdZoom: (zoom) ->
-      @set 'sdZoom', zoom
-      false
+  init: function() {
+    this._super();
+    return Em.run(function() {
+      return Em.run.scheduleOnce('afterRender', function() {
+        return $(window).trigger('resize');
+      });
+    });
+  },
 
-    sdBounds: (bounds) ->
-      @set 'sdBounds', bounds
-      false
+  nextPage: (function() {
+    var treatise;
+    treatise = this.get('treatise');
+    return this.get('treatise').nextPage(this.get('content'));
+  }).property('content', 'treatise.isSettled', 'treatise.pages.@each'),
 
-    zoomIn: ->
-      sdZoom = @get 'sdZoom'
-      larger = @zoomStops.filter (item) ->
-        item > sdZoom
-      newZoom = larger.get('firstObject')
-      if newZoom?
-        @set 'zoom', newZoom
-      false
+  prevPage: (function() {
+    var treatise;
+    treatise = this.get('treatise');
+    return this.get('treatise').prevPage(this.get('content'));
+  }).property('content', 'treatise.isSettled', 'treatise.pages.@each'),
 
-    zoomOut: ->
-      sdZoom = @get 'sdZoom'
-      smaller = @zoomStops.filter (item) ->
-        item < sdZoom
-      newZoom = smaller.get('lastObject')
-      if newZoom?
-        @set 'zoom', newZoom
-      false
-
-`export default Controller`
+  actions: {
+    sectionMoved: function(section, newBounds, newPhysicalBounds) {
+      var updateQueue;
+      section.set('bounds', newBounds);
+      section.set('physicalBounds', newPhysicalBounds);
+      updateQueue = this.get('updateQueue');
+      if (!updateQueue.get('content')) {
+        updateQueue.set('content', []);
+      }
+      if (!updateQueue.findProperty('id', section.get('id'))) {
+        updateQueue.pushObject(section);
+      }
+      return false;
+    },
+    sdZoom: function(zoom) {
+      this.set('sdZoom', zoom);
+      return false;
+    },
+    sdBounds: function(bounds) {
+      this.set('sdBounds', bounds);
+      return false;
+    },
+    zoomIn: function() {
+      var larger, newZoom, sdZoom;
+      sdZoom = this.get('sdZoom');
+      larger = this.zoomStops.filter(function(item) {
+        return item > sdZoom;
+      });
+      newZoom = larger.get('firstObject');
+      if (newZoom != null) {
+        this.set('zoom', newZoom);
+      }
+      return false;
+    },
+    zoomOut: function() {
+      var newZoom, sdZoom, smaller;
+      sdZoom = this.get('sdZoom');
+      smaller = this.zoomStops.filter(function(item) {
+        return item < sdZoom;
+      });
+      newZoom = smaller.get('lastObject');
+      if (newZoom != null) {
+        this.set('zoom', newZoom);
+      }
+      return false;
+    }
+  }
+});

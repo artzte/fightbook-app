@@ -1,11 +1,11 @@
-`import BaseRoute from '../_base'`
+import BaseRoute from '../_base';
 
-Route = BaseRoute.extend
-  model: ->
-    @modelFor 'treatise'
+export default BaseRoute.extend({
+  model: function() {
+    return this.modelFor('treatise');
+  },
+  afterModel: function() {
+    this.set('title', this.get('context.title'));
+  }
+});
 
-  afterModel: ->
-    @set 'title', @get('context.title')
-
-
-`export default Route`
