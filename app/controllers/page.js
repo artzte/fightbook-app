@@ -6,10 +6,8 @@ export default Em.ObjectController.extend({
 
   init: function() {
     this._super();
-    return Em.run(function() {
-      return Em.run.scheduleOnce('afterRender', function() {
-        return $(window).trigger('resize');
-      });
+    Em.run.scheduleOnce('afterRender', function() {
+      $(window).trigger('resize');
     });
   },
 
