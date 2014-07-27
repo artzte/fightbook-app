@@ -1,3 +1,3 @@
-export default Em.ArrayController.extend({
+export default Ember.ArrayController.extend({
   needs: ['application']
 });

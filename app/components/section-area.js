@@ -34,7 +34,7 @@ export default Ember.Component.extend({
         height: end.y - base.y
       });
     }
-    Em.run.debounce(this, redraw, 100);
+    Ember.run.debounce(this, redraw, 100);
   }).observes('bounds', 'viewport', 'dzi-timestamp', 'zoom'),
 
   dragStart: function(e) {

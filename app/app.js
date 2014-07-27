@@ -4,7 +4,7 @@ import loadInitializers from 'ember/load-initializers';
 
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
-Em.Application.reopenClass({
+Ember.Application.reopenClass({
   // This method sizes elements that are required to be of a certain height.
   doResize: function() {
     var $innerWrap = $('.inner-wrap'),
@@ -27,7 +27,7 @@ Em.Application.reopenClass({
 });
 
 var App = Ember.Application.extend({
-  modulePrefix: 'fightbook-ui',   //  TODO: loaded via config
+  modulePrefix: 'fb-app',   //  TODO: loaded via config
   Resolver: Resolver,
   customEvents: ['resize'],
   ready: function() {
@@ -36,7 +36,7 @@ var App = Ember.Application.extend({
   }
 });
 
-Em.Application.initializer({
+Ember.Application.initializer({
   name: 'appInitializers',
   initialize: function(container, app) {
     // Make the resize method available in views
@@ -62,7 +62,7 @@ Em.Application.initializer({
     app.inject('route', 'settings', 'settings:current');
 
     // Register the update queue, which holds page updates
-    app.register('updateQueue:current', Em.ArrayProxy, {
+    app.register('updateQueue:current', Ember.ArrayProxy, {
       singleton: true
     });
     app.inject('controller', 'updateQueue', 'updateQueue:current');
@@ -77,11 +77,7 @@ App.responsive({
   }
 });
 
-loadInitializers(App, 'fightbook-ui');
-
-DS.RESTAdapter.reopen({
-  namespace: 'api'
-});
+loadInitializers(App, 'fb-app');
 
 DS.RESTSerializer.reopen({
   primaryKey: '_id'

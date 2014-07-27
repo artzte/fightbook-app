@@ -46,7 +46,7 @@ export default Ember.Component.extend({
     this.set('sectionEdited', void 0);
 
     physical = this.get('sdViewport').viewportToImageRectangle(newBounds);
-    Em.keys(physical).forEach(function(key) {
+    Ember.keys(physical).forEach(function(key) {
       physical[key] = Math.round(physical[key]);
     });
 
@@ -125,7 +125,7 @@ export default Ember.Component.extend({
             if (this.isDestroying) {
               return;
             }
-            return Em.run.debounce(this, this.timestampImage, 200);
+            return Ember.run.debounce(this, this.timestampImage, 200);
           }
         });
 
@@ -177,7 +177,7 @@ export default Ember.Component.extend({
       return;
     }
 
-    Em.run.debounce(this, this._fitTo, 300);
+    Ember.run.debounce(this, this._fitTo, 300);
   }).observes('bounds-rect', 'sdViewport')
 });
 

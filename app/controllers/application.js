@@ -1,4 +1,4 @@
-export default Em.Controller.extend({
+export default Ember.Controller.extend({
   setPageClass: function(cls) {
     return this.set('pageClass', cls);
   }

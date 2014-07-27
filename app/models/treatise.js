@@ -14,7 +14,7 @@ export default DS.Model.extend({
   nextPage: function(page) {
     var index, pages;
     pages = this.get('pagesSorted');
-    if (Em.isEmpty(pages)) {
+    if (Ember.isEmpty(pages)) {
       return null;
     }
     index = pages.indexOf(page);
@@ -31,7 +31,7 @@ export default DS.Model.extend({
   prevPage: function(page) {
     var index, pages;
     pages = this.get('pagesSorted');
-    if (Em.isEmpty(pages)) {
+    if (Ember.isEmpty(pages)) {
       return null;
     }
     index = pages.indexOf(page);

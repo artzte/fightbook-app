@@ -1,15 +1,6 @@
-/* global FbENV */
-
-export default Em.ObjectController.extend({
+export default Ember.ObjectController.extend({
   needs: ['application', 'page/section', 'treatises', 'treatise'],
   zoomStops: [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 5],
-
-  init: function() {
-    this._super();
-    Em.run.scheduleOnce('afterRender', function() {
-      $(window).trigger('resize');
-    });
-  },
 
   nextPage: (function() {
     var treatise;

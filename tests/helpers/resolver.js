@@ -3,7 +3,7 @@ import Resolver from 'ember/resolver';
 var resolver = Resolver.create();
 
 resolver.namespace = {
-  modulePrefix: 'fightbook-ui'
+  modulePrefix: 'fb-app'
 };
 
 export default resolver;
