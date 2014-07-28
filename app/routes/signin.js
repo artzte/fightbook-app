@@ -1,5 +1,7 @@
+import Ember from "ember";
 import BaseRoute from './_base';
-var Route = BaseRoute.extend({
+
+export default BaseRoute.extend({
   title: 'Sign in',
   beforeModel: function() {
     if (!this.get('session.isAnon')) {
@@ -10,5 +12,3 @@ var Route = BaseRoute.extend({
     return Ember.Object.create();
   }
 });
-
-export default Route;

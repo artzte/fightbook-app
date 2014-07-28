@@ -1,3 +1,5 @@
+import Ember from "ember";
+
 export default Ember.Component.extend({
   classNameBindings: 'isActive',
   tagName: 'li',
@@ -28,7 +30,7 @@ export default Ember.Component.extend({
       if (this.get('isActive')) {
         this.sendAction('sdBounds', this.get('section.bounds'));
       } else {
-        $(this.get('element')).find('a:first-child').click();
+        this.$('a:first-child').click();
       }
     }
   }

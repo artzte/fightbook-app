@@ -1,3 +1,4 @@
+import Ember from "ember";
 import BaseRoute from './_base';
 
 var Route = BaseRoute.extend({

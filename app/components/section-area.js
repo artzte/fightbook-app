@@ -1,4 +1,4 @@
-/* global OpenSeadragon */
+import Ember from "ember";
 
 export default Ember.Component.extend({
   classNames: ['section-area'],
@@ -38,7 +38,7 @@ export default Ember.Component.extend({
   }).observes('bounds', 'viewport', 'dzi-timestamp', 'zoom'),
 
   dragStart: function(e) {
-    var dragged = $(e.target);
+    var dragged = Ember.$(e.target);
     if (dragged.is('.handle')) {
       this.sendAction('sectionSizeStart', this.get('section'), dragged.data('handle'), e);
     } else {

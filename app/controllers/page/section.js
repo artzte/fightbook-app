@@ -1,8 +1,9 @@
-/* global FbENV */
+import Ember from "ember";
+
 export default Ember.ObjectController.extend({
   needs: ['page'],
   adminEditLink: (function() {
-    return FbENV.APP.keystonePath + ("/sections/" + (this.get('id')));
+    return FbAppENV.APP.keystonePath + ("/sections/" + (this.get('id')));
   }).property('content.id'),
   actions: {
     setActive: function() {

@@ -2,7 +2,9 @@
   "predef": {
     "document": true,
     "window": true,
-    "FbAppENV": true
+    "FbAppENV": true,
+    "OpenSeadragon": true,
+    "OpenSeadragonImagingHelper": true
   },
   "browser" : true,
   "boss" : true,

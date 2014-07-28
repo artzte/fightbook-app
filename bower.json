@@ -14,7 +14,7 @@
     "ember-load-initializers": "stefanpenner/ember-load-initializers#0.0.2",
     "ember-google-analytics": "ryanto/ember-google-analytics",
     "openseadragon": "1.1.1",
-    "openseadragon-imaginghelper": "msalsbery/OpenSeadragonImagingHelper"
+    "openseadragon-imaginghelper": "msalsbery/OpenSeadragonImagingHelper",
     "ember-qunit-notifications": "^0.0.3",
     "ember-cli-test-loader": "rjackson/ember-cli-test-loader#0.0.2"
   }

@@ -1,4 +1,4 @@
-/* global OpenSeadragon */
+import Ember from "ember";
 
 export default Ember.Component.extend({
   classNames: ['page-image'],
@@ -121,7 +121,7 @@ export default Ember.Component.extend({
         });
 
         imagingHelper = sdViewer.activateImagingHelper({
-          onImageViewChanged: function(info) {
+          onImageViewChanged: function(/* info */) {
             if (this.isDestroying) {
               return;
             }
@@ -129,7 +129,7 @@ export default Ember.Component.extend({
           }
         });
 
-        sdViewer.addHandler('canvas-drag', function(info) {
+        sdViewer.addHandler('canvas-drag', function(/* info */) {
           this.sendAction('sdBounds', sdViewer.viewport.getBounds());
         });
 

@@ -1,30 +1,11 @@
 import Ember from 'ember';
 import Resolver from 'ember/resolver';
+import DS from "ember-data";
 import loadInitializers from 'ember/load-initializers';
 
+var $ = Ember.$;
+
 Ember.MODEL_FACTORY_INJECTIONS = true;
-
-Ember.Application.reopenClass({
-  // This method sizes elements that are required to be of a certain height.
-  doResize: function() {
-    var $innerWrap = $('.inner-wrap'),
-        headerHeight = $('nav').height() + $('header').height(),
-        height = $innerWrap.height() - headerHeight;
-
-    // get height-targeted containers - those with a sizeWhen data attribute
-    // are conditionally sized based on responsive media query. if the query
-    // does not match it removes the forced height attribute
-    $('.size-to-height').each(function(index, container) {
-        var el = $(container),
-            sizeWhen = el.data('sizeWhen');
-        if ((sizeWhen == null) || this.get("media." + sizeWhen)) {
-          el.height(height);
-        } else {
-          el.css('height', '');
-        }
-      }.bind(this));
-  }
-});
 
 var App = Ember.Application.extend({
   modulePrefix: 'fb-app',   //  TODO: loaded via config
@@ -36,17 +17,15 @@ var App = Ember.Application.extend({
   }
 });
 
+DS.RESTAdapter.reopen({
+  namespace: 'api'
+});
+
 Ember.Application.initializer({
   name: 'appInitializers',
   initialize: function(container, app) {
-    // Make the resize method available in views
-    app.register('doResizeInitializer:doResize', app.constructor.doResize, {
-      instantiate: false
-    });
-    app.inject('view', 'doResize', 'doResizeInitializer:doResize');
-    app.Session = Ember.Object.extend();
-
     // Register a session object for routes and controllers
+    app.Session = Ember.Object.extend();
     app.register('session:current', app.Session, {
       singleton: true
     });

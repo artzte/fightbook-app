@@ -1,5 +1,7 @@
+import Ember from 'ember';
 import ajax from 'ic-ajax';
-var Route = Ember.Route.extend({
+
+export default Ember.Route.extend({
   beforeModel: function() {
     ajax({
       url: '/api/signout'
@@ -11,5 +13,3 @@ var Route = Ember.Route.extend({
     );
   }
 });
-
-export default Route;

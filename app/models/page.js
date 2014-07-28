@@ -1,5 +1,4 @@
-/* global FbENV */
-/* global OpenSeadragon */
+import DS from "ember-data";
 
 export default DS.Model.extend({
   slug: DS.attr('string'),
@@ -21,11 +20,11 @@ export default DS.Model.extend({
   }).property('sections.@each.sortOrder'),
 
   dziUrl: (function() {
-    return "" + FbENV.APP.dziBaseUrl + "/" + (this.get('treatise.key')) + "/dz/" + (this.get('slug')) + ".dzi";
+    return "" + FbAppENV.APP.dziBaseUrl + "/" + (this.get('treatise.key')) + "/dz/" + (this.get('slug')) + ".dzi";
   }).property('slug'),
 
   thumbUrl: function(vSize) {
-    return "" + FbENV.APP.dziBaseUrl + "/" + (this.get('treatise.key')) + "/thumbs/" + (this.get('slug')) + "/page-" + vSize + ".jpg";
+    return "" + FbAppENV.APP.dziBaseUrl + "/" + (this.get('treatise.key')) + "/thumbs/" + (this.get('slug')) + "/page-" + vSize + ".jpg";
   },
 
   thumbSmall: (function() {
