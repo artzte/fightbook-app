@@ -1,4 +1,4 @@
-/* global OpenSeadragon */
+import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['page-image'],
@@ -46,7 +46,7 @@ export default Ember.Component.extend({
     this.set('sectionEdited', void 0);
 
     physical = this.get('sdViewport').viewportToImageRectangle(newBounds);
-    Em.keys(physical).forEach(function(key) {
+    Ember.keys(physical).forEach(function(key) {
       physical[key] = Math.round(physical[key]);
     });
 
@@ -121,32 +121,35 @@ export default Ember.Component.extend({
         });
 
         imagingHelper = sdViewer.activateImagingHelper({
-          onImageViewChanged: function(info) {
+          onImageViewChanged: function(/* info */) {
             if (this.isDestroying) {
               return;
             }
-            return Em.run.debounce(this, this.timestampImage, 200);
-          }
+            return Ember.run.debounce(this, this.timestampImage, 200);
+          }.bind(this)
         });
 
-        sdViewer.addHandler('canvas-drag', function(info) {
+        sdViewer.addHandler('canvas-drag', function(/* info */) {
           this.sendAction('sdBounds', sdViewer.viewport.getBounds());
-        });
+        }.bind(this));
 
         sdViewer.addHandler('zoom', function(info) {
           this.sendAction('sdZoom', info.zoom);
           if (sdViewer.viewport) {
             this.sendAction('sdBounds', sdViewer.viewport.getBounds());
           }
-        });
+        }.bind(this));
 
         sdViewer.addHandler('open', function(viewer, source) {
           this.sendAction('sdOpen', source);
           this.set('sdViewport', this.get('sdViewer').viewport);
           return this.timestampImage();
-        });
+        }.bind(this));
 
-        sdViewer.addHandler('close', function() {});
+        sdViewer.addHandler('close', function() {
+          Ember.Logger.debug("viewer closed");
+        }.bind(this));
+
         this.set('sdViewer', sdViewer);
         this.set('sdImagingHelper', imagingHelper);
         window.sdViewer = sdViewer;
@@ -177,7 +180,7 @@ export default Ember.Component.extend({
       return;
     }
 
-    Em.run.debounce(this, this._fitTo, 300);
+    Ember.run.debounce(this, this._fitTo, 300);
   }).observes('bounds-rect', 'sdViewport')
 });
 

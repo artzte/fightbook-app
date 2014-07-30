@@ -2,8 +2,8 @@ import BaseRoute from '../_base';
 
 export default BaseRoute.extend({
   model: function(params) {
-    var page = this.modelFor('page'),
-        store = this.get('store');
+    var page = this.modelFor('page');
+    
     return page.get('sections').findProperty('sortOrder', parseInt(params.sort_order, 10));
   },
   setupController: function(controller, section) {

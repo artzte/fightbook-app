@@ -1,3 +1,6 @@
+import Ember from "ember";
+import DS from "ember-data";
+
 export default DS.Model.extend({
   title: DS.attr('string'),
   key: DS.attr('string'),
@@ -14,7 +17,7 @@ export default DS.Model.extend({
   nextPage: function(page) {
     var index, pages;
     pages = this.get('pagesSorted');
-    if (Em.isEmpty(pages)) {
+    if (Ember.isEmpty(pages)) {
       return null;
     }
     index = pages.indexOf(page);
@@ -31,7 +34,7 @@ export default DS.Model.extend({
   prevPage: function(page) {
     var index, pages;
     pages = this.get('pagesSorted');
-    if (Em.isEmpty(pages)) {
+    if (Ember.isEmpty(pages)) {
       return null;
     }
     index = pages.indexOf(page);

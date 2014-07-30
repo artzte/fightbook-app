@@ -1,7 +1,7 @@
-export default Em.View.extend({
+import Ember from "ember";
+
+export default Ember.View.extend({
   didInsertElement: function() {
-    Em.run.scheduleOnce('afterRender', this, function() {
-      this.doResize();
-    });
+    Ember.$(window).trigger('resize');
   }
 });

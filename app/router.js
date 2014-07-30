@@ -1,9 +1,7 @@
-/* global FbENV */
 import Ember from 'ember';
-var Router;
 
-Router = Ember.Router.extend({
-  location: FbENV.locationType
+var Router = Ember.Router.extend({
+  location: FbAppENV.locationType
 });
 
 Router.map(function() {

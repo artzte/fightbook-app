@@ -1,3 +1,5 @@
+import DS from "ember-data";
+
 export default DS.Model.extend({
   visibility: DS.attr('string'),
   page: DS.belongsTo('page'),

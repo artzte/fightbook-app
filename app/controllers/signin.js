@@ -1,6 +1,7 @@
+import Ember from "ember";
 import ajax from 'ic-ajax';
 
-export default Em.Controller.extend({
+export default Ember.Controller.extend({
   actions: {
     signin: function() {
       var controller = this;
@@ -13,7 +14,7 @@ export default Em.Controller.extend({
         }
       }).then(function(result) {
         var transition;
-        controller.set('session.currentUser', Em.Object.create(result));
+        controller.set('session.currentUser', Ember.Object.create(result));
         controller.set('session.isAnon', false);
         controller.set('errorResult', void 0);
         transition = controller.get('afterLoginTransition');
@@ -21,10 +22,10 @@ export default Em.Controller.extend({
           controller.set('afterLoginTransition', null);
           transition.retry();
         } else {
-          controller.transitionTo('treatises');
+          controller.transitionToRoute('treatises');
         }
       }, function(result) {
-        Em.run(function() {
+        Ember.run(function() {
           controller.set('errorResult', result.jqXHR.responseJSON);
         });
       });

@@ -1,3 +1,4 @@
+import Ember from "ember";
 import BaseRoute from './_base';
 import ajax from 'ic-ajax';
 
@@ -59,7 +60,7 @@ var Route = BaseRoute.extend({
       return true;
     },
     // TODO 404 conditions
-    error: function(result, transition) {
+    error: function(result /*, transition */) {
       if (result.status === 403) {
         this.clearSession();
         this.transitionTo('signout');

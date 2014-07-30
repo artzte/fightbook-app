@@ -1,7 +1,8 @@
 /* global require */
 
-var Application = require('fightbook-ui/app')['default'];
-var Router = require('fightbook-ui/router')['default'];
+var Application = require('fb-app/app')['default'];
+var Router = require('fb-app/router')['default'];
+import Ember from 'ember';
 
 export default function startApp(attrs) {
   var App;

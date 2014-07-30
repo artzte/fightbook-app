@@ -2,6 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
+    environment: environment,
     baseURL: '/',
     locationType: 'auto',
     EmberENV: {
@@ -19,17 +20,15 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    // LOG_MODULE_RESOLVER is needed for pre-1.6.0
-    ENV.LOG_MODULE_RESOLVER = true;
-
-    ENV.APP.LOG_RESOLVER = false;
+    // ENV.APP.LOG_RESOLVER = true;
     ENV.APP.LOG_ACTIVE_GENERATION = true;
-    ENV.APP.LOG_MODULE_RESOLVER = false;
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.APP.dziBaseUrl = '/media';
-    ENV.APP.keystonePath = 'http://localhost:3004/keystone'
+  }
+
+  if (environment === 'test') {
+
   }
 
   if (environment === 'production') {
