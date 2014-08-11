@@ -125,7 +125,7 @@ export default Ember.Component.extend({
             if (this.isDestroying) {
               return;
             }
-            return Ember.run.debounce(this, this.timestampImage, 200);
+            //return Ember.run.debounce(this, this.timestampImage, 200);
           }.bind(this)
         });
 
@@ -143,7 +143,7 @@ export default Ember.Component.extend({
         sdViewer.addHandler('open', function(viewer, source) {
           this.sendAction('sdOpen', source);
           this.set('sdViewport', this.get('sdViewer').viewport);
-          return this.timestampImage();
+          //return this.timestampImage();
         }.bind(this));
 
         sdViewer.addHandler('close', function() {
@@ -156,9 +156,9 @@ export default Ember.Component.extend({
       });
   },
 
-  timestampImage: function() {
-    this.set('dziTimestamp', "" + (this.get('dziUrl')) + (new Date().getTime()));
-  },
+  //timestampImage: function() {
+    //this.set('dziTimestamp', "" + (this.get('dziUrl')) + (new Date().getTime()));
+  //},
 
   setZoom: (function() {
     this.sdViewer.viewport.zoomTo(this.get('zoom'));

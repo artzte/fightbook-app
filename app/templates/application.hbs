@@ -1,53 +1,51 @@
 <div class="off-canvas-wrap">
-  <div class="inner-wrap">
-    <nav class="tab-bar">
-      <section class="left-small">
-        <ul class="inline-list">
-          <li>
-            <a class="left-off-canvas-toggle menu-icon"><span></span></a>
-          </li>
-        </ul>
-      </section>
-
-      <section class="middle tab-bar-section">
-        <h1 class="title">{{#link-to 'index'}}la incrossada{{/link-to}}</h1>
-      </section>
-
-      <section class="right top-bar-section">
-        <ul class="inline-list">
-          <li>
-          {{#if session.isAnon}}
-            {{#link-to 'signin'}}Sign in{{/link-to}}
-          {{else}}
-            {{#link-to 'signout'}}Sign out{{/link-to}}
-          {{/if}}
-          </li>
-        </ul>
-      </section>
-
-    </nav>
-
-    <aside class="left-off-canvas-menu">
-      {{outlet leftMenu}}
-    </aside>
-
-    <section class="main-section">
-
-      <!-- Content -->
-      <div {{bind-attr class=":row pageClass"}}>
-        <div class="large-12 columns">
-          {{outlet}}
-        </div>
-      </div>
-
-      <footer {{bind-attr class=":row pageClass"}}>
-        <div class="large-12 columns">
-          {{outlet footer}}
-        </div>
-      </footer>
+  <nav class="tab-bar">
+    <section class="left-small">
+      <ul class="inline-list">
+        <li>
+          <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+        </li>
+      </ul>
     </section>
+
+    <section class="middle tab-bar-section">
+      <h1 class="title">{{#link-to 'index'}}la incrossada{{/link-to}}</h1>
+    </section>
+
+    <section class="right top-bar-section">
+      <ul class="inline-list">
+        <li>
+        {{#if session.isAnon}}
+          {{#link-to 'signin'}}Sign in{{/link-to}}
+        {{else}}
+          {{#link-to 'signout'}}Sign out{{/link-to}}
+        {{/if}}
+        </li>
+      </ul>
+    </section>
+
+  </nav>
+
+  <aside class="left-off-canvas-menu">
+    {{outlet leftMenu}}
+  </aside>
+
+  <section class="main-section">
+
+    <!-- Content -->
+    <div class="row main-content">
+      <div class="large-12 columns">
+        {{outlet}}
+      </div>
+    </div>
+
+    <footer class="row">
+      <div class="large-12 columns">
+        {{outlet footer}}
+      </div>
+    </footer>
+  </section>
 
   <a class="exit-off-canvas"></a>
 
-  </div>
 </div>
