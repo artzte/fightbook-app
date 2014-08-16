@@ -16,10 +16,9 @@ export default Ember.Component.extend({
   positionElement: (function() {
     var bounds = this.get('bounds'),
         overlay = this.$(),
-        ts = this.get('dzi-timestamp'),
         viewport = this.get('viewport');
 
-    if (!(overlay && bounds && viewport && ts)) {
+    if (!(overlay && bounds && viewport)) {
       return;
     }
 
@@ -35,7 +34,7 @@ export default Ember.Component.extend({
       });
     }
     Ember.run.debounce(this, redraw, 100);
-  }).observes('bounds', 'viewport', 'dzi-timestamp', 'zoom'),
+  }).observes('bounds', 'viewport', 'zoom', 'sizing-rect'),
 
   dragStart: function(e) {
     var dragged = Ember.$(e.target);

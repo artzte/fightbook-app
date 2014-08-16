@@ -34,20 +34,18 @@
     <section class="main-section">
 
       <!-- Content -->
-      <div {{bind-attr class=":row pageClass"}}>
+      <div>
         <div class="large-12 columns">
           {{outlet}}
         </div>
       </div>
 
-      <footer {{bind-attr class=":row pageClass"}}>
+      <footer>
         <div class="large-12 columns">
           {{outlet footer}}
         </div>
       </footer>
     </section>
-
-  <a class="exit-off-canvas"></a>
-
+    <a class="exit-off-canvas"></a>
   </div>
 </div>

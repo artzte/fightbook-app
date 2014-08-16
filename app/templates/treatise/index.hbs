@@ -6,21 +6,19 @@
   </div>
 </header>
 
-<div class="row">
-  <div class="columns small-12" style="padding: none">
-    <div class="thumbs-wrapper size-to-height">
-      <ul class="large-block-grid-6 small-block-grid-2 size-to-height">
-        {{#each p in pagesSorted}}
-        <li class="large-2 medium-3 small-4 columns" role='content'>
-          <article class="page-thumbnail">
-              {{#link-to 'page' key p.slug class='th'}}
-                <img class="dt" {{bind-attr src=p.thumbSmall}}>
-                <div class="caption">{{p.title}}</div>
-              {{/link-to}}
-          </article>
-        </li>
-        {{/each}}
-      </ul>
-    </div>
+<div class="row treatise-index">
+  <div class="columns small-12 thumbs-wrapper" {{bind-attr style=view.sizingRectStyle}}>
+    <ul class="large-block-grid-6 small-block-grid-2 thumbs-content">
+      {{#each p in pagesSorted}}
+      <li class="large-2 medium-3 small-4 columns" role='content'>
+        <article class="page-thumbnail">
+            {{#link-to 'page' key p.slug class='th'}}
+              <img class="dt" {{bind-attr src=p.thumbSmall}}>
+              <div class="caption">{{p.title}}</div>
+            {{/link-to}}
+        </article>
+      </li>
+      {{/each}}
+    </ul>
   </div>
 </div>

@@ -125,7 +125,7 @@ export default Ember.Component.extend({
             if (this.isDestroying) {
               return;
             }
-            return Ember.run.debounce(this, this.timestampImage, 200);
+            // placeholder action
           }.bind(this)
         });
 
@@ -143,7 +143,6 @@ export default Ember.Component.extend({
         sdViewer.addHandler('open', function(viewer, source) {
           this.sendAction('sdOpen', source);
           this.set('sdViewport', this.get('sdViewer').viewport);
-          return this.timestampImage();
         }.bind(this));
 
         sdViewer.addHandler('close', function() {
@@ -152,17 +151,24 @@ export default Ember.Component.extend({
 
         this.set('sdViewer', sdViewer);
         this.set('sdImagingHelper', imagingHelper);
+
         window.sdViewer = sdViewer;
       });
-  },
-
-  timestampImage: function() {
-    this.set('dziTimestamp', "" + (this.get('dziUrl')) + (new Date().getTime()));
   },
 
   setZoom: (function() {
     this.sdViewer.viewport.zoomTo(this.get('zoom'));
   }).observes('zoom'),
+
+  sizeTo: function() {
+    var rect = this.get('sizing-rect');
+
+    if(!rect) {
+      return;
+    }
+
+    this.$('.page-outer').css({height: rect.height, width: rect.width});
+  }.observes('sizing-rect.width', 'sizing-rect.height'),
 
   _fitTo: function() {
     var bounds, newBounds, viewport;
@@ -174,13 +180,14 @@ export default Ember.Component.extend({
 
   fitToBounds: (function() {
     var bounds = this.get('bounds-rect'),
-        viewport = this.get('sdViewport');
+        viewport = this.get('sdViewport'),
+        size = this.get('sizing-rect');
 
-    if (!(bounds && viewport)) {
+    if (!(bounds && viewport && size)) {
       return;
     }
 
     Ember.run.debounce(this, this._fitTo, 300);
-  }).observes('bounds-rect', 'sdViewport')
+  }).observes('bounds-rect', 'sdViewport', 'sizing-rect.width', 'sizing-rect.height')
 });
 
