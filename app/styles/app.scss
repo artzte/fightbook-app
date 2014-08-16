@@ -99,8 +99,6 @@ $sectionBorderSelected: #888;
   }
 }
 
-
-
 .page-stats {
   position: fixed;
   top: 10%;
@@ -108,13 +106,14 @@ $sectionBorderSelected: #888;
   font-size: .8rem;
 }
 
-.row {
-  max-width: 82rem;
-}
-
 .thumbs-wrapper {
   overflow-y: scroll;
   box-sizing: border-box;
+  padding: 1rem 0;
+
+  .thumbs-content {
+    width: 100%;
+  }
 }
 
 .page-thumbnail {
@@ -161,31 +160,6 @@ h1,h2 {
 h2.page-title {
   position: absolute;
   z-index: 1;
-}
-
-$leaderheadVerticalMargin: .4rem;
-
-header {
-
-  h1 {
-    font-size: 1.2rem;
-    margin: $leaderheadVerticalMargin;
-  }
-
-  .page-links {
-    margin: $leaderheadVerticalMargin;
-    li {
-      margin-left: 1rem;
-    }
-    a {
-      font-size: 1.5rem;
-      color: $accentColor;
-    }
-  }
-}
-
-.row.wide {
-  max-width: 80rem;
 }
 
 #section-content {
@@ -278,17 +252,34 @@ header {
   }
 }
 
-body,html{
-    height:100%;
-    width:100%;
+
+.inner-wrap {
+  height: 100vh;
 }
 
-.application-wrapper {
-  height: 100%;
+.row {
+  max-width: 95vw;
 }
 
-.off-canvas-wrap,.inner-wrap{
-  height:100%;
+$leaderheadVerticalMargin: .4rem;
+
+header {
+
+  h1 {
+    font-size: 1.2rem;
+    margin: $leaderheadVerticalMargin;
+  }
+
+  .page-links {
+    margin: $leaderheadVerticalMargin;
+    li {
+      margin-left: 1rem;
+    }
+    a {
+      font-size: 1.5rem;
+      color: $accentColor;
+    }
+  }
 }
 
 

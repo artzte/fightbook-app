@@ -10,7 +10,7 @@ Ember.MODEL_FACTORY_INJECTIONS = true;
 var App = Ember.Application.extend({
   modulePrefix: 'fb-app',   //  TODO: loaded via config
   Resolver: Resolver,
-  customEvents: ['resize'],
+  customEvents: ['sizeToHeight'],
   ready: function() {
     // init the foundation JS
     $(document).foundation();

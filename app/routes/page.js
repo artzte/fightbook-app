@@ -35,6 +35,9 @@ var Route = BaseRoute.extend({
       controller: this.get('controller')
     });
   },
+  afterModel: function(resolvedModel) {
+    console.log("afterModel", resolvedModel.get('title'));
+  },
   actions: {
     sectionClicked: function(section) {
       this.transitionTo('page.section', this.get('currentModel'), section.get('sortOrder'));
