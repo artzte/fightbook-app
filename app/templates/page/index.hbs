@@ -3,7 +3,7 @@
   <div class="section-wrapper">
     {{#link-to 'page.section' page.slug section.sortOrder class='section-link'}}{{/link-to}}
     <div class="translation">
-      <p>{{section.translation.md}}</p>
+      <p>{{{section.formattedContent}}}</p>
     </div>
   </div>
   {{/each}}
