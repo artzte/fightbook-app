@@ -18,10 +18,11 @@ var app = new EmberApp();
 // along with the exports of each module as its value.
 
 app.import('vendor/openseadragon/built-openseadragon/openseadragon/openseadragon.js');
+app.import('vendor/xregexp/min/xregexp-min.js');
 app.import('vendor/foundation/js/foundation.js');
 app.import('vendor/ember-google-analytics/ember-google-analytics.js');
 app.import('vendor/ember-responsive/dist/ember-responsive.js');
 app.import('vendor/openseadragonimaginghelper/openseadragon-imaginghelper.js');
-
+app.import('vendor/markdown-js/lib/markdown.js');
 
 module.exports = app.toTree();

@@ -1,4 +1,5 @@
-import DS from "ember-data";
+import Ember from 'ember';
+import DS from 'ember-data';
 
 export default DS.Model.extend({
   slug: DS.attr('string'),
@@ -54,5 +55,15 @@ export default DS.Model.extend({
     } else {
       return null;
     }
-  }).property('sections.@each.bounds')
+  }).property('sections.@each.bounds'),
+
+  footnotes: function() {
+    var sections = this.get('sectionsSorted'),
+        pageFootnotes = Ember.ArrayProxy.create({content: []});
+
+    sections.forEach(function(section) {
+      pageFootnotes.addObjects(section.get('extracts.footnotes'));
+    });
+    return pageFootnotes;
+  }.property('sections.@each.footnotes')
 });

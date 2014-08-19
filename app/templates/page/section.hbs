@@ -1,6 +1,6 @@
 <div id="section-content">
   <div class="translation">
-    <p>{{translation.md}}</p>
+    <p>{{{formattedContent}}}</p>
     <ul class="inline-list right">
       {{#if settings.editMode}}
         <li>
@@ -8,7 +8,15 @@
         </li>
       {{/if}}
       <li>{{#link-to 'page' page}}Back to {{page.title}}{{/link-to}}</li>
-    </li>
+    </ul>
+    <div class="clearfix"></div>
   </div>
+  {{#if footnotes}}
+  <div class="footnotes-wrapper">
+    {{#each footnote in footnotes}}
+      <p><sup>{{footnote.reference}}</sup> {{{footnote.content}}}</p>
+    {{/each}}
+  </div>
+  {{/if}}
   {{copyright-slug content=page.treatise.copyright.html}}
 </div>

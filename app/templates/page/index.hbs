@@ -1,11 +1,18 @@
-<div id="section-content">
+<div id="section-content" class="all-sections">
   {{#each section in sectionsSorted}}
   <div class="section-wrapper">
     {{#link-to 'page.section' page.slug section.sortOrder class='section-link'}}{{/link-to}}
     <div class="translation">
-      <p>{{section.translation.md}}</p>
+      <p>{{{section.formattedContent}}}</p>
     </div>
   </div>
   {{/each}}
+  {{#if footnotes}}
+  <div class="footnotes-wrapper">
+    {{#each footnote in footnotes}}
+      <p><sup>{{footnote.reference}}</sup> {{{footnote.content}}}</p>
+    {{/each}}
+  </div>
+  {{/if}}
   {{copyright-slug content=page.treatise.copyright.html}}
 </div>

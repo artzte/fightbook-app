@@ -162,14 +162,19 @@ h2.page-title {
   z-index: 1;
 }
 
+$section-font-size: 0.8rem;
 #section-content {
   overflow-y: scroll;
   height: 99%;
   .translation {
-    font-size: 0.8rem;
-    padding-left: 1.5rem;
+    font-size: $section-font-size;
     p {
       font-size: inherit;
+    }
+  }
+  &.all-sections {
+    .translation {
+      padding-left: 1.5rem;
     }
   }
   .section-wrapper {
@@ -184,6 +189,9 @@ h2.page-title {
         background: lighten($accentColor, 10);
       }
     }
+  }
+  .footnotes-wrapper p {
+    font-size: $section-font-size;
   }
 }
 
