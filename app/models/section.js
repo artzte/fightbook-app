@@ -11,9 +11,4 @@ export default DS.Model.extend({
   state: DS.attr('string'),
   createdAt: DS.attr('date'),
 
-  //TODO still used?
-  excerpt: (function() {
-    var translation = this.get('translation.md') || '';
-    return translation.substr(0, 100);
-  }).property('translation')
 });
