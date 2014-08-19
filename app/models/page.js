@@ -10,11 +10,6 @@ export default DS.Model.extend({
   treatise: DS.belongsTo('treatise'),
   sortOrder: DS.attr('number'),
 
-  //TODO may be superfluous
-  //id: (function() {
-    //return this.get('_id');
-  //}).property('_id'),
-
   sectionsSorted: (function() {
     return this.get('sections').sortBy('sortOrder');
   }).property('sections.@each.sortOrder'),
