@@ -16,7 +16,18 @@ export default Ember.ObjectController.extend({
     return this.get('treatise').prevPage(this.get('content'));
   }).property('content', 'treatise.isSettled', 'treatise.pages.@each'),
 
+  timestampImageChangedAt: function() {
+    this.set('imageViewChangedAt', new Date().getTime());
+  },
+
   actions: {
+    setBounds: function(bounds) {
+      this.timestampImageChangedAt();
+      this.set('boundsRect', bounds);
+    },
+    imageViewChanged: function() {
+      this.timestampImageChangedAt();
+    },
     sectionMoved: function(section, newBounds, newPhysicalBounds) {
       var updateQueue;
       section.set('bounds', newBounds);
@@ -32,10 +43,7 @@ export default Ember.ObjectController.extend({
     },
     sdZoom: function(zoom) {
       this.set('sdZoom', zoom);
-      return false;
-    },
-    sdBounds: function(bounds) {
-      this.set('sdBounds', bounds);
+      this.timestampImageChangedAt();
       return false;
     },
     zoomIn: function() {

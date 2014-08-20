@@ -34,7 +34,7 @@ export default Ember.Component.extend({
       });
     }
     Ember.run.debounce(this, redraw, 100);
-  }).observes('bounds', 'viewport', 'zoom', 'sizing-rect'),
+  }).observes('imageViewChangedAt', 'bounds'),
 
   dragStart: function(e) {
     var dragged = Ember.$(e.target);

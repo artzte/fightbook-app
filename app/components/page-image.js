@@ -107,6 +107,11 @@ export default Ember.Component.extend({
     return newBounds;
   },
 
+  notifyImageViewChanged: function() {
+    console.log("sending notification");
+    this.sendAction('imageViewChanged');
+  },
+
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this, function() {
         var imagingHelper, sdViewer;
@@ -121,23 +126,26 @@ export default Ember.Component.extend({
         });
 
         imagingHelper = sdViewer.activateImagingHelper({
+
+          // sends an action that results in a timestamp change that
+          // helps the image bounds and sections stay in sync through
+          // zooming, etc.
           onImageViewChanged: function(/* info */) {
             if (this.isDestroying) {
               return;
             }
-            // placeholder action
+            // Lazily runs the timestamp
+            Ember.run.debounce(this, this.notifyImageViewChanged, 200);
           }.bind(this)
         });
 
-        sdViewer.addHandler('canvas-drag', function(/* info */) {
-          this.sendAction('sdBounds', sdViewer.viewport.getBounds());
-        }.bind(this));
+        //sdViewer.addHandler('canvas-drag', function([> info <]) {
+        //}.bind(this));
 
+
+        // Tracks the zoom level so that page-based controls can increase or reduce the zoom
         sdViewer.addHandler('zoom', function(info) {
           this.sendAction('sdZoom', info.zoom);
-          if (sdViewer.viewport) {
-            this.sendAction('sdBounds', sdViewer.viewport.getBounds());
-          }
         }.bind(this));
 
         sdViewer.addHandler('open', function(viewer, source) {

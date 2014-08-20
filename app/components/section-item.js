@@ -28,7 +28,7 @@ export default Ember.Component.extend({
   actions: {
     select: function() {
       if (this.get('isActive')) {
-        this.sendAction('sdBounds', this.get('section.bounds'));
+        this.sendAction('setBounds', this.get('section.bounds'));
       } else {
         this.$('a:first-child').click();
       }

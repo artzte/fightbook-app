@@ -1,4 +1,15 @@
 <div class="page-outer"></div>
 {{#each s in sections}}
-{{section-area section=s sizing-rect=sizing-rect current-section=section bounds=s.bounds viewer=sdViewer viewport=sdViewport zoom=zoom sectionSizeStart='sectionSizeStart' sectionDragStart='sectionDragStart' visible=editMode}}
+  {{section-area
+    section=s
+    sizing-rect=sizing-rect
+    current-section=section
+    bounds=s.bounds
+    viewport=sdViewport
+    zoom=zoom
+    imageViewChangedAt=imageViewChangedAt
+    sectionSizeStart='sectionSizeStart'
+    sectionDragStart='sectionDragStart'
+    visible=editMode
+  }}
 {{/each}}
