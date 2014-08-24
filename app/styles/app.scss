@@ -2,20 +2,13 @@
 @import "foundation/foundation";
 @import "foundation/foundation_default";
 
-$heading-font-family: 'Scotch W01 Modern Display', serif;
 $form-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 $backgroundScreen: rgba(255,255,255,0.5);
 // @keyframes domChanged { from { background: yellow; } }
 // @-webkit-keyframes domChanged { from { background: yellow; } }
 // .ember-view { animation: domChanged 1s; -webkit-animation: domChanged 1s; }
 
-$accentColor: #a8614B;
 $creamColor: lighten($accentColor, 80);
-
-h1, h2, h3  {
-  font-family: $heading-font-family;
-  color: $accentColor;
-}
 
 nav.tab-bar a {
   color: white;
@@ -131,19 +124,6 @@ $sectionBorderSelected: #888;
   }
 }
 
-.copyright {
-  clear: both;
-  margin-top: 5rem;
-  ul {
-    @extend   .no-bullet;
-  }
-  li {
-    text-align: right;
-    color: $accentColor;
-    font-size: 0.8rem;
-  }
-}
-
 .edit-link {
   clear: both;
   margin-top: 1rem;
@@ -162,7 +142,10 @@ h2.page-title {
   z-index: 1;
 }
 
-$section-font-size: 0.8rem;
+$section-font-size: 0.9rem;
+$section-right-padding: 0.5rem;
+$section-small-font-size: 0.7rem;
+
 #section-content {
   overflow-y: scroll;
   height: 99%;
@@ -178,6 +161,7 @@ $section-font-size: 0.8rem;
     }
   }
   .section-wrapper {
+    padding-right: $section-right-padding;
     .section-link {
       display: block;
       float: left;
@@ -191,8 +175,23 @@ $section-font-size: 0.8rem;
     }
   }
   .footnotes-wrapper p {
-    font-size: $section-font-size;
+    padding-right: $section-right-padding;
+    font-size: $section-small-font-size;
   }
+  .copyright {
+    padding-right: $section-right-padding;
+    clear: both;
+    margin-top: 5rem;
+    ul {
+      @extend   .no-bullet;
+    }
+    li {
+      text-align: right;
+      color: $accentColor;
+      font-size: $section-small-font-size;
+    }
+  }
+
 }
 
 .section-column {

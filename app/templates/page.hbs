@@ -62,9 +62,6 @@
       {{/if}}
     </ul>
 
-    {{!--
-    {{page-image sizing-rect=view.imageSizingRect bounds-rect=boundsRect sections=sections section=section dziUrl=dziUrl zoom=zoom sdZoom="sdZoom" sdBounds="sdBounds" sectionMoved="sectionMoved" editMode=settings.editMode sectionClicked="sectionClicked"}}
-    --}}
     {{page-image
       sizing-rect=view.imageSizingRect
       bounds-rect=boundsRect
@@ -81,7 +78,7 @@
     }}
 
   </div>
-  <div class="medium-4 large-5 small-12 columns section-column size-to-height" data-size-when="isMedium">
+  <div class="medium-4 large-5 small-12 columns section-column" {{bind-attr style=view.sizingRectStyle}}>
     {{outlet}}
   </div>
 </div>

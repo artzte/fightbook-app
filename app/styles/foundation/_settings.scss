@@ -8,6 +8,8 @@ $rem-base: 16px;
 // Allows the use of rem-calc() or lower-bound() in your settings
 @import "../../../vendor/foundation/scss/foundation/functions";
 
+$accentColor: #a8614B;
+
 // $experimental: true;
 
 // The default font-size is set to 100% of the browser style sheet (usually 16px)
@@ -1085,10 +1087,13 @@ $body-font-family: 'Scotch W01 Micro Regular', serif;
 // $include-open-sans: true;
 
 // We use these to control header font styles
-// $header-font-family: join("Open Sans", $body-font-family);
+$header-font-family: 'Scotch W01 Modern Display', serif;
+
+//join("Open Sans", $body-font-family);
 // $header-font-weight: 300;
 // $header-font-style: normal;
-// $header-font-color: #222;
+$header-font-color: $accentColor;
+//#222;
 // $header-line-height: 1.4;
 // $header-top-margin: .2rem;
 // $header-bottom-margin: .5rem;

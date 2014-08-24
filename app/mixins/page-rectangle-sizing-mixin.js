@@ -10,7 +10,6 @@ export default Ember.Mixin.create({
     this.calcPageRectangle();
   },
   calcPageRectangle: function() {
-    console.log("calc");
     var innerWrap = Ember.$('.inner-wrap'),
         el = this.$(),
         nav = Ember.$('nav.tab-bar'),
