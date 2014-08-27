@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import Resolver from 'ember/resolver';
 import DS from "ember-data";
 import loadInitializers from 'ember/load-initializers';
 
@@ -8,7 +7,7 @@ Ember.MODEL_FACTORY_INJECTIONS = true;
 var App = Ember.Application.extend({
   ready: function() {
     // init the foundation JS
-    $(document).foundation();
+    Ember.$(document).foundation();
   }
 });
 

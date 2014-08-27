@@ -3,7 +3,7 @@
     "document": true,
     "window": true,
     "OpenSeadragon": true,
-    "OpenSeadragonImagingHelper": true
+    "OpenSeadragonImagingHelper": true,
     "-Promise": true,
     "FbAppENV": true
   },
@@ -12,6 +12,7 @@
   "curly": true,
   "debug": false,
   "devel": true,
+  "esnext": true,
   "eqeqeq": true,
   "evil": true,
   "forin": false,
