@@ -23,7 +23,6 @@ export default Ember.Mixin.create({
   },
   sizingRectStyle: function() {
     var rect = this.get('sizingRect');
-
     if(!rect) {
       return "";
     }

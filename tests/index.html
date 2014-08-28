@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>FightbookUi Tests</title>
+    <title>FbApp Tests</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,15 +33,14 @@
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
 
-    <script>
-      window.FbAppENV = {{ENV}};
-      window.EmberENV = window.FbAppENV.EmberENV;
-    </script>
-    <script src="assets/test-support.js"></script>
     <script src="assets/vendor.js"></script>
+    <script src="assets/test-support.js"></script>
     <script src="assets/fb-app.js"></script>
     <script src="testem.js"></script>
     <script>
+      window.FbAppENV = require('fb-app/config/environment')['default'];
+      window.EmberENV = window.FbAppENV.EmberENV;
+
       require('fb-app/tests/test-helper');
     </script>
     <script src="assets/test-loader.js"></script>
