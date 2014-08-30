@@ -15,13 +15,11 @@
     <script type="text/javascript" src="//fast.fonts.net/jsapi/c38dc9d0-a9eb-4341-9ca7-ede273c563dc.js"></script>
   </head>
   <body>
-    <script>
-      window.FbAppENV = {{ENV}};
-      window.EmberENV = window.FbAppENV.EmberENV;
-    </script>
     <script src="assets/vendor.js"></script>
     <script src="assets/fb-app.js"></script>
     <script>
+      window.FbAppENV = require('fb-app/config/environment')['default'];
+      window.EmberENV = window.FbAppENV.EmberENV;
       window.FbApp = require('fb-app/app')['default'].create(FbAppENV.APP);
     </script>
     <script>
