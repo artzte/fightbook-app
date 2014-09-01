@@ -147,17 +147,12 @@ $section-right-padding: 0.5rem;
 $section-small-font-size: 0.7rem;
 
 #section-content {
-  overflow-y: scroll;
   height: 99%;
+
   .translation {
     font-size: $section-font-size;
     p {
       font-size: inherit;
-    }
-  }
-  &.all-sections {
-    .translation {
-      padding-left: 1.5rem;
     }
   }
   .section-wrapper {
@@ -167,7 +162,7 @@ $section-small-font-size: 0.7rem;
       float: left;
       width: .75rem;
       height: .75rem;
-      margin-top: 0.2rem;
+      margin: 0.2rem 0.2rem 0 0;
       background: $accentColor;
       &:hover {
         background: lighten($accentColor, 10);
@@ -200,6 +195,7 @@ $section-small-font-size: 0.7rem;
   background: $backgroundScreen;
   max-height: 18%;
   padding: 0 1rem 0 0;
+  overflow-y: scroll;
 }
 @media #{$medium-up} {
   .section-column {

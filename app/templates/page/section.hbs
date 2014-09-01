@@ -1,7 +1,10 @@
 <div id="section-content">
   <div class="translation">
+    {{#if media.isMedium}}
     <h4>Panel {{sortOrder}}</h4>
+    {{/if}}
     {{{formattedContent}}}
+    {{#if media.isMedium}}
     <ul class="inline-list right">
       {{#if settings.editMode}}
         <li>
@@ -10,6 +13,7 @@
       {{/if}}
       <li>{{#link-to 'page' page}}Back to {{page.title}}{{/link-to}}</li>
     </ul>
+    {{/if}}
     <div class="clearfix"></div>
   </div>
   {{#if footnotes}}
