@@ -3,7 +3,7 @@ import BaseRoute from '../_base';
 export default BaseRoute.extend({
   model: function(params) {
     var page = this.modelFor('page');
-    
+
     return page.get('sections').findProperty('sortOrder', parseInt(params.sort_order, 10));
   },
   setupController: function(controller, section) {
@@ -16,6 +16,13 @@ export default BaseRoute.extend({
     controller.set('section', section);
     controller.set('controllers.page.section', section);
     controller.set('controllers.page.boundsRect', section.get('bounds'));
-
+  },
+  renderTemplate: function() {
+    this._super();
+    return this.render('page/section-title', {
+      into: 'page',
+      outlet: 'sectionTitle',
+      controller: this.get('controller')
+    });
   }
 });
