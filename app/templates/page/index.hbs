@@ -2,7 +2,7 @@
   {{#each section in sectionsSorted}}
   <div class="section-wrapper">
     {{#link-to 'page.section' page.slug section.sortOrder class='section-link'}}{{/link-to}}
-    <div class="translation">
+    <div class="translation" {{action 'sectionClicked' section}}>
       {{{section.formattedContent}}}
     </div>
   </div>
