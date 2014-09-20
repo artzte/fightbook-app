@@ -1,8 +1,13 @@
 import DS from "ember-data";
 
 export default DS.RESTSerializer.extend({
+  normalize: function(type, hash, prop) {
+
+    hash.bounds = hash.bounds || {x: 0, y: 0, width: 1, height: 1};
+    return this._super(type, hash, prop);
+  },
   serialize: function(section) {
-    var bounds = section.get('bounds'), 
+    var bounds = section.get('bounds'),
         json = {
           title: section.get('title'),
           page_ordinal: section.get('pageOrdinal'),
