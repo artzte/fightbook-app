@@ -152,6 +152,17 @@ $section-small-font-size: 0.7rem;
 #section-content {
   height: 99%;
 
+  &.all-sections {
+    hr {
+      border-width: 2px 0 0 0;
+      margin: 1rem auto;
+      border-color: #a8614B;
+      width: 10%;
+      border-style: dotted;
+      border-color: $accentColor;
+    }
+  }
+
   .translation {
     font-size: $section-font-size;
     p {

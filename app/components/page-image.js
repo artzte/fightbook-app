@@ -122,7 +122,9 @@ export default Ember.Component.extend({
           showNavigationControl: false,
           showNavigator: false,
           defaultZoomLevel: 1,
-          minZoomLevel: 1
+          minZoomLevel: 1,
+          zoomPerClick: 1,
+          zoomPerScroll: 1
         });
 
         imagingHelper = sdViewer.activateImagingHelper({
@@ -139,13 +141,13 @@ export default Ember.Component.extend({
           }.bind(this)
         });
 
-        //sdViewer.addHandler('canvas-drag', function([> info <]) {
-        //}.bind(this));
-
-
         // Tracks the zoom level so that page-based controls can increase or reduce the zoom
         sdViewer.addHandler('zoom', function(info) {
           this.sendAction('sdZoom', info.zoom);
+        }.bind(this));
+
+        sdViewer.addHandler('canvas-click', function(info) {
+          this.sendAction('pageClick', this.sdViewport.pointFromPixel(info.position));
         }.bind(this));
 
         sdViewer.addHandler('open', function(viewer, source) {

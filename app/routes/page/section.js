@@ -24,5 +24,11 @@ export default BaseRoute.extend({
       outlet: 'sectionTitle',
       controller: this.get('controller')
     });
+  },
+  actions: {
+    pageClick: function() {
+      // discard this event if in a section
+      return false;
+    }
   }
 });
