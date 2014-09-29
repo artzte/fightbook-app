@@ -131,10 +131,14 @@ $sectionBorderSelected: #888;
   font-size: 0.8rem;
 }
 
-h1,h2 {
+h1,h2, h3, h4 {
   a {
       color: inherit;
+      &:hover {
+        color: inherit;
+      }
     }
+
 }
 
 h2.page-title {
@@ -183,7 +187,7 @@ $section-small-font-size: 0.7rem;
       }
     }
   }
-  .footnotes-wrapper p {
+  .footnotes-wrapper li {
     padding-right: $section-right-padding;
     font-size: $section-small-font-size;
   }

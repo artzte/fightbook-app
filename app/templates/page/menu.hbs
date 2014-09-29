@@ -16,7 +16,7 @@
   <ul class="off-canvas-list">
     <li><label>{{treatise.title}}</label></li>
     {{#each page in treatise.pagesSorted}}
-    <li>{{#link-to 'page' page}}{{page.title}}{{/link-to}}</li>
+    <li>{{#link-to 'page' page.slug}}{{page.title}}{{/link-to}}</li>
     {{/each}}
   </ul>
 {{/if}}
