@@ -8,6 +8,7 @@ export default DS.Model.extend({
   state: DS.attr('string'),
   createdAt: DS.attr('date'),
   pages: DS.hasMany('page'),
+  sequences: DS.hasMany('sequence'),
   copyright: DS.attr('markdown'),
 
   pagesSorted: (function() {

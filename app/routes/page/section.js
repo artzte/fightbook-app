@@ -29,6 +29,16 @@ export default BaseRoute.extend({
     pageClick: function() {
       // discard this event if in a section
       return false;
+    },
+    attachSequenceItem: function(sequence, section, sequenceItem, attached) {
+      var store = this.store;
+      if(attached) {
+        sequenceItem = this.store.createRecord('sequenceItem', {sequence: sequence, section: section});
+        sequenceItem.save();
+      }
+      else {
+        sequenceItem.destroyRecord();
+      }
     }
   }
 });

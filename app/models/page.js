@@ -10,6 +10,7 @@ export default DS.Model.extend({
   sections: DS.hasMany('section'),
   treatise: DS.belongsTo('treatise'),
   sortOrder: DS.attr('number'),
+  sequenceItems: DS.hasMany('sequenceItem'),
 
   sectionsSorted: (function() {
     return this.get('sections').sortBy('sortOrder');
