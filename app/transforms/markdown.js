@@ -7,7 +7,7 @@ export default DS.Transform.extend({
   },
   serialize: function(deserialized) {
     return {
-      md: deserialized.get('md')
+      md: deserialized && deserialized.get('md')
     };
   }
 });
