@@ -92,13 +92,6 @@ $sectionBorderSelected: #888;
   }
 }
 
-.page-stats {
-  position: fixed;
-  top: 10%;
-  left: 40%;
-  font-size: .8rem;
-}
-
 .thumbs-wrapper {
   overflow-y: scroll;
   box-sizing: border-box;
@@ -128,7 +121,6 @@ $sectionBorderSelected: #888;
   clear: both;
   margin-top: 1rem;
   text-align: right;
-  font-size: 0.8rem;
 }
 
 h1,h2, h3, h4 {
@@ -149,9 +141,7 @@ h2.page-title {
   background: $backgroundScreen;
 }
 
-$section-font-size: 0.9rem;
 $section-right-padding: 0.5rem;
-$section-small-font-size: 0.7rem;
 
 #section-content {
   height: 99%;
@@ -167,12 +157,6 @@ $section-small-font-size: 0.7rem;
     }
   }
 
-  .translation {
-    font-size: $section-font-size;
-    p {
-      font-size: inherit;
-    }
-  }
   .section-wrapper {
     padding-right: $section-right-padding;
     .section-link {
@@ -189,7 +173,8 @@ $section-small-font-size: 0.7rem;
   }
   .footnotes-wrapper li {
     padding-right: $section-right-padding;
-    font-size: $section-small-font-size;
+    font-size: $small-font-size;
+    line-height: 1.4em;
   }
   .copyright {
     padding-right: $section-right-padding;
@@ -201,7 +186,7 @@ $section-small-font-size: 0.7rem;
     li {
       text-align: right;
       color: $accentColor;
-      font-size: $section-small-font-size;
+      font-size: $small-font-size;
     }
   }
 
@@ -232,13 +217,13 @@ $section-small-font-size: 0.7rem;
 
   li {
     text-align: center;
-    font-size: 1rem;
 
     a {
       display: inline-block;
       width: 1.5rem;
       height: 1.5rem;
       color: $accentColor;
+      line-height: rem-calc(26);
       &.active {
         border-radius: 3rem;
         background: $accentColor;
@@ -273,6 +258,16 @@ $section-small-font-size: 0.7rem;
   }
 }
 
+.checkbox-list-item {
+  list-style-type: none;
+  position: relative;
+  input {
+    position: absolute;
+    left: -1.1rem;
+    top: .2rem;
+  }
+}
+
 
 .inner-wrap {
   height: 100vh;
@@ -287,7 +282,6 @@ $leaderheadVerticalMargin: .4rem;
 header {
 
   h1 {
-    font-size: 1.2rem;
     margin: $leaderheadVerticalMargin;
   }
 
