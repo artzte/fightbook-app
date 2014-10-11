@@ -28,11 +28,17 @@ var Route = BaseRoute.extend({
     controller.set('page', model);
   },
   renderTemplate: function() {
+    var controller = this.get('controller');
     this._super();
-    return this.render('page/menu', {
+    this.render('page/nav', {
+      into: 'treatise',
+      outlet: 'treatiseNav',
+      controller: controller
+    });
+    this.render('page/menu', {
       into: 'application',
       outlet: 'leftMenu',
-      controller: this.get('controller')
+      controller: controller
     });
   },
   actions: {

@@ -1,0 +1,16 @@
+<ul class="inline-list page-links right">
+  {{#if prevPage}}
+  <li>
+    {{#link-to 'page' prevPage.slug title=prevPage.title}}
+      <i class="icon-arrow-left"></i>
+    {{/link-to}}
+  </li>
+  {{/if}}
+  {{#if nextPage}}
+  <li>
+    {{#link-to 'page' nextPage.slug title=nextPage.title}}
+      <i class="icon-arrow-right"></i>
+    {{/link-to}}
+  </li>
+  {{/if}}
+</ul>

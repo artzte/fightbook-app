@@ -1,29 +1,4 @@
 <!-- Main Blog Content -->
-<header>
-  <div class="row">
-    <div class="large-6 small-6 columns">
-      <h1 class="left">{{#link-to 'treatise' treatise.key}}{{treatise.title}}{{/link-to}}</h1>
-    </div>
-    <div class="large-6 small-6 columns">
-      <ul class="inline-list page-links right">
-        {{#if prevPage}}
-        <li>
-          {{#link-to 'page' prevPage.slug title=prevPage.title}}
-            <i class="icon-arrow-left"></i>
-          {{/link-to}}
-        </li>
-        {{/if}}
-        {{#if nextPage}}
-        <li>
-          {{#link-to 'page' nextPage.slug title=nextPage.title}}
-            <i class="icon-arrow-right"></i>
-          {{/link-to}}
-        </li>
-        {{/if}}
-      </ul>
-    </div>
-  </div>
-</header>
 <div class="row">
   <div class="large-7 medium-8 small-12 columns">
     <h2 class="page-title">
