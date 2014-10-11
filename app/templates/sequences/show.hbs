@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="columns small-12">
+    <h4>{{title}}</h3>
+    {{#if content.html}}
+    <div class="content">
+      {{content.html}}
+    </div>
+    {{/if}}
+  </div>
+</div>
+<div class="row">
+  <div class="columns small-12">
+    <ul>
+      {{#each sequenceItem in sequenceItems}}
+      <li>
+        {{sequenceItem.page.title}} : {{sequenceItem.section.sortOrder}}
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>

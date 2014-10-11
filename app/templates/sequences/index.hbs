@@ -1,0 +1,11 @@
+<div class="row sequence-index-row">
+  <div class="columns small-12">
+    <ul>
+      {{#each sequence in content}}
+      <li>
+        {{#link-to 'sequences.show' sequence.slug}}{{sequence.title}}{{/link-to}}
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
