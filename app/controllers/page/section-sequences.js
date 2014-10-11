@@ -15,5 +15,5 @@ export default Ember.ObjectController.extend({
     else {
       return !!sequenceItem;
     }
-  }.property('sequenceItem')
+  }.property('parentController.model', 'model')
 });
