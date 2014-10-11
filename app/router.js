@@ -9,8 +9,12 @@ Router.map(function() {
   this.route('signout');
   this.resource('treatises', { path: '/t' }, function() {
     this.route('index', { path: '/' });
-    this.resource('treatise', { path: ':treatise_key' }, function() {
-      this.resource('page', { path: '/p/:page_id' }, function() {
+    this.resource('treatise', { path: ':treatiseKey' }, function() {
+      this.resource('sequences', { path: '/seq' }, function() {
+        this.route('index', {path: '/'});
+        this.route('show', {path: '/:sequenceSlug'});
+      });
+      this.resource('page', { path: '/p/:pageId' }, function() {
         this.route('section', { path: '/sec/:sort_order' });
       });
     });

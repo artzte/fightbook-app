@@ -6,7 +6,7 @@ var Route = BaseRoute.extend({
     var page, store, treatise;
     store = this.get('store');
     treatise = this.modelFor('treatise');
-    page = treatise.get('pages').findProperty('slug', params.page_id);
+    page = treatise.get('pages').findProperty('slug', params.pageId);
 
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (Ember.isEmpty(page.get('sections'))) {

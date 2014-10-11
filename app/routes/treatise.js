@@ -5,7 +5,7 @@ var Route = BaseRoute.extend({
     var store, treatise;
 
     store = this.get('store');
-    treatise = store.all('treatise').findProperty('key', params.treatise_key);
+    treatise = store.all('treatise').findProperty('key', params.treatiseKey);
 
     this.set('title', treatise.get('title'));
 
