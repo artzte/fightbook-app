@@ -162,6 +162,10 @@ export default Ember.Component.extend({
         this.set('sdViewer', sdViewer);
         this.set('sdImagingHelper', imagingHelper);
 
+        Ember.run.scheduleOnce('afterRender', this, function() {
+          this.sizeTo();
+        });
+
         window.sdViewer = sdViewer;
       });
   },
@@ -170,15 +174,18 @@ export default Ember.Component.extend({
     this.sdViewer.viewport.zoomTo(this.get('zoom'));
   }).observes('zoom'),
 
+  resizeContainer: function() {
+    this.sizeTo();
+  }.observes('sizing-rect.width', 'sizing-rect.height'),
+
   sizeTo: function() {
     var rect = this.get('sizing-rect');
-
     if(!rect) {
       return;
     }
 
     this.$('.page-outer').css({height: rect.height, width: rect.width});
-  }.observes('sizing-rect.width', 'sizing-rect.height'),
+  },
 
   _fitTo: function() {
     var bounds, newBounds, viewport;
