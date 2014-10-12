@@ -9,6 +9,7 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
   pages: DS.hasMany('page'),
   sequences: DS.hasMany('sequence'),
+  comments: DS.attr('markdown'),
   copyright: DS.attr('markdown'),
 
   pagesSorted: (function() {
