@@ -13,7 +13,12 @@
     <ul>
       {{#each sequenceItem in sequenceItems}}
       <li>
-        {{sequenceItem.page.title}} : {{sequenceItem.section.sortOrder}}
+        {{sequenceItem.title}} ({{sequenceItem.page.title}} : {{sequenceItem.section.sortOrder}})
+        {{page-image
+            sizing-rect=view.sectionSizingRect
+            bounds-rect=sequenceItem.section.bounds
+            section=sequenceItem.section
+            dziUrl=sequenceItem.page.dziUrl}}
       </li>
       {{/each}}
     </ul>
