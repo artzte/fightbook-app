@@ -2,18 +2,27 @@ import Ember from "ember";
 
 export default Ember.ObjectController.extend({
   needs: ['section', 'page'],
-  attached: function(key, value) {
-    var section = this.get('parentController.model'),
-        sectionSequences = section.get('sequenceItems'),
-        sequence = this.get('model'),
-        sequenceItem = sectionSequences.findBy('sequence.id', sequence.get('id'));
+  _itemData: function() {
+    var data = {};
 
+    data.section = this.get('parentController.model');
+    data.sectionSequences = data.section.get('sequenceItems');
+    data.sequence = this.get('model');
+    data.sequenceItem = data.sectionSequences.findBy('sequence.id', data.sequence.get('id'));
+
+    return data;
+  }.property('parentController.model.sequenceItems.length', 'model'),
+  attached: function(key, value) {
+    var itemData = this.get('_itemData');
     if(arguments.length>1) {
-      this.send('attachSequenceItem', sequence, section, sequenceItem, value);
+      this.send('attachSequenceItem', itemData.sequence, itemData.section, itemData.sequenceItem, value);
       return value;
     }
     else {
-      return !!sequenceItem;
+      return !!itemData.sequenceItem;
     }
-  }.property('parentController.model', 'model')
+  }.property('_itemData'),
+  sequenceItem: function() {
+    return this.get('_itemData').sequenceItem;
+  }.property('_itemData')
 });

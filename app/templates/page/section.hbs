@@ -20,7 +20,11 @@
       <h5>Sequences</h5>
       <ul>
         {{#each sequenceItem in sequenceItems}}
-          <li>{{sequenceItem.sequence.title}}</li>
+        <li>
+          {{#link-to 'sequences.show' sequenceItem.sequence.slug}}
+            {{sequenceItem.sequence.title}}
+          {{/link-to}}
+        </li>
         {{/each}}
       </ul>
     {{/if}}{{/unless}}
@@ -36,6 +40,9 @@
               {{input type='checkbox' name='attached' checked=sequence.attached}}
               {{sequence.title}}
             </label>
+            {{#if sequence.sequenceItem}}
+              {{input value=sequence.sequenceItem.title action='updateTitle'}}
+            {{/if}}
           </li>
         {{/each}}
       </ul>

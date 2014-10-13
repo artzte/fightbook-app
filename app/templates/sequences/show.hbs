@@ -1,6 +1,6 @@
 <div class="row">
   <div class="columns small-12">
-    <h4>{{title}}</h3>
+    <h3>{{title}}</h3>
     {{#if content.html}}
     <div class="content">
       {{content.html}}
@@ -8,19 +8,36 @@
     {{/if}}
   </div>
 </div>
+{{#each sequenceItem in sequenceItems}}
 <div class="row">
   <div class="columns small-12">
-    <ul>
-      {{#each sequenceItem in sequenceItems}}
-      <li>
-        {{sequenceItem.title}} ({{sequenceItem.page.title}} : {{sequenceItem.section.sortOrder}})
-        {{page-image
-            sizing-rect=view.sectionSizingRect
-            bounds-rect=sequenceItem.section.bounds
-            section=sequenceItem.section
-            dziUrl=sequenceItem.page.dziUrl}}
-      </li>
-      {{/each}}
-    </ul>
+    <h4>{{sequenceItem.title}}</h4>
+    <p>
+      {{#link-to 'page.section' sequenceItem.pageSlug sequenceItem.section.sortOrder}}
+        ({{sequenceItem.page.title}} : {{sequenceItem.section.sortOrder}})
+      {{/link-to}}
+    </p>
   </div>
 </div>
+<div class="row">
+  <div class="columns small-12 medium-4">
+    {{page-image
+        sizing-rect=view.sectionSizingRect
+        bounds-rect=sequenceItem.section.bounds
+        section=sequenceItem.section
+        dziUrl=sequenceItem.page.dziUrl}}
+  </div>
+  <div class="columns small-12 medium-8">
+    {{#with sequenceItem.section}}
+    <div class="translation">
+      {{{formattedContent}}}
+    </div>
+    {{#if footnotes}}
+      <div class="footnotes-wrapper">
+        {{{footnotes}}}
+      </div>
+    {{/if}}
+    {{/with}}
+  </div>
+</div>
+{{/each}}

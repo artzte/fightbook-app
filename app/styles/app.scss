@@ -261,7 +261,7 @@ $section-right-padding: 0.5rem;
 .checkbox-list-item {
   list-style-type: none;
   position: relative;
-  input {
+  input[type='checkbox'] {
     position: absolute;
     left: -1.1rem;
     top: .2rem;
