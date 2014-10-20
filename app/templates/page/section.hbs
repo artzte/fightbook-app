@@ -22,7 +22,7 @@
         {{#each sequenceItem in sequenceItems}}
         <li>
           {{#link-to 'sequences.show' sequenceItem.sequence.slug}}
-            {{sequenceItem.sequence.title}}
+            {{sequenceItem.title}} - {{sequenceItem.sequence.title}}
           {{/link-to}}
         </li>
         {{/each}}
@@ -41,7 +41,15 @@
               {{sequence.title}}
             </label>
             {{#if sequence.sequenceItem}}
-              {{input value=sequence.sequenceItem.title action='updateTitle'}}
+              <form {{action 'saveItem' on='submit'}}>
+                    <label>Title</label>
+                      {{input value=sequence.sequenceItem.title}}
+                    </label>
+                    <label>Commentary</label>
+                      {{textarea value=sequence.sequenceItem.commentary.md}}
+                    </label>
+                    <input type='submit' class='hide' value='Save'/>
+              </form>
             {{/if}}
           </li>
         {{/each}}
