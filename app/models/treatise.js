@@ -9,8 +9,8 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
   pages: DS.hasMany('page'),
   sequences: DS.hasMany('sequence'),
-  comments: DS.attr('markdown'),
-  copyright: DS.attr('markdown'),
+  comments: DS.hasOneFragment('markdown'),
+  copyright: DS.hasOneFragment('markdown'),
 
   pagesSorted: (function() {
     return this.get('pages').sortBy('sortOrder');

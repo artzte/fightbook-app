@@ -5,5 +5,5 @@ export default DS.Model.extend({
   section: DS.belongsTo('section'),
   sequence: DS.belongsTo('sequence'),
   title: DS.attr('string'),
-  content: DS.attr('markdown')
+  commentary: DS.hasOneFragment('markdown')
 });

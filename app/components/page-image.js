@@ -66,7 +66,7 @@ export default Ember.Component.extend({
   recalcSectionArea: function(section, x, y) {
     var bounds, dragStartPosition, dxLogical, dyLogical, handleDragStartPosition, newBounds, sectionDragStartPosition, diff;
 
-    bounds = section.get('bounds');
+    bounds = section.get('osBounds');
     handleDragStartPosition = this.get('handleDragStartPosition');
     sectionDragStartPosition = this.get('sectionDragStartPosition');
     dragStartPosition = handleDragStartPosition || sectionDragStartPosition;

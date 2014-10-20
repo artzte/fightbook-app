@@ -43,10 +43,10 @@ export default DS.Model.extend({
       lefts = bounds.getEach('x');
       tops = bounds.getEach('y');
       rights = bounds.map(function(bound) {
-        return bound.x + bound.width;
+        return bound.get('x') + bound.get('width');
       });
       bottoms = bounds.map(function(bound) {
-        return bound.y + bound.height;
+        return bound.get('y') + bound.get('height');
       });
       top = tops.sort().shift();
       left = lefts.sort().shift();

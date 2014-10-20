@@ -15,7 +15,7 @@ export default BaseRoute.extend({
     controller.set('page', page);
     controller.set('section', section);
     controller.set('controllers.page.section', section);
-    controller.set('controllers.page.boundsRect', section.get('bounds'));
+    controller.set('controllers.page.boundsRect', section.get('osBounds'));
   },
   renderTemplate: function() {
     this._super();
