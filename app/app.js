@@ -18,6 +18,14 @@ DS.RESTAdapter.reopen({
   namespace: 'api'
 });
 
+var UpdateQueue = Ember.ArrayProxy.extend({
+  addTask: function(item) {
+    if(!this.contains(item)) {
+      this.pushObject(item);
+    }
+  }
+});
+
 Ember.Application.initializer({
   name: 'appInitializers',
   initialize: function(container, app) {
@@ -38,7 +46,7 @@ Ember.Application.initializer({
     app.inject('route', 'settings', 'settings:current');
 
     // Register the update queue, which holds page updates
-    app.register('updateQueue:current', Ember.ArrayProxy, {
+    app.register('updateQueue:current', UpdateQueue, {
       singleton: true
     });
     app.inject('controller', 'updateQueue', 'updateQueue:current');

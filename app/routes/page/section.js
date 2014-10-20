@@ -34,11 +34,10 @@ export default BaseRoute.extend({
       if(attached) {
         sequenceItem = this.store.createRecord('sequenceItem', {sequence: sequence, section: section});
         sequenceItem.save();
-        section.get('sequenceItems').pushObject(sequenceItem);
       }
       else {
-        sequenceItem.destroyRecord();
         section.get('sequenceItems').removeObject(sequenceItem);
+        sequenceItem.destroyRecord();
       }
     }
   }

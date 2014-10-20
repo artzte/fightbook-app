@@ -34,6 +34,13 @@ var Route = BaseRoute.extend({
       }
     );
   },
+  setupController: function() {
+    var updateQueue = this.get('updateQueue');
+    if (!updateQueue.get('content')) {
+      updateQueue.set('content', []);
+    }
+    this._super.apply(this, arguments);
+  },
   clearSession: function() {
     this.set('session.currentUser', undefined);
     this.set('session.isAnon', true);
@@ -48,14 +55,17 @@ var Route = BaseRoute.extend({
 
     // goes through the queued updates and submits them all in sequence
     flushUpdateQueue: function() {
-      var section, updateQueue;
+      var item, updateQueue, i, len;
       if (!this.get('session.currentUser.isAdmin')) {
         return;
       }
       updateQueue = this.get('updateQueue');
-      while (updateQueue.get('length')) {
-        section = updateQueue.popObject();
-        section.save();
+
+      for(i = 0, len = updateQueue.get('length'); i < len; i++) {
+        item = updateQueue.shiftObject();
+        if(item.get('isDirty')) {
+          item.save();
+        }
       }
       return true;
     },

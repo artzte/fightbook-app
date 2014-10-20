@@ -11,7 +11,7 @@ export default Ember.ObjectController.extend({
     data.sequenceItem = data.sectionSequences.findBy('sequence.id', data.sequence.get('id'));
 
     return data;
-  }.property('parentController.model.sequenceItems.length', 'model'),
+  }.property('parentController.model.sequenceItems[]', 'model'),
   attached: function(key, value) {
     var itemData = this.get('_itemData');
     if(arguments.length>1) {
@@ -22,7 +22,13 @@ export default Ember.ObjectController.extend({
       return !!itemData.sequenceItem;
     }
   }.property('_itemData'),
-  sequenceItem: function() {
-    return this.get('_itemData').sequenceItem;
-  }.property('_itemData')
+  sequenceItem: Ember.computed.alias('_itemData.sequenceItem'),
+  actions: {
+    saveItem: function() {
+      var item = this.get('sequenceItem');
+      if(item && item.get('isDirty')) {
+        item.save();
+      }
+    }
+  }
 });

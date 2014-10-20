@@ -29,16 +29,9 @@ export default Ember.ObjectController.extend({
       this.timestampImageChangedAt();
     },
     sectionMoved: function(section, newBounds, newPhysicalBounds) {
-      var updateQueue;
       section.set('bounds', newBounds);
       section.set('physicalBounds', newPhysicalBounds);
-      updateQueue = this.get('updateQueue');
-      if (!updateQueue.get('content')) {
-        updateQueue.set('content', []);
-      }
-      if (!updateQueue.findProperty('id', section.get('id'))) {
-        updateQueue.pushObject(section);
-      }
+      this.get('updateQueue').addTask(section);
       return false;
     },
     sdZoom: function(zoom) {
