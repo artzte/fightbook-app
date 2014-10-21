@@ -1,4 +1,4 @@
-<div id="section-content" class="all-sections">
+<div class="section-content" class="all-sections">
   {{#each section in sectionsSorted}}
   <div class="section-wrapper">
     <div class="translation" {{action 'sectionClicked' section}}>
@@ -7,12 +7,6 @@
     <hr />
   </div>
   {{/each}}
-  {{#if footnotes}}
-  <div class="footnotes-wrapper">
-    {{#each footnote in footnotes}}
-      <p><sup>{{footnote.reference}}</sup> {{{footnote.content}}}</p>
-    {{/each}}
-  </div>
-  {{/if}}
+  {{partial 'sections/footnotes'}}
   {{copyright-slug content=page.treatise.copyright.html}}
 </div>

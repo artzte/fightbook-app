@@ -1,4 +1,4 @@
-<div id="section-content">
+<div class="section-content">
   <div class="translation">
     {{#if media.isMedium}}
     <h4>{{#link-to 'page' page}}{{page.title}}{{/link-to}} : {{sortOrder}}</h4>
@@ -6,15 +6,7 @@
     {{{formattedContent}}}
 
   </div>
-  {{#if footnotes}}
-  <div class="footnotes-wrapper">
-    <ul class="no-bullet">
-    {{#each footnote in footnotes}}
-      <li>{{footnote.reference}}</sup> {{{footnote.content}}}</li>
-    {{/each}}
-    </ul>
-  </div>
-  {{/if}}
+  {{partial 'sections/footnotes'}}
   <div class="sequences-wrapper">
     {{#unless settings.editMode}}{{#if sequenceItems}}
       <h5>Sequences</h5>

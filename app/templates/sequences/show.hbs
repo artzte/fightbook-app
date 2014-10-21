@@ -26,17 +26,13 @@
         section=sequenceItem.section
         dziUrl=sequenceItem.page.dziUrl}}
   </div>
-  <div class="columns small-12 medium-8">
-    {{#with sequenceItem.section}}
-    <div class="translation">
-      {{{formattedContent}}}
-    </div>
-    {{#if footnotes}}
-      <div class="footnotes-wrapper">
-        {{{footnotes}}}
+  {{#with sequenceItem.section}}
+    <div class="columns small-12 medium-8 section-content">
+      <div class="translation">
+        {{{formattedContent}}}
       </div>
-    {{/if}}
-    {{/with}}
-  </div>
+      {{partial 'sections/footnotes'}}
+    </div>
+  {{/with}}
 </div>
 {{/each}}
