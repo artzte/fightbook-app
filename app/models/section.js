@@ -15,8 +15,8 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
 
   osBounds: function() {
-    var bounds = this.get('bounds'),
-        co = bounds.getProperties('x', 'y', 'width', 'height');
+    var bounds = this.get('bounds'), co;
+    co = bounds && bounds.getProperties('x', 'y', 'width', 'height') || {};
     return new OpenSeadragon.Rect(co.x, co.y, co.width, co.height);
   }.property('bounds.x', 'bounds.y', 'bounds.width', 'bounds.height'),
 
