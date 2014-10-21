@@ -33,12 +33,16 @@ export default BaseRoute.extend({
     attachSequenceItem: function(sequence, section, sequenceItem, attached) {
       if(attached) {
         sequenceItem = this.store.createRecord('sequenceItem', {sequence: sequence, section: section});
+        section.get('sequenceItems').pushObject(sequenceItem);
+        sequence.get('sequenceItems').pushObject(sequenceItem);
         sequenceItem.save();
       }
       else {
         section.get('sequenceItems').removeObject(sequenceItem);
+        sequence.get('sequenceItems').removeObject(sequenceItem);
         sequenceItem.destroyRecord();
       }
+      this.get('controller').notifyPropertyChange('sequenceItems[]');
     }
   }
 });

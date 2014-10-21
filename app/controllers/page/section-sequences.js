@@ -11,7 +11,7 @@ export default Ember.ObjectController.extend({
     data.sequenceItem = data.sectionSequences.findBy('sequence.id', data.sequence.get('id'));
 
     return data;
-  }.property('parentController.model.sequenceItems[]', 'model'),
+  }.property('parentController.sequenceItems[]', 'model'),
   attached: function(key, value) {
     var itemData = this.get('_itemData');
     if(arguments.length>1) {
