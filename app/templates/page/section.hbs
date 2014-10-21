@@ -29,7 +29,6 @@
       </ul>
     {{/if}}{{/unless}}
     {{#if media.isMedium}}{{#if settings.editMode}}
-      <h5>Admin</h5>
       <ul>
         <li>
           <a {{bind-attr href=adminEditLink}} target="_blank">Admin edit page</a>
@@ -42,13 +41,17 @@
             </label>
             {{#if sequence.sequenceItem}}
               <form {{action 'saveItem' on='submit'}}>
-                    <label>Title</label>
-                      {{input value=sequence.sequenceItem.title}}
-                    </label>
-                    <label>Commentary</label>
-                      {{textarea value=sequence.sequenceItem.commentary.md}}
-                    </label>
-                    <input type='submit' class='hide' value='Save'/>
+                <div class="row">
+                  <div class="columns small-10">
+                    {{input value=sequence.sequenceItem.title placeholder='Title'}}
+                  </div>
+                  <div class="columns small-2">
+                    <input type='submit' class="button tiny" value='Save'/>
+                  </div>
+                  <div class="columns small-12">
+                    {{textarea value=sequence.sequenceItem.commentary.md placeholder='Commentary'}}
+                  </div>
+                </div>
               </form>
             {{/if}}
           </li>
