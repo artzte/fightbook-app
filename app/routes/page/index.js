@@ -16,7 +16,7 @@ export default BaseRoute.extend({
           x = logicalPoint.x,
           y = logicalPoint.y,
           section = sections.find(function(section) {
-            var bounds = section.get('bounds');
+            var bounds = section.get('osBounds');
             return (x >= bounds.x && x < bounds.x + bounds.width) &&
                 (y >= bounds.y && y < bounds.y + bounds.height);
           });
