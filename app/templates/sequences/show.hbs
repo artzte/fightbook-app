@@ -1,38 +1,52 @@
-<div class="row">
-  <div class="columns small-12">
-    <h3>{{title}}</h3>
-    {{#if content.html}}
-    <div class="content">
-      {{content.html}}
+<header>
+  <div class="row">
+    <div class="columns large-12 small-12 page-title">
+      <h2>{{title}}</h2>
+      <p>
+        {{#link-to 'sequences' this.treatise}}All sequences{{/link-to}}
+      </p>
     </div>
-    {{/if}}
   </div>
-</div>
-{{#each sequenceItem in sequenceItems}}
-<div class="row">
-  <div class="columns small-12">
-    <h4>{{sequenceItem.title}}</h4>
-    <p>
-      {{#link-to 'page.section' sequenceItem.pageSlug sequenceItem.section.sortOrder}}
-        ({{sequenceItem.page.title}} : {{sequenceItem.section.sortOrder}})
-      {{/link-to}}
-    </p>
-  </div>
-</div>
-<div class="row">
-  <div class="columns small-12 medium-4">
-    {{page-image sizing-rect=view.sectionSizingRect
-        bounds-rect=sequenceItem.section.osBounds
-        section=sequenceItem.section
-        dziUrl=sequenceItem.page.dziUrl}}
-  </div>
-  {{#with sequenceItem.section}}
-    <div class="columns small-12 medium-8 section-content">
-      <div class="translation">
-        {{{formattedContent}}}
+</header>
+{{#if hasContent}}
+  <div class="row">
+    <div class="columns small-12">
+      <div class="content">
+        {{{contentHtml}}}
       </div>
-      {{partial 'sections/footnotes'}}
     </div>
-  {{/with}}
+  </div>
+{{/if}}
+
+{{#each sequenceItem in sequenceItems}}
+<div class="row sequence-item-row">
+  <div class="columns small-12">
+    <div class="row">
+      <div class="columns small-12">
+        <h4>
+          {{sequenceItem.title}} &ndash;
+          {{#link-to 'page.section' sequenceItem.pageSlug sequenceItem.section.sortOrder}}
+            {{sequenceItem.page.title}}: {{sequenceItem.section.sortOrder}}
+          {{/link-to}}
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns small-12 medium-4">
+        {{page-image sizing-rect=view.sectionSizingRect
+            bounds-rect=sequenceItem.section.osBounds
+            section=sequenceItem.section
+            dziUrl=sequenceItem.page.dziUrl}}
+      </div>
+      {{#with sequenceItem.section}}
+        <div class="columns small-12 medium-8 section-content">
+          <div class="translation">
+            {{{formattedContent}}}
+          </div>
+          {{partial 'sections/footnotes'}}
+        </div>
+      {{/with}}
+    </div>
+  </div>
 </div>
 {{/each}}

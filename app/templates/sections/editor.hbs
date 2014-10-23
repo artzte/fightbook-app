@@ -1,0 +1,33 @@
+{{#if media.isMedium}}
+  {{#if settings.editMode}}
+    <ul>
+      <li>
+        <a {{bind-attr href=adminEditLink}} target="_blank">Admin edit page</a>
+      </li>
+      {{#each sequence in page.treatise.sequences itemController='page/sectionSequences'}}
+        <li class='checkbox-list-item'>
+          <label>
+            {{input type='checkbox' name='attached' checked=sequence.attached}}
+            {{sequence.title}}
+          </label>
+          {{#if sequence.sequenceItem}}
+            <form {{action 'saveItem' on='submit'}}>
+              <div class="row">
+                <div class="columns small-10">
+                  {{input value=sequence.sequenceItem.title placeholder='Title'}}
+                </div>
+                <div class="columns small-2">
+                  <input type='submit' class="button tiny" value='Save'/>
+                </div>
+                <div class="columns small-12">
+                  {{textarea value=sequence.sequenceItem.commentary.md placeholder='Commentary'}}
+                </div>
+              </div>
+            </form>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+{{/if}}
+
