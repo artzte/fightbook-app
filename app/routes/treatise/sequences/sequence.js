@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function(params) {
-    var sequence = this.modelFor('treatise').get('sequences').findProperty('slug',params.sequenceSlug),
+    var sequence = this.modelFor('treatise.sequences').findProperty('slug', params.sequenceSlug),
         store = this.store;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (Ember.isNone(sequence.get('hasLoadedItems'))) {

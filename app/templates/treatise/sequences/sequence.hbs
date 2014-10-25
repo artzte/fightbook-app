@@ -3,7 +3,7 @@
     <div class="columns large-12 small-12 page-title">
       <h2>{{title}}</h2>
       <p>
-        {{#link-to 'sequences' this.treatise}}All sequences{{/link-to}}
+        {{#link-to 'treatise.sequences' treatise}}All sequences{{/link-to}}
       </p>
     </div>
   </div>
@@ -25,7 +25,7 @@
       <div class="columns small-12">
         <h4>
           {{sequenceItem.title}} &ndash;
-          {{#link-to 'page.section' sequenceItem.pageSlug sequenceItem.section.sortOrder}}
+          {{#link-to 'page.section' sequenceItem.page.slug sequenceItem.section.sortOrder}}
             {{sequenceItem.page.title}}: {{sequenceItem.section.sortOrder}}
           {{/link-to}}
         </h4>

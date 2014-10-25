@@ -13,7 +13,7 @@
       <ul>
         {{#each sequenceItem in sequenceItems}}
         <li>
-          {{#link-to 'sequences.show' sequenceItem.sequence.slug}}
+          {{#link-to 'treatise.sequences.sequence' sequenceItem.sequence.slug}}
             {{sequenceItem.title}} - {{sequenceItem.sequence.title}}
           {{/link-to}}
         </li>
