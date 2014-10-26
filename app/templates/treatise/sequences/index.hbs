@@ -10,7 +10,7 @@
     <ul>
       {{#each sequence in content}}
       <li>
-        first photo would be great here
+        {{sequence.sequenceItems.firstObject.page.title}}
         {{#link-to 'treatise.sequences.sequence' sequence.slug}}{{sequence.title}}{{/link-to}}
       </li>
       {{/each}}

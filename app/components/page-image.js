@@ -108,7 +108,6 @@ export default Ember.Component.extend({
   },
 
   notifyImageViewChanged: function() {
-    console.log("sending notification");
     this.sendAction('imageViewChanged');
   },
 
