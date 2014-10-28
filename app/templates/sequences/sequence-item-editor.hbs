@@ -1,0 +1,16 @@
+<form {{action 'saveItem' sequenceItem on='submit'}}>
+  <div class="row">
+    <div class="columns small-10">
+      {{input value=sequenceItem.title placeholder='Title'}}
+    </div>
+    <div class="columns small-2">
+      <input type='submit' class="button tiny" value='Save'/>
+      {{#if sequenceItem.isLoading}}{{sequenceItem.isLoading}}
+        <img src="assets/loading.gif">
+      {{/if}}
+    </div>
+    <div class="columns small-12">
+      {{textarea value=sequenceItem.commentary.md placeholder='Commentary'}}
+    </div>
+  </div>
+</form>

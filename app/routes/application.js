@@ -48,7 +48,6 @@ var Route = BaseRoute.extend({
   },
   actions: {
     saveItem: function(item) {
-      debugger
       if(item && item.get('isDirty')) {
         item.save();
       }

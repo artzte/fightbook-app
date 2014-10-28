@@ -18,13 +18,13 @@
   </div>
 {{/if}}
 
-{{#each sequenceItem in sequenceItems}}
+{{#each sequenceItem in sequenceItemsPageOrdered}}
 <div class="row sequence-item-row">
   <div class="columns small-12">
     <div class="row">
       <div class="columns small-12">
         <h4>
-          {{sequenceItem.title}} &ndash;
+          {{sequenceItem.title}} &ndash; {{sequenceItem.pageSortPosition}}
           {{#link-to 'page.section' sequenceItem.page.slug sequenceItem.section.sortOrder}}
             {{sequenceItem.page.title}}: {{sequenceItem.section.sortOrder}}
           {{/link-to}}
@@ -38,17 +38,19 @@
             section=sequenceItem.section
             dziUrl=sequenceItem.page.dziUrl}}
       </div>
-      {{#with sequenceItem.section}}
-        <div class="columns small-12 medium-8 section-content">
-          <div class="translation">
-            {{{formattedContent}}}
-          </div>
-          {{partial 'sections/footnotes'}}
-          {{#if editMode}}
-          edit mode
-          {{/if}}
+      <div class="columns small-12 medium-8 section-content">
+        <div class="translation">
+          {{{sequenceItem.section.formattedContent}}}
         </div>
-      {{/with}}
+        {{#with sequenceItem.section}}
+          {{partial 'sections/footnotes'}}
+        {{/with}}
+        {{#if settings.editMode}}
+        {{#with sequenceItem}}
+        {{partial 'sequences/sequence-item-editor'}}
+        {{/with}}
+        {{/if}}
+      </div>
     </div>
   </div>
 </div>
