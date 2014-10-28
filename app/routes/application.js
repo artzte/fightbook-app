@@ -47,8 +47,19 @@ var Route = BaseRoute.extend({
     this.set('settings.editMode', false);
   },
   actions: {
-    toggleEditMode: function() {
-      this.toggleProperty('settings.editMode');
+    saveItem: function(item) {
+      debugger
+      if(item && item.get('isDirty')) {
+        item.save();
+      }
+    },
+    toggleEditMode: function(mode) {
+      if(arguments.length) {
+        this.set('settings.editMode', mode);
+      }
+      else {
+        this.toggleProperty('settings.editMode');
+      }
       this.send('flushUpdateQueue');
       return true;
     },

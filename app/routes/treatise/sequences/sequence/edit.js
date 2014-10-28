@@ -6,13 +6,6 @@ export default Ember.Route.extend({
   },
   setupController: function(controller, model) {
     this._super(controller, model);
-  },
-  actions: {
-    willTransition: function(transition) {
-      console.log("WILL", transition);
-    },
-    didTransition: function(transition) {
-      console.log("DID", transition);
-    }
+    controller.send('toggleEditMode', true);
   }
 });
