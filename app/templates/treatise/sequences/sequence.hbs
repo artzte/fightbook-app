@@ -2,9 +2,18 @@
   <div class="row">
     <div class="columns large-12 small-12 page-title">
       <h2>{{title}}</h2>
-      <p>
-        {{#link-to 'treatise.sequences' treatise}}All sequences{{/link-to}}
-      </p>
+      <ul class="inline-list">
+        <li>
+          {{#link-to 'treatise.sequences' treatise}}Show all sequences{{/link-to}}
+        </li>
+        {{#if session.currentUser.isAdmin}}
+        <li>
+          <a {{action 'toggleEditMode'}}>
+            <i {{bind-attr class=":icon-pencil :edit-mode-toggle settings.editMode:active"}}></i>
+            Edit titles and descriptions
+          </a>
+        </li>
+        {{/if}}
     </div>
   </div>
 </header>
@@ -17,14 +26,14 @@
     </div>
   </div>
 {{/if}}
-
-{{#each sequenceItem in sequenceItems}}
+{{#render 'treatise/sequences/sequenceItems' sequenceItems}}
+{{#each sequenceItem in content}}
 <div class="row sequence-item-row">
   <div class="columns small-12">
     <div class="row">
       <div class="columns small-12">
         <h4>
-          {{sequenceItem.title}} &ndash;
+          {{sequenceItem.title}} &ndash; {{sequenceItem.pageSortPosition}}
           {{#link-to 'page.section' sequenceItem.page.slug sequenceItem.section.sortOrder}}
             {{sequenceItem.page.title}}: {{sequenceItem.section.sortOrder}}
           {{/link-to}}
@@ -33,20 +42,26 @@
     </div>
     <div class="row">
       <div class="columns small-12 medium-4">
-        {{page-image sizing-rect=view.sectionSizingRect
+        {{page-image sizing-rect=settings.thumbSizingRect
             bounds-rect=sequenceItem.section.osBounds
             section=sequenceItem.section
             dziUrl=sequenceItem.page.dziUrl}}
       </div>
-      {{#with sequenceItem.section}}
-        <div class="columns small-12 medium-8 section-content">
-          <div class="translation">
-            {{{formattedContent}}}
-          </div>
-          {{partial 'sections/footnotes'}}
+      <div class="columns small-12 medium-8 section-content">
+        <div class="translation">
+          {{{sequenceItem.section.formattedContent}}}
         </div>
-      {{/with}}
+        {{#with sequenceItem.section}}
+          {{partial 'sections/footnotes'}}
+        {{/with}}
+        {{#if settings.editMode}}
+        {{#with sequenceItem}}
+        {{partial 'sequences/sequence-item-editor'}}
+        {{/with}}
+        {{/if}}
+      </div>
     </div>
   </div>
 </div>
 {{/each}}
+{{/render}}

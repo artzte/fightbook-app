@@ -12,9 +12,7 @@ Router.map(function() {
     this.resource('treatise', { path: ':treatiseKey' }, function() {
       this.route('sequences', { path: '/seq' }, function() {
         this.route('index', {path: '/'});
-        this.route('sequence', {path: '/:sequenceSlug'}, function() {
-          this.route('edit');
-        });
+        this.route('sequence', {path: '/:sequenceSlug'});
       });
       this.resource('page', { path: '/p/:pageId' }, function() {
         this.route('section', { path: '/sec/:sort_order' });

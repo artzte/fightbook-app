@@ -5,15 +5,10 @@
     </div>
   </div>
 </header>
-<div class="row sequence-index-row">
-  <div class="columns small-12">
-    <ul>
-      {{#each sequence in content}}
-      <li>
-        first photo would be great here
-        {{#link-to 'treatise.sequences.sequence' sequence.slug}}{{sequence.title}}{{/link-to}}
-      </li>
-      {{/each}}
-    </ul>
+{{#each sequence in content}}
+  <div class="row sequence-index-row">
+    <div class="columns small-9">
+      {{#link-to 'treatise.sequences.sequence' sequence.slug}}{{sequence.title}}{{/link-to}}
+    </div>
   </div>
-</div>
+{{/each}}

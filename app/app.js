@@ -38,7 +38,10 @@ Ember.Application.initializer({
     app.inject('route', 'session', 'session:current');
 
     // Register a settings object for routes and controllers
-    app.Settings = Ember.Object.extend();
+    app.Settings = Ember.Object.extend({
+      thumbSizingRect: {width: '300px', height: '300px'}
+    });
+
     app.register('settings:current', app.Settings, {
       singleton: true
     });

@@ -22,13 +22,5 @@ export default Ember.ObjectController.extend({
       return !!itemData.sequenceItem;
     }
   }.property('_itemData'),
-  sequenceItem: Ember.computed.alias('_itemData.sequenceItem'),
-  actions: {
-    saveItem: function() {
-      var item = this.get('sequenceItem');
-      if(item && item.get('isDirty')) {
-        item.save();
-      }
-    }
-  }
+  sequenceItem: Ember.computed.alias('_itemData.sequenceItem')
 });
