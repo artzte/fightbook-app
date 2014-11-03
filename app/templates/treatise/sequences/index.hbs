@@ -7,6 +7,12 @@
 </header>
 {{#each sequence in content}}
   <div class="row sequence-index-row">
+    <div class="columns small-3">
+      {{page-image sizing-rect=settings.thumbSizingRect
+          bounds-rect=sequence.sequenceItems.firstObject.section.osBounds
+          section=sequence.sequenceItems.firstObject.section
+          dziUrl=sequence.sequenceItems.firstObject.page.dziUrl}}
+    </div>
     <div class="columns small-9">
       {{#link-to 'treatise.sequences.sequence' sequence.slug}}{{sequence.title}}{{/link-to}}
     </div>
