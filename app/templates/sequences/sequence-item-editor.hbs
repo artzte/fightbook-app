@@ -4,10 +4,7 @@
       {{input value=sequenceItem.title placeholder='Title'}}
     </div>
     <div class="columns small-2">
-      <input type='submit' class="button tiny" value='Save'/>
-      {{#if sequenceItem.isLoading}}{{sequenceItem.isLoading}}
-        <img src="assets/loading.gif">
-      {{/if}}
+      <input type='submit' {{bind-attr class=":button :tiny sequenceItem.isDirty::disabled"}} value='Save'/>
     </div>
     <div class="columns small-12">
       {{textarea value=sequenceItem.commentary.md placeholder='Commentary'}}
