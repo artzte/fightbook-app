@@ -52,6 +52,12 @@ var Route = BaseRoute.extend({
         item.save();
       }
     },
+    confirmDelete: function(item) {
+      if(confirm(['Remove ',item.get('title'),'?'].join(''))) {
+        item.deleteRecord();
+        item.save();
+      }
+    },
     toggleEditMode: function(mode) {
       if(arguments.length) {
         this.set('settings.editMode', mode);
