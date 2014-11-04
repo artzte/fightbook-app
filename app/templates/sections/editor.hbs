@@ -11,19 +11,9 @@
             {{sequence.title}}
           </label>
           {{#if sequence.sequenceItem}}
-            <form {{action 'saveItem' on='submit'}}>
-              <div class="row">
-                <div class="columns small-10">
-                  {{input value=sequence.sequenceItem.title placeholder='Title'}}
-                </div>
-                <div class="columns small-2">
-                  <input type='submit' class="button tiny" value='Save'/>
-                </div>
-                <div class="columns small-12">
-                  {{textarea value=sequence.sequenceItem.commentary.md placeholder='Commentary'}}
-                </div>
-              </div>
-            </form>
+            {{#with sequence}}
+            {{partial 'sequences/sequence-item-editor'}}
+            {{/with}}
           {{/if}}
         </li>
       {{/each}}
