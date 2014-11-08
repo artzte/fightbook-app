@@ -2,6 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
+    modulePrefix: 'fb-app',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
@@ -16,6 +17,15 @@ module.exports = function(environment) {
       dziBaseUrl: '//s3-us-west-2.amazonaws.com/media.incrossada.org',
       title: 'la incrossada',
       keystonePath: '/keystone'
+    },
+    contentSecurityPolicy: {
+      'default-src': "'none'",
+      'script-src': "'self' 'unsafe-eval' *://fast.fonts.net *://www.google-analytics.com/analytics.js",
+      'font-src': "'self' *://fonts.gstatic.com", // Allow fonts to be loaded from http://fonts.gstatic.com
+      'connect-src': "'self'", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
+      'img-src': "'self' *://s3-us-west-2.amazonaws.com/media.incrossada.org",
+      'style-src': "'self' 'unsafe-inline' *://fast.fonts.net", // Allow inline styles and loaded CSS from http://fonts.googleapis.com 
+      'media-src': "'self'"
     }
   };
 
@@ -29,7 +39,15 @@ module.exports = function(environment) {
   }
 
   if (environment === 'test') {
-    ENV.baseURL = '/'; // Testem prefers this...
+    // Testem prefers this...
+    ENV.baseURL = '/';
+    ENV.locationType = 'auto';
+
+    // keep test console output quieter
+    ENV.APP.LOG_ACTIVE_GENERATION = false;
+    ENV.APP.LOG_VIEW_LOOKUPS = false;
+
+    ENV.APP.rootElement = '#ember-testing';
   }
 
   if (environment === 'production') {

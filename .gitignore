@@ -6,13 +6,11 @@
 
 # dependencies
 /node_modules
-/bower_components/*
+/bower_components
 
 # misc
 /.sass-cache
 /connect.lock
-.DS_Store
-Thumbs.db
 /coverage/*
 /libpeerconnection.log
 npm-debug.log

@@ -1,18 +1,16 @@
 {
-  "predef": {
-    "document": true,
-    "window": true,
-    "OpenSeadragon": true,
-    "OpenSeadragonImagingHelper": true,
-    "-Promise": true,
-    "FbAppENV": true
-  },
+  "predef": [
+    "OpenSeadragon",
+    "OpenSeadragonImagingHelper",
+    "document",
+    "window",
+    "-Promise"
+  ],
   "browser" : true,
   "boss" : true,
   "curly": true,
   "debug": false,
   "devel": true,
-  "esnext": true,
   "eqeqeq": true,
   "evil": true,
   "forin": false,

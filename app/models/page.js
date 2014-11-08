@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import config from '../config/environment';
 
 export default DS.Model.extend({
   slug: DS.attr('string'),
@@ -17,11 +18,11 @@ export default DS.Model.extend({
   }).property('sections.@each.sortOrder'),
 
   dziUrl: (function() {
-    return "" + FbAppENV.APP.dziBaseUrl + "/" + (this.get('treatise.key')) + "/dz/" + (this.get('slug')) + ".dzi";
+    return "" + config.APP.dziBaseUrl + "/" + (this.get('treatise.key')) + "/dz/" + (this.get('slug')) + ".dzi";
   }).property('slug'),
 
   thumbUrl: function(vSize) {
-    return "" + FbAppENV.APP.dziBaseUrl + "/" + (this.get('treatise.key')) + "/thumbs/" + (this.get('slug')) + "/page-" + vSize + ".jpg";
+    return "" + config.APP.dziBaseUrl + "/" + (this.get('treatise.key')) + "/thumbs/" + (this.get('slug')) + "/page-" + vSize + ".jpg";
   },
 
   thumbSmall: (function() {

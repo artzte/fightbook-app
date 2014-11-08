@@ -2,16 +2,19 @@ import Ember from 'ember';
 import Resolver from 'ember/resolver';
 import DS from "ember-data";
 import loadInitializers from 'ember/load-initializers';
+import config from './config/environment';
 
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
 var App = Ember.Application.extend({
-  modulePrefix: 'fb-app',   //  TODO: loaded via config
-  Resolver: Resolver,
   ready: function() {
     // init the foundation JS
     Ember.$(document).foundation();
-  }
+    this._super.apply(this, arguments);
+  },
+  modulePrefix: config.modulePrefix,
+  podModulePrefix: config.podModulePrefix,
+  Resolver: Resolver
 });
 
 DS.RESTAdapter.reopen({
@@ -64,7 +67,7 @@ App.responsive({
   }
 });
 
-loadInitializers(App, 'fb-app');
+loadInitializers(App, config.modulePrefix);
 
 DS.RESTSerializer.reopen({
   primaryKey: '_id'

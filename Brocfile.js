@@ -1,8 +1,16 @@
 /* global require, module */
 
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var EmberApp = require('ember-cli/lib/broccoli/ember-app'),
+  mergeTrees = require('broccoli-merge-trees'),
+  pickFiles = require('broccoli-static-compiler');
 
-var app = new EmberApp();
+var app = new EmberApp({
+  sassOptions: {
+    includePaths: [
+      'bower_components/foundation/scss'
+    ]
+  }
+});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
@@ -26,4 +34,13 @@ app.import('bower_components/ember-data.model-fragments/dist/ember-data.model-fr
 app.import('vendor/openseadragon-imaginghelper/openseadragon-imaginghelper.js');
 app.import('bower_components/markdown-js/lib/markdown.js');
 
-module.exports = app.toTree();
+var analytics = pickFiles('vendor/analytics', {
+  srcDir: '/',
+  files: ['analytics.js'],
+  destDir: 'assets'
+});
+
+module.exports = mergeTrees([
+  app.toTree(),
+  analytics
+]);

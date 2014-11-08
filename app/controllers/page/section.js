@@ -1,9 +1,10 @@
 import Ember from "ember";
+import config from '../../config/environment';
 
 export default Ember.ObjectController.extend({
   needs: ['page'],
   adminEditLink: (function() {
-    return FbAppENV.APP.keystonePath + ("/sections/" + (this.get('id')));
+    return config.APP.keystonePath + ("/sections/" + (this.get('id')));
   }).property('content.id'),
   actions: {
     setActive: function() {
