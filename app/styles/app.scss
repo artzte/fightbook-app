@@ -1,14 +1,20 @@
-@import "vendor/foundation/scss/normalize";
-@import "foundation/foundation";
-@import "foundation/foundation_default";
+@import "bower_components/foundation/scss/normalize";
 
-$form-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-$backgroundScreen: rgba(255,255,255,0.5);
-// @keyframes domChanged { from { background: yellow; } }
-// @-webkit-keyframes domChanged { from { background: yellow; } }
-// .ember-view { animation: domChanged 1s; -webkit-animation: domChanged 1s; }
-
+$accentColor: #a8614B;
 $creamColor: lighten($accentColor, 80);
+$backgroundScreen: rgba(255,255,255,0.5);
+$header-font-color: $accentColor;
+
+$body-font-family: 'Scotch W01 Micro Regular', serif;
+$form-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+
+$h1-font-size: 1.2rem;
+$small-font-size: 80%;
+$paragraph-font-size: 0.9rem;
+
+$paragraph-line-height: ($paragraph-font-size*1.6);
+
+@import "bower_components/foundation/scss/foundation";
 
 nav.tab-bar a {
   color: white;
