@@ -13,19 +13,20 @@ module.exports = function(environment) {
       }
     },
 
+    contentSecurityPolicy: {
+      'default-src': "'none'",
+      'script-src': "'self' 'unsafe-eval' http://fast.fonts.net http://www.google-analytics.com/analytics.js",
+      'font-src': "'self' http://fast.fonts.net", // Allow fonts to be loaded from http://fonts.gstatic.com
+      'connect-src': "'self' http://s3-us-west-2.amazonaws.com", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
+      'img-src': "'self' http://s3-us-west-2.amazonaws.com http://www.google-analytics.com",
+      'style-src': "'self' 'unsafe-inline' http://fast.fonts.net", // Allow inline styles and loaded CSS from http://fonts.googleapis.com 
+      'media-src': "'self'"
+    },
+
     APP: {
       dziBaseUrl: '//s3-us-west-2.amazonaws.com/media.incrossada.org',
       title: 'la incrossada',
       keystonePath: '/keystone'
-    },
-    contentSecurityPolicy: {
-      'default-src': "'none'",
-      'script-src': "'self' 'unsafe-eval' *://fast.fonts.net *://www.google-analytics.com/analytics.js",
-      'font-src': "'self' *://fonts.gstatic.com", // Allow fonts to be loaded from http://fonts.gstatic.com
-      'connect-src': "'self'", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
-      'img-src': "'self' *://s3-us-west-2.amazonaws.com/media.incrossada.org",
-      'style-src': "'self' 'unsafe-inline' *://fast.fonts.net", // Allow inline styles and loaded CSS from http://fonts.googleapis.com 
-      'media-src': "'self'"
     }
   };
 
@@ -35,7 +36,8 @@ module.exports = function(environment) {
     ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.APP.dziBaseUrl = '//dev.media.incrossada.org';
+    // override
+    //ENV.APP.dziBaseUrl = '//dev.media.incrossada.org';
   }
 
   if (environment === 'test') {
