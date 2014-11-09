@@ -5,16 +5,13 @@
     </div>
   </div>
 </header>
+<ul class="block-grid-4 thumbnail-array">
 {{#each sequence in content}}
-  <div class="row sequence-index-row">
-    <div class="columns small-3">
-      {{page-image sizing-rect=settings.thumbSizingRect
-          bounds-rect=sequence.sequenceItems.firstObject.section.osBounds
-          section=sequence.sequenceItems.firstObject.section
-          dziUrl=sequence.sequenceItems.firstObject.page.dziUrl}}
-    </div>
-    <div class="columns small-9">
-      {{#link-to 'treatise.sequences.sequence' sequence.slug}}{{sequence.title}}{{/link-to}}
-    </div>
-  </div>
+  <li>
+    {{#link-to 'treatise.sequences.sequence' sequence.slug class='th'}}
+    <img {{bind-attr src=sequence.sequenceItems.firstObject.section.thumbSmall}}/>
+    <p>{{sequence.title}}</p>
+    {{/link-to}}
+  </li>
 {{/each}}
+</ul>

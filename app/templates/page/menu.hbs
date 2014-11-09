@@ -4,17 +4,15 @@
   <li>{{#link-to 'treatise' treatise}}{{treatise.title}}{{/link-to}}</li>
   {{/each}}
 </ul>
-{{#if page}}
+{{#if treatise}}
   <ul class="off-canvas-list">
-    <li><label>{{title}}</label></li>
-    {{#each section in page.sectionsSorted}}
-    <li>{{#link-to 'page.section' page.slug section.sortOrder}}Panel {{section.sortOrder}}{{/link-to}}</li>
+    <li><label>Sequences</label></li>
+    {{#each sequence in treatise.sequences}}
+    <li>{{#link-to 'treatise.sequences.sequence' treatise sequence.slug}}{{sequence.title}}{{/link-to}}</li>
     {{/each}}
   </ul>
-{{/if}}
-{{#if controllers.treatise}}
   <ul class="off-canvas-list">
-    <li><label>{{treatise.title}}</label></li>
+    <li><label>Folios</label></li>
     {{#each page in treatise.pagesSorted}}
     <li>{{#link-to 'page' page.slug}}{{page.title}}{{/link-to}}</li>
     {{/each}}

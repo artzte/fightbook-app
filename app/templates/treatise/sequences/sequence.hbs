@@ -42,10 +42,15 @@
     </div>
     <div class="row">
       <div class="columns small-12 medium-4">
+        {{!--
         {{page-image sizing-rect=settings.thumbSizingRect
             bounds-rect=sequenceItem.section.osBounds
             section=sequenceItem.section
             dziUrl=sequenceItem.page.dziUrl}}
+        --}}
+        {{#link-to 'page.section' sequenceItem.page.slug sequenceItem.section.sortOrder class='th'}}
+          <img {{bind-attr src=sequenceItem.section.thumbMedium}}/>
+        {{/link-to}}
       </div>
       <div class="columns small-12 medium-8 section-content">
         <div class="translation">

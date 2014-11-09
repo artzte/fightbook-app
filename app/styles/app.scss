@@ -108,6 +108,20 @@ $sectionBorderSelected: #888;
   }
 }
 
+
+.thumbnail-array {
+  a {
+    text-align: center;
+    color: inherit;
+    &:hover {
+      color: $accentColor;
+    }
+  }
+  p {
+    font-size: $small-font-size;
+  }
+}
+
 .page-thumbnail {
   position: relative;
   margin-bottom: 1rem;
