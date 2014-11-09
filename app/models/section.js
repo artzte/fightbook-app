@@ -2,6 +2,7 @@
 /* global markdown */
 
 import DS from "ember-data";
+import config from '../config/environment';
 
 export default DS.Model.extend({
   visibility: DS.attr('string'),
@@ -54,6 +55,33 @@ export default DS.Model.extend({
 
   extracts: function() {
     return this._extractFootnotes(this.get('translation.md')||'');
-  }.property('translation.md')
+  }.property('translation.md'),
+
+  thumbUrl: function(vSize) {
+    return ["",
+      config.APP.dziBaseUrl,
+      "/",
+      (this.get('page.treatise.key')),
+      "/thumbs/",
+      this.get('page.slug'),
+      "/section_",
+      this.get('sortOrder'),
+      "-",
+      vSize,
+      ".jpg"
+    ].join("");
+  },
+
+  thumbSmall: (function() {
+    return this.thumbUrl(150);
+  }).property('page.slug', 'treatise.key'),
+
+  thumbMedium: (function() {
+    return this.thumbUrl(300);
+  }).property('page.slug', 'treatise.key'),
+
+  thumbLarge: (function() {
+    return this.thumbUrl(600);
+  }).property('page.slug', 'treatise.key')
 
 });
