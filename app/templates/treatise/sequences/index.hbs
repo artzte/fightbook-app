@@ -5,13 +5,17 @@
     </div>
   </div>
 </header>
-<ul class="block-grid-4 thumbnail-array">
-{{#each sequence in content}}
-  <li>
-    {{#link-to 'treatise.sequences.sequence' sequence.slug class='th'}}
-    <img {{bind-attr src=sequence.sequenceItems.firstObject.section.thumbSmall}}/>
-    <p>{{sequence.title}}</p>
-    {{/link-to}}
-  </li>
-{{/each}}
-</ul>
+<div class="row">
+  <div class="columns medium-12">
+    <ul class="block-grid-4 thumbnail-array">
+    {{#each sequence in content}}
+      <li>
+        {{#link-to 'treatise.sequences.sequence' sequence.slug class='th'}}
+        <img {{bind-attr src=sequence.sequenceItems.firstObject.section.thumbSmall}}/>
+        <p>{{sequence.title}}</p>
+        {{/link-to}}
+      </li>
+    {{/each}}
+    </ul>
+  </div>
+</div>

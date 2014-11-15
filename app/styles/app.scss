@@ -140,6 +140,10 @@ $sectionBorderSelected: #888;
 .sequence-item-row {
   margin-top: 1rem;
   padding-bottom: 2rem;
+
+  .sequence-image {
+    text-align: center;
+  }
 }
 
 .edit-link {

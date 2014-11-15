@@ -1,12 +1,12 @@
 <div class="row treatise-index">
   <div class="columns small-12 thumbs-wrapper" {{bind-attr style=view.sizingRectStyle}}>
-    <ul class="large-block-grid-6 small-block-grid-2 thumbs-content">
+    <ul class="large-block-grid-6 medium-block-grid-4 small-block-grid-3 thumbnail-array">
       {{#each p in pagesSorted}}
       <li class="large-2 medium-3 small-4 columns" role='content'>
         <article class="page-thumbnail">
             {{#link-to 'page' key p.slug class='th'}}
               <img class="dt" {{bind-attr src=p.thumbSmall}}>
-              <div class="caption">{{p.title}}</div>
+              <p>{{p.title}}</p>
             {{/link-to}}
         </article>
       </li>
