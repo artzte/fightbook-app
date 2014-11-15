@@ -8,8 +8,6 @@ Ember.MODEL_FACTORY_INJECTIONS = true;
 
 var App = Ember.Application.extend({
   ready: function() {
-    // init the foundation JS
-    Ember.$(document).foundation();
     this._super.apply(this, arguments);
   },
   modulePrefix: config.modulePrefix,

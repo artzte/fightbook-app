@@ -5,6 +5,11 @@ export default Ember.View.extend({
   didInsertElement: function() {
     var view = this;
 
+    Ember.run.schedule('afterRender', function() {
+      // init the foundation JS
+      Ember.$(document).foundation();
+    });
+
     // This blocks page unload until the update queue can be flushed. In
     // most cases even if the user clicks ok to continue refresh they will
     // get pushed.
