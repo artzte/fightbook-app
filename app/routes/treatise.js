@@ -14,6 +14,15 @@ var Route = BaseRoute.extend({
     } else {
       return treatise.reload();
     }
+  },
+  renderTemplate: function() {
+    var controller = this.get('controller');
+    this._super.apply(this, arguments);
+    this.render('page/menu', {
+      into: 'application',
+      outlet: 'leftMenu',
+      controller: controller
+    });
   }
 });
 

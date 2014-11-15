@@ -35,11 +35,6 @@ var Route = BaseRoute.extend({
       outlet: 'treatiseNav',
       controller: controller
     });
-    this.render('page/menu', {
-      into: 'application',
-      outlet: 'leftMenu',
-      controller: controller
-    });
   },
   actions: {
     sectionClicked: function(section) {
