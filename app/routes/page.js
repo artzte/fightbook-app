@@ -1,4 +1,3 @@
-import Ember from "ember";
 import BaseRoute from './_base';
 
 var Route = BaseRoute.extend({
@@ -8,20 +7,16 @@ var Route = BaseRoute.extend({
     treatise = this.modelFor('treatise');
     page = treatise.get('pages').findProperty('slug', params.pageId);
 
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (Ember.isEmpty(page.get('sections'))) {
-        return store.reloadRecord(page).then(
-          function() {
-            resolve(page);
-          },
-          function(err) {
-            reject(err);
-          }
-        );
-      } else {
-        return resolve(page);
-      }
-    });
+    if (page.get('_detail')) {
+      return page;
+    }
+    else {
+      var promise = page.reload();
+      promise.then(function(page) {
+        page.set('_detail', true);
+      });
+      return promise;
+    }
   },
   setupController: function(controller, model) {
     this._super(controller, model);

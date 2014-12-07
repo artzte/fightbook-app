@@ -9,10 +9,15 @@ var Route = BaseRoute.extend({
 
     this.set('title', treatise.get('title'));
 
-    if (treatise.get('pages.length')) {
+    if (treatise.get('_detail')) {
       return treatise;
-    } else {
-      return treatise.reload();
+    }
+    else {
+      var promise = treatise.reload();
+      promise.then(function(treatise) {
+        treatise.set('_detail', true);
+      });
+      return promise;
     }
   },
   renderTemplate: function() {
