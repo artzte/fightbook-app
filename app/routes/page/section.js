@@ -32,9 +32,8 @@ export default BaseRoute.extend({
     },
     attachSequenceItem: function(sequence, section, sequenceItem, attached) {
       if(attached) {
-        sequenceItem = this.store.createRecord('sequenceItem', {sequence: sequence, section: section});
-        section.get('sequenceItems').pushObject(sequenceItem);
-        sequence.get('sequenceItems').pushObject(sequenceItem);
+        sequenceItem = this.store.createRecord('sequenceItem', {page: section.get('page'), sequence: sequence, section: section});
+        debugger;
         sequenceItem.save();
       }
       else {
