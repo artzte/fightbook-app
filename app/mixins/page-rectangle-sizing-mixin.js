@@ -12,9 +12,14 @@ export default Ember.Mixin.create({
   calcPageRectangle: function() {
     var innerWrap = Ember.$('.inner-wrap'),
         el = this.$(),
-        nav = Ember.$('nav.tab-bar'),
-        header = Ember.$('header'),
-        remainingHeight = innerWrap.height() - nav.height() - (header.height()||0);
+        nav, header, remainingHeight;
+
+    if(!el) {
+      return;
+    }
+    nav = Ember.$('nav.tab-bar');
+    header = Ember.$('header');
+    remainingHeight = innerWrap.height() - nav.height() - (header.height()||0);
 
     this.set('sizingRect', {
       width: el.width(),
