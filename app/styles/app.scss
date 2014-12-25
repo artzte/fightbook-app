@@ -23,6 +23,14 @@ nav.tab-bar a {
   }
 }
 
+
+.main-section {
+  &.main-section-scrollable {
+    height: 99%;
+    overflow-y: scroll;
+  }
+}
+
 form {
   font-family: $form-font-family;
   .button, input {

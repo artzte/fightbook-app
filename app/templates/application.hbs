@@ -31,18 +31,20 @@
       {{outlet leftMenu}}
     </aside>
 
-    <section class="main-section">
+    <section {{bind-attr class=':main-section mainContainerClass'}}>
 
       <!-- Content -->
-      <div>
+      <div class="row">
         <div class="large-12 columns">
           {{outlet}}
         </div>
       </div>
 
       <footer>
-        <div class="large-12 columns">
-          {{outlet footer}}
+        <div class="row">
+          <div class="large-12 columns">
+            {{outlet footer}}
+          </div>
         </div>
       </footer>
     </section>

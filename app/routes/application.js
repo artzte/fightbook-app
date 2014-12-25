@@ -69,6 +69,10 @@ var Route = BaseRoute.extend({
       return true;
     },
 
+    willTransition: function() {
+      this.set('settings.mainContainerClass', null);
+    },
+
     // goes through the queued updates and submits them all in sequence
     flushUpdateQueue: function() {
       var item, updateQueue, i, len;
