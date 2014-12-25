@@ -32,16 +32,12 @@ export default BaseRoute.extend({
     },
     attachSequenceItem: function(sequence, section, sequenceItem, attached) {
       if(attached) {
-        sequenceItem = this.store.createRecord('sequenceItem', {sequence: sequence, section: section});
-        section.get('sequenceItems').pushObject(sequenceItem);
-        sequence.get('sequenceItems').pushObject(sequenceItem);
-        sequenceItem.save();
+        sequenceItem = this.store.createRecord('sequenceItem', {page: section.get('page'), sequence: sequence, section: section});
       }
       else {
-        section.get('sequenceItems').removeObject(sequenceItem);
-        sequence.get('sequenceItems').removeObject(sequenceItem);
-        sequenceItem.destroyRecord();
+        sequenceItem.deleteRecord();
       }
+      sequenceItem.save();
       this.get('controller').notifyPropertyChange('sequenceItems[]');
     }
   }
