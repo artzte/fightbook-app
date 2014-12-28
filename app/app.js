@@ -7,9 +7,6 @@ import config from './config/environment';
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
 var App = Ember.Application.extend({
-  ready: function() {
-    this._super.apply(this, arguments);
-  },
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
   Resolver: Resolver

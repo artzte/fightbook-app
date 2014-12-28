@@ -10,7 +10,6 @@
 
   "port": 4404,
   "host": "0.0.0.0",
-  "live-reload": true,
   "live-reload-port": "318989",
   "environment": "development"
 }
