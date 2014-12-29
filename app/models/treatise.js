@@ -12,6 +12,8 @@ export default DS.Model.extend({
   comments: DS.hasOneFragment('markdown'),
   copyright: DS.hasOneFragment('markdown'),
 
+  author: DS.belongsTo('user'),
+
   pagesSorted: (function() {
     return this.get('pages').sortBy('sortOrder');
   }).property('pages.@each.sortOrder'),
