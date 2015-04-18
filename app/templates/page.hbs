@@ -1,60 +1,57 @@
-<!-- Main Blog Content -->
-<div class="row">
-  <div class="large-7 medium-8 small-12 columns">
-    <h2 class="page-title">
-      {{#link-to 'page' content}}{{title}}{{/link-to}} {{outlet sectionTitle}}
-    </h2>
-
-    <ul id="sections-nav" class="no-bullet">
-      <li>
-        {{#link-to 'page.index' page.slug class="page-link"}}
-          <i class="icon-file"></i>
+<div class="main-all">
+  <h2 class="page-title">
+    {{#link-to 'page' content}}{{title}}{{/link-to}} {{outlet sectionTitle}}
+  </h2>
+</div>
+<div class="main-left">
+  <ul id="sections-nav" class="no-bullet">
+    <li>
+      {{#link-to 'page.index' page.slug class="page-link"}}
+        <i class="icon-file"></i>
+      {{/link-to}}
+    </li>
+    {{#each s in sectionsSorted itemController='section'}}
+      <li class="section-number">
+        {{#link-to 'page.section' page.slug s.sortOrder}}
+          {{s.sortOrder}}
         {{/link-to}}
       </li>
-      {{#each s in sectionsSorted itemController='section'}}
-        <li class="section-number">
-          {{#link-to 'page.section' page.slug s.sortOrder}}
-            {{s.sortOrder}}
-          {{/link-to}}
-        </li>
-      {{/each}}
-      <li>
-        <a {{action 'zoomIn'}}>
-          <i class="zoom-control icon-zoomin"></i>
-        </a>
-      </li>
-      <li>
-        <a {{action 'zoomOut'}}>
-          <i class="zoom-control icon-zoomout"></i>
-        </a>
-      </li>
-      {{#if session.currentUser.isAdmin}}
-      <li>
-        <a {{action 'toggleEditMode'}}>
-          <i {{bind-attr class=":icon-pencil :edit-mode-toggle settings.editMode:active"}}></i>
-        </a>
-      </li>
-      {{/if}}
-    </ul>
+    {{/each}}
+    <li>
+      <a {{action 'zoomIn'}}>
+        <i class="zoom-control icon-zoomin"></i>
+      </a>
+    </li>
+    <li>
+      <a {{action 'zoomOut'}}>
+        <i class="zoom-control icon-zoomout"></i>
+      </a>
+    </li>
+    {{#if session.currentUser.isAdmin}}
+    <li>
+      <a {{action 'toggleEditMode'}}>
+        <i {{bind-attr class=":icon-pencil :edit-mode-toggle settings.editMode:active"}}></i>
+      </a>
+    </li>
+    {{/if}}
+  </ul>
 
-    {{page-image
-      sizing-rect=view.imageSizingRect
-      bounds-rect=boundsRect
-      sections=sections
-      section=section
-      dziUrl=dziUrl
-      zoom=zoom
-      imageViewChangedAt=imageViewChangedAt
-      sdZoom="sdZoom"
-      pageClick="pageClick"
-      sectionMoved="sectionMoved"
-      imageViewChanged="imageViewChanged"
-      editMode=settings.editMode
-      sectionClicked="sectionClicked"
-    }}
-
-  </div>
-  <div class="medium-4 large-5 small-12 columns section-column" {{bind-attr style=view.sizeContentStyle}}>
-    {{outlet}}
-  </div>
+  {{page-image
+    sizing-rect=view.imageSizingRect
+    bounds-rect=boundsRect
+    sections=sections
+    section=section
+    dziUrl=dziUrl
+    zoom=zoom
+    imageViewChangedAt=imageViewChangedAt
+    sdZoom="sdZoom"
+    pageClick="pageClick"
+    sectionMoved="sectionMoved"
+    imageViewChanged="imageViewChanged"
+    editMode=settings.editMode
+    sectionClicked="sectionClicked"
+  }}
+</div>
+<div class="main-right section-column" {{bind-attr style=view.sizeContentStyle}}>
+  {{outlet}}
 </div>

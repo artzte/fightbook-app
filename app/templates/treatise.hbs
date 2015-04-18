@@ -1,11 +1,9 @@
-<header>
-  <div class="row">
-    <div class="large-6 small-6 columns">
-      <h1 class="left">{{#link-to 'treatise' key}}{{title}}{{/link-to}}</h1>
-    </div>
-    <div class="large-6 small-6 columns">
-      {{outlet 'treatiseNav'}}
-    </div>
-  </div>
-</header>
-{{outlet}}
+<div class="main-left">
+  <h1 class="left">{{#link-to 'treatise' key}}{{title}}{{/link-to}}</h1>
+</div>
+<div class="main-right">
+  {{outlet 'treatiseNav'}}
+</div>
+<div class="main-all">
+  {{outlet}}
+</div>

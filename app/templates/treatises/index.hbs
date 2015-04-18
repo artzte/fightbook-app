@@ -1,13 +1,13 @@
-{{#each}}
-<div class="large-6 columns">
+{{#each treatise in content}}
+<div class="medium-left">
   <h3>Treatises</h3>
   <p>
-    {{#link-to 'treatise' key}}
-      {{title}}
+    {{#link-to 'treatise' treatise.key}}
+      {{treatise.title}}
     {{/link-to}}
   </p>
   <div class="content">
-    {{content}}
+    {{treatise.content}}
   </div>
 </div>
 {{/each}}
