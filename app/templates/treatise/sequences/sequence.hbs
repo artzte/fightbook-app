@@ -1,67 +1,43 @@
-  <div class="main-all">
-          <h2>{{title}}</h2>
-          <ul class="inline-list">
-            <li>
-              {{#link-to 'treatise.sequences' treatise}}Show all sequences{{/link-to}}
-            </li>
-            {{#if session.currentUser.isAdmin}}
-            <li>
-              <a {{action 'toggleEditMode'}}>
-                <i {{bind-attr class=":icon-pencil :edit-mode-toggle settings.editMode:active"}}></i>
-                Edit titles and descriptions
-              </a>
-            </li>
-            {{/if}}
-          </ul>
-    {{#if hasContent}}
-      <div class="row">
-        <div class="columns small-12">
-          <div class="content">
-            {{{contentHtml}}}
-          </div>
-        </div>
-      </div>
+<div class="main-all">
+  <h2>{{title}}</h2>
+  <ul class="inline-list">
+    <li>
+      {{#link-to 'treatise.sequences' treatise}}Show all sequences{{/link-to}}
+    </li>
+    {{#if session.currentUser.isAdmin}}
+    <li>
+      <a {{action 'toggleEditMode'}}>
+        <i {{bind-attr class=":icon-pencil :edit-mode-toggle settings.editMode:active"}}></i>
+        Edit titles and descriptions
+      </a>
+    </li>
     {{/if}}
-    {{#render 'treatise/sequences/sequenceItems' sequenceItems}}
-      {{#each sequenceItem in content}}
-      <div class="row sequence-item-row">
-        <div class="columns small-12">
-          <div class="row">
-            <div class="columns small-12">
-              <h4>
-                {{sequenceItem.title}} &ndash; {{sequenceItem.pageSortPosition}}
-                {{#link-to 'page.section' sequenceItem.page.slug sequenceItem.section.sortOrder}}
-                  {{sequenceItem.page.title}}: {{sequenceItem.section.sortOrder}}
-                {{/link-to}}
-              </h4>
-            </div>
-          </div>
-          <div class="row">
-            <div class="columns small-12 medium-4 sequence-image">
-              {{!--
-              {{page-image sizing-rect=settings.thumbSizingRect
-                  bounds-rect=sequenceItem.section.osBounds
-                  section=sequenceItem.section
-                  dziUrl=sequenceItem.page.dziUrl}}
-              --}}
-              {{#link-to 'page.section' sequenceItem.page.slug sequenceItem.section.sortOrder class='th'}}
-                <img {{bind-attr src=sequenceItem.section.thumbMedium}}/>
-              {{/link-to}}
-            </div>
-            <div class="columns small-12 medium-8 section-content">
-              <div class="translation">
-                {{{sequenceItem.section.formattedContent}}}
-              </div>
-              {{#with sequenceItem.section}}
-                {{partial 'sections/footnotes'}}
-              {{/with}}
-              {{#if settings.editMode}}
-                {{partial 'sequences/sequence-item-editor'}}
-              {{/if}}
-            </div>
-          </div>
-        </div>
+  </ul>
+</div>
+<div class="main-all content">
+  {{#if hasContent}}
+    {{{contentHtml}}}
+  {{/if}}
+  {{#render 'treatise/sequences/sequenceItems' sequenceItems}}
+    {{#each sequenceItem in content}}
+      <h4>
+        {{sequenceItem.title}} &ndash; {{sequenceItem.pageSortPosition}}
+        {{#link-to 'page.section' sequenceItem.page.slug sequenceItem.section.sortOrder}}
+          {{sequenceItem.page.title}}: {{sequenceItem.section.sortOrder}}
+        {{/link-to}}
+      </h4>
+      {{#link-to 'page.section' sequenceItem.page.slug sequenceItem.section.sortOrder class='th'}}
+        <img {{bind-attr src=sequenceItem.section.thumbMedium}}/>
+      {{/link-to}}
+      <div class="translation">
+        {{{sequenceItem.section.formattedContent}}}
       </div>
-      {{/each}}
-    {{/render}}
-  </div>
+      {{#with sequenceItem.section}}
+        {{partial 'sections/footnotes'}}
+      {{/with}}
+      {{#if settings.editMode}}
+        {{partial 'sequences/sequence-item-editor'}}
+      {{/if}}
+    {{/each}}
+  {{/render}}
+</div>

@@ -28,7 +28,6 @@ var app = new EmberApp({
 app.import('vendor/analytics/analytics.js');
 app.import('bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.js');
 app.import('bower_components/xregexp/min/xregexp-min.js');
-app.import('bower_components/foundation/js/foundation.js');
 app.import('bower_components/ember-google-analytics/ember-google-analytics.js');
 app.import('bower_components/ember-responsive/dist/ember-responsive.js');
 app.import('bower_components/ember-data.model-fragments/dist/ember-data.model-fragments.js');

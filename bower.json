@@ -21,5 +21,8 @@
   },
   "resolutions": {
     "ember": "1.11.1"
+  },
+  "devDependencies": {
+    "ember-data.model-fragments": "~0.3.1"
   }
 }
