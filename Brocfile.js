@@ -25,6 +25,7 @@ var app = new EmberApp({
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
+app.import('vendor/analytics/analytics.js');
 app.import('bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.js');
 app.import('bower_components/xregexp/min/xregexp-min.js');
 app.import('bower_components/foundation/js/foundation.js');
@@ -34,13 +35,13 @@ app.import('bower_components/ember-data.model-fragments/dist/ember-data.model-fr
 app.import('vendor/openseadragon-imaginghelper/openseadragon-imaginghelper.js');
 app.import('bower_components/markdown-js/lib/markdown.js');
 
-var analytics = pickFiles('vendor/analytics', {
-  srcDir: '/',
-  files: ['analytics.js'],
-  destDir: 'assets'
-});
+var icomoon = pickFiles('vendor/icomoon', {
+    srcDir: '/',
+    files: ['style.css','fonts/*.*'],
+    destDir: 'assets'
+  });
 
 module.exports = mergeTrees([
-  app.toTree(),
-  analytics
+  icomoon,
+  app.toTree()
 ]);
