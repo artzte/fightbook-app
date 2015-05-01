@@ -1,27 +1,12 @@
 @import 'bourbon/_bourbon';
 @import "neat/neat";
+@import "app-variables";
+@import "app-typography";
+@import "app-media";
 
-$font-family: 'Scotch W01 Micro Regular', serif;
-
-$headerBg: #111;
-$headerFg: #fff;
-$headerMenuBorder: #000;
-$headerMenuBg: #222;
-$headerMenuFg: #fff;
-
-$headerHeight: 2.5rem;
-$headerCollapsedHeight: .2rem;
-
-$sideNavBg: #e0e0e0;
-$sideNavFg: #111;
-
-p,ul,ol,h1,h2,h3,h4,h5 {
-  font-family: $font-family;
-  line-height: 1.35rem;
-}
-
-p:first-child {
-  margin-top: 0;
+body {
+  margin: 0;
+  padding: 0;
 }
 
 header, section, footer {

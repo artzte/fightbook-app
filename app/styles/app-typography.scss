@@ -1,0 +1,33 @@
+$font-family: 'Scotch W01 Micro Regular', serif;
+
+p,ul,ol,h1,h2,h3,h4,h5 {
+  font-family: $font-family;
+  line-height: 1.35rem;
+}
+
+h1,h2, h3, h4 {
+  a {
+    color: inherit;
+    &:hover {
+      color: inherit;
+    }
+  }
+}
+
+p:first-child {
+  margin-top: 0;
+}
+
+ul.no-bullet li {
+  list-style-type: none;
+}
+
+ul.inline-list {
+  li {
+    float: left;
+    list-style-type: none;
+    margin-right: 1rem;
+  }
+}
+
+

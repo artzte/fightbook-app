@@ -1,0 +1,26 @@
+$font-family: 'Scotch W01 Micro Regular', serif;
+$headerBg: #111;
+$headerFg: #fff;
+$headerMenuBorder: #000;
+$headerMenuBg: #222;
+$headerMenuFg: #fff;
+
+$headerHeight: 2.5rem;
+$headerCollapsedHeight: .2rem;
+
+$sideNavBg: #e0e0e0;
+$sideNavFg: #111;
+
+$handleSize: 0.6rem;
+$handleOffset: ($handleSize / 2 * -1);
+$sectionBorder: #fff;
+$sectionBorderSelected: #888;
+$backgroundScreen: rgba(255,255,255,0.5);
+
+
+$accentColor: #a8614B;
+$creamColor: lighten($accentColor, 80);
+$header-font-color: $accentColor;
+
+$small-font-size: 80%;
+

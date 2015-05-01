@@ -1,0 +1,267 @@
+.page-image {
+  height: 90vh;
+  width: 100%;
+  canvas {
+    background-color: #c7bfac;
+  }
+}
+
+.page-outer {
+  height: inherit;
+  position: relative;
+}
+
+.section-area {
+  background: $backgroundScreen;
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+  display: none;
+
+  &.visible {
+    display: block;
+  }
+
+  .handle {
+    height: $handleSize;
+    width: $handleSize;
+    background: $backgroundScreen;
+    position: absolute;
+    cursor: pointer;
+    border: 1px solid $sectionBorder;
+    &.handle-tl {
+      top: $handleOffset;
+      left: $handleOffset;
+    }
+    &.handle-tr {
+      top: $handleOffset;
+      right: $handleOffset;
+    }
+    &.handle-bl {
+      bottom: $handleOffset;
+      left: $handleOffset;
+    }
+    &.handle-br {
+      bottom: $handleOffset;
+      right: $handleOffset;
+    }
+  }
+
+  &.selected {
+    border: 1px solid $sectionBorderSelected;
+    .handle {
+      background: $sectionBorderSelected;
+    }
+  }
+  &:hover {
+    border: 1px solid $sectionBorderSelected;
+    .handle {
+      border: 1px solid $sectionBorder;
+    }
+  }
+}
+
+.thumbnail-array {
+  li {
+    float: left;
+    margin: 1rem 1rem 0 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  a {
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+      color: $accentColor;
+      text-decoration: underline;
+    }
+  }
+  p {
+    margin-top: 0.2rem;
+  }
+}
+
+.page-thumbnail {
+  position: relative;
+  margin-bottom: 1rem;
+  text-align: center;
+  a {
+    color: inherit;
+  }
+  .caption {
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    color: $accentColor;
+  }
+}
+
+.sequence-item-row {
+  margin-top: 1rem;
+  padding-bottom: 2rem;
+
+  .sequence-image {
+    text-align: center;
+  }
+}
+
+.edit-link {
+  clear: both;
+  margin-top: 1rem;
+  text-align: right;
+}
+
+h2.page-title {
+  position: absolute;
+  z-index: 1;
+  padding: 0 1rem;
+  margin-top: 0px;
+  background: $backgroundScreen;
+}
+
+$section-right-padding: 0.5rem;
+
+.section-content {
+
+  &.all-sections {
+    hr {
+      border-width: 2px 0 0 0;
+      margin: 1rem auto;
+      border-color: #a8614B;
+      width: 10%;
+      border-style: dotted;
+      border-color: $accentColor;
+    }
+  }
+
+  .section-wrapper {
+    padding-right: $section-right-padding;
+    .section-link {
+      display: block;
+      float: left;
+      width: .75rem;
+      height: .75rem;
+      margin: 0.2rem 0.2rem 0 0;
+      background: $accentColor;
+      &:hover {
+        background: lighten($accentColor, 10);
+      }
+    }
+  }
+  .footnotes-wrapper li {
+    padding-right: $section-right-padding;
+    font-size: $small-font-size;
+    line-height: 1.4em;
+  }
+  .copyright {
+    padding-right: $section-right-padding;
+    clear: both;
+    margin-top: 5rem;
+    ul {
+      @extend .no-bullet;
+    }
+    li {
+      text-align: right;
+      color: $accentColor;
+      font-size: $small-font-size;
+    }
+  }
+
+}
+
+#sections-nav {
+  z-index: 2;
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
+
+  li {
+    text-align: center;
+
+    a {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      color: $accentColor;
+      line-height: rem-calc(26);
+      &.active {
+        border-radius: 3rem;
+        background: $accentColor;
+        color: $creamColor;
+        &.page-link {
+          background: none;
+        }
+        i {
+          color: lighten($accentColor, 30);
+        }
+      }
+    }
+  }
+
+  i {
+    display: block;
+    color: $accentColor;
+    font-size: 1.2rem;
+
+    &.bordered {
+      border: 1px solid $accentColor;
+    }
+    &.screened {
+      background: $backgroundScreen;
+    }
+  }
+  li {
+    margin-bottom: 1rem;
+  }
+  .edit-mode-toggle.active {
+    color: red;
+  }
+}
+
+.checkbox-list-item {
+  list-style-type: none;
+  position: relative;
+  input[type='checkbox'] {
+    position: absolute;
+    left: -1.1rem;
+    top: .2rem;
+  }
+}
+
+
+.inner-wrap {
+  height: 100vh;
+}
+
+.row {
+  max-width: 95vw;
+}
+
+$leaderheadVerticalMargin: .4rem;
+
+header {
+
+  h1 {
+    margin: $leaderheadVerticalMargin;
+  }
+
+  .page-links {
+    margin: $leaderheadVerticalMargin;
+    li {
+      margin-left: 1rem;
+    }
+    a {
+      font-size: 1.5rem;
+      color: $accentColor;
+    }
+  }
+}
+
+
+footer {
+  background: $backgroundScreen;
+  position: absolute;
+  bottom: 0;
+}
