@@ -10,7 +10,7 @@
         <i class="icon-file"></i>
       {{/link-to}}
     </li>
-    {{#each s in sectionsSorted itemController='section'}}
+    {{#each s in model.sectionsSorted itemController='section'}}
       <li class="section-number">
         {{#link-to 'page.section' page.slug s.sortOrder}}
           {{s.sortOrder}}

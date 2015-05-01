@@ -1,5 +1,5 @@
 <div class="section-content" class="all-sections">
-  {{#each section in sectionsSorted}}
+  {{#each section in model.sectionsSorted}}
   <div class="section-wrapper">
     <div class="translation" {{action 'sectionClicked' section}}>
       {{{section.formattedContent}}}

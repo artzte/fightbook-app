@@ -7,7 +7,7 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app'),
 var app = new EmberApp({
   sassOptions: {
     includePaths: [
-      'bower_components/foundation/scss'
+      'vendor'
     ]
   }
 });
@@ -26,6 +26,7 @@ var app = new EmberApp({
 // along with the exports of each module as its value.
 
 app.import('vendor/analytics/analytics.js');
+app.import('vendor/icomoon/style.css');
 app.import('bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.js');
 app.import('bower_components/xregexp/min/xregexp-min.js');
 app.import('bower_components/ember-google-analytics/ember-google-analytics.js');
@@ -36,7 +37,7 @@ app.import('bower_components/markdown-js/lib/markdown.js');
 
 var icomoon = pickFiles('vendor/icomoon', {
     srcDir: '/',
-    files: ['style.css','fonts/*.*'],
+    files: ['fonts/*.*'],
     destDir: 'assets'
   });
 

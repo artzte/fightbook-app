@@ -1,7 +1,7 @@
-{{#if footnotes}}
+{{#if model.footnotes}}
 <div class="footnotes-wrapper">
   <ul class="no-bullet">
-    {{#each footnote in footnotes}}
+    {{#each footnote in model.footnotes}}
       <li><sup>{{footnote.reference}}</sup> {{{footnote.content}}}</li>
     {{/each}}
   </ul>
