@@ -15,11 +15,17 @@ module.exports = function(environment) {
 
     contentSecurityPolicy: {
       'default-src': "'none'",
+      // scripts
       'script-src': "'self' 'unsafe-eval' http://fast.fonts.net http://www.google-analytics.com/analytics.js",
-      'font-src': "'self' http://fast.fonts.net", // Allow fonts to be loaded from http://fonts.gstatic.com
-      'connect-src': "'self' http://s3-us-west-2.amazonaws.com", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
-      'img-src': "'self' http://s3-us-west-2.amazonaws.com http://www.google-analytics.com",
+      // fonts
+      'font-src': "'self' http://fast.fonts.net",
+      // data
+      'connect-src': "'self' http://s3-us-west-2.amazonaws.com http://dev.media.incrossada.org",
+      // images
+      'img-src': "'self' http://s3-us-west-2.amazonaws.com http://www.google-analytics.com http://dev.media.incrossada.org",
+      // stylesheets
       'style-src': "'self' 'unsafe-inline' http://fast.fonts.net", // Allow inline styles and loaded CSS from http://fonts.googleapis.com 
+      // media? etc? hmmm
       'media-src': "'self'"
     },
 

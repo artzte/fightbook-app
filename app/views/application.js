@@ -6,8 +6,7 @@ export default Ember.View.extend({
     var view = this;
 
     Ember.run.schedule('afterRender', function() {
-      // init the foundation JS
-      Ember.$(document).foundation();
+      // init any global JS
     });
 
     // This blocks page unload until the update queue can be flushed. In
