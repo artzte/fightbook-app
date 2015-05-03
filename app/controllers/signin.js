@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
         var transition;
         controller.set('session.currentUser', Ember.Object.create(result));
         controller.set('session.isAnon', false);
-        controller.set('errorResult', void 0);
+        controller.set('errorResult', undefined);
         transition = controller.get('afterLoginTransition');
         if (transition) {
           controller.set('afterLoginTransition', null);

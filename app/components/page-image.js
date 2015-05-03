@@ -41,9 +41,9 @@ export default Ember.Component.extend({
 
     newBounds = this.recalcSectionArea(section, ev.originalEvent.pageX, ev.originalEvent.pageY);
 
-    this.set('handleDragStartPosition', void 0);
-    this.set('sectionDragStartPosition', void 0);
-    this.set('sectionEdited', void 0);
+    this.set('handleDragStartPosition', undefined);
+    this.set('sectionDragStartPosition', undefined);
+    this.set('sectionEdited', undefined);
 
     physical = this.get('sdViewport').viewportToImageRectangle(newBounds);
     Ember.keys(physical).forEach(function(key) {
