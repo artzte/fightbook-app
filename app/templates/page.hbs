@@ -5,13 +5,6 @@
         <i class="icon-file"></i>
       {{/link-to}}
     </li>
-    {{#each s in model.sectionsSorted itemController='section'}}
-      <li class="section-number">
-        {{#link-to 'page.section' page.slug s.sortOrder}}
-          {{s.sortOrder}}
-        {{/link-to}}
-      </li>
-    {{/each}}
     <li>
       <a {{action 'zoomIn'}}>
         <i class="zoom-control icon-zoomin"></i>
