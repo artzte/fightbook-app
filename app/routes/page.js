@@ -19,16 +19,15 @@ var Route = BaseRoute.extend({
     }
   },
   setupController: function(controller, model) {
-    this._super(controller, model);
+    this._super.apply(this, arguments);
     controller.set('page', model);
   },
   renderTemplate: function() {
-    var controller = this.get('controller');
     this._super();
     this.render('page/nav', {
       into: 'treatise',
       outlet: 'treatiseNav',
-      controller: controller
+      controller: this.controller
     });
   },
   actions: {
