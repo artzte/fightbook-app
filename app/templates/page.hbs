@@ -1,10 +1,5 @@
-<div class="main-all">
-  <h2 class="page-title">
-    {{#link-to 'page' content}}{{title}}{{/link-to}} {{outlet sectionTitle}}
-  </h2>
-</div>
-<div class="main-left">
-  <ul id="sections-nav" class="no-bullet">
+<div class="main-left page-image-container">
+  <ul class="inline-list no-bullet page-image-overlaid-controls">
     <li>
       {{#link-to 'page.index' page.slug class="page-link"}}
         <i class="icon-file"></i>

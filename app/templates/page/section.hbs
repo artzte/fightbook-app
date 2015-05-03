@@ -1,8 +1,6 @@
+<h1>{{model.page.title}} : {{model.sortOrder}}</h1>
 <div class="section-content">
   <div class="translation">
-    {{#if media.isMedium}}
-    <h4>{{#link-to 'page' page}}{{page.title}}{{/link-to}} : {{sortOrder}}</h4>
-    {{/if}}
     {{{model.formattedContent}}}
   </div>
   {{partial 'sections/footnotes'}}
