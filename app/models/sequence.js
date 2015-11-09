@@ -7,7 +7,7 @@ export default DS.Model.extend({
   author: DS.belongsTo('user'),
   sequenceItems: DS.hasMany('sequenceItem'),
   treatise: DS.belongsTo('treatise'),
-  content: DS.hasOneFragment('markdown'),
+  content: DS.attr('markdown'),
   createdAt: DS.attr('date'),
   publishedAt: DS.attr('date')
 });

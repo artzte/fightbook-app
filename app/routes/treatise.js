@@ -20,6 +20,9 @@ var Route = BaseRoute.extend({
       return promise;
     }
   },
+  afterModel: function() {
+    this.set('title', 'Magoo');
+  },
   renderTemplate: function() {
     var controller = this.get('controller');
     this._super.apply(this, arguments);
@@ -28,6 +31,11 @@ var Route = BaseRoute.extend({
       outlet: 'leftMenu',
       controller: controller
     });
+  },
+  actions: {
+    didTransition: function() {
+      this.send('setTitle', this.modelFor('treatise').get('title'));
+    }
   }
 });
 

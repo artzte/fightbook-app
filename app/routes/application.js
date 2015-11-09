@@ -1,6 +1,8 @@
 import Ember from "ember";
 import BaseRoute from './_base';
 import ajax from 'ic-ajax';
+import config from '../config/environment';
+
 
 var Route = BaseRoute.extend({
   // resolves as the current user if authenticated; otherwise returns
@@ -47,6 +49,16 @@ var Route = BaseRoute.extend({
     this.set('settings.editMode', false);
   },
   actions: {
+    setTitle: function() {
+      var args = Ember.$.makeArray(arguments),
+        title;
+
+      args.unshift(config.APP.title);
+      title = args.join(' : ');
+      this.controller.set('pageTitle', title);
+      Ember.$('title').text(title);
+
+    },
     saveItem: function(item) {
       if(item && item.get('isDirty')) {
         item.save();

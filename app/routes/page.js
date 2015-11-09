@@ -34,6 +34,9 @@ var Route = BaseRoute.extend({
     sectionClicked: function(section) {
       this.transitionTo('page.section', this.get('currentModel'), section.get('sortOrder'));
     },
+    didTransition: function() {
+      this.send('setTitle', this.modelFor('treatise').get('title'), this.modelFor('page').get('title'));
+    },
     willTransition: function() {
       this.send('flushUpdateQueue');
     }

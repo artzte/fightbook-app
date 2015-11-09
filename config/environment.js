@@ -43,7 +43,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
     // override
-    //ENV.APP.dziBaseUrl = '//dev.media.incrossada.org';
+    ENV.APP.dziBaseUrl = '//dev.media.incrossada.org';
   }
 
   if (environment === 'test') {

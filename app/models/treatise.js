@@ -9,8 +9,8 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
   pages: DS.hasMany('page'),
   sequences: DS.hasMany('sequence'),
-  comments: DS.hasOneFragment('markdown'),
-  copyright: DS.hasOneFragment('markdown'),
+  comments: DS.attr('markdown'),
+  copyright: DS.attr('markdown'),
 
   author: DS.belongsTo('user'),
 

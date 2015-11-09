@@ -7,6 +7,6 @@ export default DS.Model.extend({
   section: DS.belongsTo('section', {async: true}),
   sequence: DS.belongsTo('sequence'),
   title: attr('string'),
-  commentary: DS.hasOneFragment('markdown'),
+  commentary: DS.attr('markdown'),
   createdAt: attr('date')
 });

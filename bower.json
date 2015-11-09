@@ -17,12 +17,10 @@
     "ember-resolver": "~0.1.15",
     "jquery": "^1.11.1",
     "loader.js": "ember-cli/loader.js#3.2.0",
-    "qunit": "~1.17.1"
+    "qunit": "~1.17.1",
+    "ember-data.model-fragments": "0.3.2"
   },
   "resolutions": {
     "ember": "1.11.1"
-  },
-  "devDependencies": {
-    "ember-data.model-fragments": "~0.3.1"
   }
 }
