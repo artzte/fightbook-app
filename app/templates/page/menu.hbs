@@ -1,18 +1,18 @@
 <ul class="off-canvas-list">
   <li><label>Treatises</label></li>
-  {{#each treatise in controllers.treatises}}
+  {{#each controllers.treatises as |treatise| }}
   <li>{{#link-to 'treatise' treatise}}{{treatise.title}}{{/link-to}}</li>
   {{/each}}
 </ul>
 <ul class="off-canvas-list">
   <li><label>Sequences</label></li>
-  {{#each sequence in sequences}}
+  {{#each sequences as |sequence|}}
   <li>{{#link-to 'treatise.sequences.sequence' model sequence.slug}}{{sequence.title}}{{/link-to}}</li>
   {{/each}}
 </ul>
 <ul class="off-canvas-list">
   <li><label>Folios</label></li>
-  {{#each page in pagesSorted}}
+  {{#each pagesSorted as |page|}}
   <li>{{#link-to 'page' page.slug}}{{page.title}}{{/link-to}}</li>
   {{/each}}
 </ul>

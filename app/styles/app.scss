@@ -13,11 +13,24 @@ header, section, footer {
   @include outer-container;
 }
 
+section {
+  margin-top: $headerHeight;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 100;
+}
+
 header, footer {
+  margin-top: 0;
   max-width: none;
 }
 
 header {
+  position: fixed;
   height: $headerHeight;
   background: $headerBg;
   color: $headerFg;

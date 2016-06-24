@@ -2,10 +2,9 @@ import BaseRoute from './_base';
 
 var Route = BaseRoute.extend({
   model: function(params) {
-    var store, treatise;
+    const store = this.get('store');
 
-    store = this.get('store');
-    treatise = store.all('treatise').findProperty('key', params.treatiseKey);
+    const treatise = store.peekAll('treatise').findBy('key', params.treatiseKey);
 
     this.set('title', treatise.get('title'));
 
@@ -20,6 +19,9 @@ var Route = BaseRoute.extend({
       return promise;
     }
   },
+  afterModel: function() {
+    this.set('title', 'Magoo');
+  },
   renderTemplate: function() {
     var controller = this.get('controller');
     this._super.apply(this, arguments);
@@ -28,6 +30,11 @@ var Route = BaseRoute.extend({
       outlet: 'leftMenu',
       controller: controller
     });
+  },
+  actions: {
+    didTransition: function() {
+      this.send('setTitle', this.modelFor('treatise').get('title'));
+    }
   }
 });
 

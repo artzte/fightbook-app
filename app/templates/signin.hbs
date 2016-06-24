@@ -32,9 +32,9 @@
         {{input type='password' value=password}}
       </label>
       {{#if errorResult}}
-      <div data-alert class="alert-box warning">
-        {{errorResult.message}}
-      </div>
+        <div data-alert class="alert-box warning">
+          {{errorResult}}
+        </div>
       {{/if}}
       {{input type='submit' value='Submit' class='button'}}
     </form>

@@ -9,7 +9,7 @@ export default Ember.Mixin.create({
       var title;
       title = this.get('title');
       if (title) {
-        document.title = config.APP.title.concat(" - ", title);
+        document.title = config.APP.title.concat(" : ", title);
         return false;
       } else {
         document.title = config.APP.title;

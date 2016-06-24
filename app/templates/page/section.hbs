@@ -5,18 +5,20 @@
   </div>
   {{partial 'sections/footnotes'}}
   <div class="sequences-wrapper">
-    {{#unless settings.editMode}}{{#if sequenceItems}}
-      <h5>Sequences</h5>
-      <ul>
-        {{#each sequenceItem in sequenceItems}}
-        <li>
-          {{#link-to 'treatise.sequences.sequence' sequenceItem.sequence.slug}}
-            {{sequenceItem.title}} - {{sequenceItem.sequence.title}}
-          {{/link-to}}
-        </li>
-        {{/each}}
-      </ul>
-    {{/if}}{{/unless}}
+    {{#unless settings.editMode}}
+      {{#if sequenceItems}}
+        <h5>Sequences</h5>
+        <ul>
+          {{#each sequenceItems as |sequenceItem| }}
+          <li>
+            {{#link-to 'treatise.sequences.sequence' sequenceItem.sequence.slug}}
+              {{sequenceItem.title}} - {{sequenceItem.sequence.title}}
+            {{/link-to}}
+          </li>
+          {{/each}}
+        </ul>
+      {{/if}}
+    {{/unless}}
     {{partial 'sections/editor'}}
     {{copyright-slug content=page.treatise.copyright.html}}
   </div>

@@ -9,15 +9,15 @@ export default DS.Model.extend({
   page: DS.belongsTo('page'),
   sortOrder: DS.attr('number'),
   sequenceItems: DS.hasMany('sequenceItem'),
-  translation: DS.hasOneFragment('markdown'),
-  bounds: DS.hasOneFragment('rect'),
-  physicalBounds: DS.hasOneFragment('rect'),
+  translation: DS.attr('markdown'),
+  bounds: DS.attr('rect'),
+  physicalBounds: DS.attr('rect'),
   state: DS.attr('string'),
   createdAt: DS.attr('date'),
 
   osBounds: function() {
     var bounds = this.get('bounds'), co;
-    co = bounds && bounds.getProperties('x', 'y', 'width', 'height') || {};
+    co = bounds || {};
     return new OpenSeadragon.Rect(co.x, co.y, co.width, co.height);
   }.property('bounds.x', 'bounds.y', 'bounds.width', 'bounds.height'),
 

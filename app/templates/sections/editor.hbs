@@ -4,18 +4,8 @@
       <li>
         <a {{bind-attr href=adminEditLink}} target="_blank">Admin edit page</a>
       </li>
-      {{#each sequence in page.treatise.sequences itemController='page/sectionSequences'}}
-        <li class='checkbox-list-item'>
-          <label>
-            {{input type='checkbox' name='attached' checked=sequence.attached}}
-            {{sequence.title}}
-          </label>
-          {{#if sequence.sequenceItem}}
-            {{#with sequence}}
-            {{partial 'sequences/sequence-item-editor'}}
-            {{/with}}
-          {{/if}}
-        </li>
+      {{#each page.treatise.sequences as |sequence|}}
+        {{page/sectionSequence sequence=sequence}}
       {{/each}}
     </ul>
   {{/if}}

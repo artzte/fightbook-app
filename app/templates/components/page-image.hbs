@@ -1,5 +1,5 @@
 <div class="page-outer" {{bind-attr style=image-sizing-style}}></div>
-{{#each s in sections}}
+{{#each sections as |s|}}
   {{section-area
     section=s
     sizing-rect=sectionSizingRect

@@ -1,14 +1,14 @@
-<div class="main-all thumbs-wrapper">
+{{#treatise/pages-index treatise=model as |t|}}
   <ul class="thumbnail-array">
-    {{#each p in pagesSorted}}
-    <li>
-      <article class="page-thumbnail">
-        {{#link-to 'page' key p.slug class='th'}}
-          <img class="dt" {{bind-attr src=p.thumbSmall}}>
-          <p>{{p.title}}</p>
-        {{/link-to}}
-      </article>
-    </li>
+    {{#each t.pagesSorted as |p|}}
+      <li>
+        <article class="page-thumbnail">
+          {{#link-to 'page' p.slug class='th'}}
+            <img class="dt" src={{p.thumbSmall}}>
+            <p>{{p.title}}</p>
+          {{/link-to}}
+        </article>
+      </li>
     {{/each}}
   </ul>
-</div>
+{{/treatise/pages-index}}

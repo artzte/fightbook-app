@@ -15,8 +15,8 @@ export default Ember.Component.extend({
 
   positionElement: (function() {
     var bounds = this.get('bounds'),
-        overlay = this.$(),
-        viewport = this.get('viewport');
+      overlay = this.$(),
+      viewport = this.get('viewport');
 
     if (!(overlay && bounds && viewport)) {
       return;

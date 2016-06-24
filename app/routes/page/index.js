@@ -6,7 +6,6 @@ export default BaseRoute.extend({
   },
   setupController: function(controller, page) {
     this.set('title', [page.get('treatise.title'), page.get('title')].join(' - '));
-    controller.set('controllers.page.boundsRect', page.get('bounds'));
     this._super(controller, page);
   },
   actions: {

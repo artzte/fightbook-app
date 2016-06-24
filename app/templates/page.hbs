@@ -1,45 +1,46 @@
-<div class="main-left page-image-container">
-  <ul class="inline-list no-bullet page-image-overlaid-controls">
-    <li>
-      {{#link-to 'page.index' page.slug class="page-link"}}
-        <i class="icon-file"></i>
-      {{/link-to}}
-    </li>
-    <li>
-      <a {{action 'zoomIn'}}>
-        <i class="zoom-control icon-zoomin"></i>
-      </a>
-    </li>
-    <li>
-      <a {{action 'zoomOut'}}>
-        <i class="zoom-control icon-zoomout"></i>
-      </a>
-    </li>
-    {{#if session.currentUser.isAdmin}}
-    <li>
-      <a {{action 'toggleEditMode'}}>
-        <i {{bind-attr class=":icon-pencil :edit-mode-toggle settings.editMode:active"}}></i>
-      </a>
-    </li>
-    {{/if}}
-  </ul>
-
-  {{page-image
-    sizing-rect=view.imageSizingRect
-    bounds-rect=boundsRect
-    sections=model.sections
-    section=section
-    dziUrl=model.dziUrl
-    zoom=zoom
-    imageViewChangedAt=imageViewChangedAt
-    sdZoom="sdZoom"
-    pageClick="pageClick"
-    sectionMoved="sectionMoved"
-    imageViewChanged="imageViewChanged"
-    editMode=settings.editMode
-    sectionClicked="sectionClicked"
-  }}
-</div>
-<div class="main-right section-column" {{bind-attr style=view.sizeContentStyle}}>
-  {{outlet}}
-</div>
+{{#page/sizing-rect as |sizingRect|}}
+  <div class="main-left page-image-container">
+    <ul class="inline-list no-bullet page-image-overlaid-controls">
+      <li>
+        {{#link-to 'page.index' page.slug class="page-link"}}
+          <i class="icon-file"></i>
+        {{/link-to}}
+      </li>
+      <li>
+        <a {{action 'zoomIn'}}>
+          <i class="zoom-control icon-zoomin"></i>
+        </a>
+      </li>
+      <li>
+        <a {{action 'zoomOut'}}>
+          <i class="zoom-control icon-zoomout"></i>
+        </a>
+      </li>
+      {{#if session.currentUser.isAdmin}}
+        <li>
+          <a {{action 'toggleEditMode'}}>
+            <i {{bind-attr class=":icon-pencil :edit-mode-toggle settings.editMode:active"}}></i>
+          </a>
+        </li>
+      {{/if}}
+    </ul>
+    {{page-image
+      sizingRect=sizingRect.imageSizingRect
+      boundsRect=boundsRect
+      sections=model.sections
+      section=section
+      dziUrl=model.dziUrl
+      zoom=zoom
+      imagesizingRectChangedAt=imagesizingRectChangedAt
+      sdZoom="sdZoom"
+      pageClick="pageClick"
+      sectionMoved="sectionMoved"
+      imagesizingRectChanged="imagesizingRectChanged"
+      editMode=settings.editMode
+      sectionClicked="sectionClicked"
+    }}
+  </div>
+  <div class="main-right section-column" {{bind-attr style=sizingRect.sizeContentStyle}}>
+    {{outlet}}
+  </div>
+{{/page/sizing-rect}}

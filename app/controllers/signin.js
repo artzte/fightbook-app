@@ -1,32 +1,37 @@
 import Ember from "ember";
-import ajax from 'ic-ajax';
 
 export default Ember.Controller.extend({
+  ajax: Ember.inject.service(),
   actions: {
     signin: function() {
-      var controller = this;
-      return ajax({
-        url: '/api/signin',
+      return this.get('ajax').request('/api/signin', {
         method: 'post',
         data: {
           email: this.get('email'),
           password: this.get('password')
         }
-      }).then(function(result) {
-        var transition;
-        controller.set('session.currentUser', Ember.Object.create(result));
-        controller.set('session.isAnon', false);
-        controller.set('errorResult', undefined);
-        transition = controller.get('afterLoginTransition');
+      }).then((result) => {
+        const transition = this.get('afterLoginTransition');
+
+        this.set('session.currentUser', Ember.Object.create(result));
+        this.set('session.isAnon', false);
+        this.set('errorResult', undefined);
+
         if (transition) {
-          controller.set('afterLoginTransition', null);
+          this.set('afterLoginTransition', null);
           transition.retry();
         } else {
-          controller.transitionToRoute('treatises');
+          this.transitionToRoute('treatises');
         }
-      }, function(result) {
-        Ember.run(function() {
-          controller.set('errorResult', result.jqXHR.responseJSON);
+      }, (result) => {
+        Ember.run(() => {
+          let msg;
+          try {
+            msg = result.errors[0].detail.message;
+          } catch(e) {
+            msg = 'Could not match username or password';
+          }
+          this.set('errorResult', msg);
         });
       });
     }

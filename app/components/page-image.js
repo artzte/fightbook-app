@@ -2,6 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['page-image'],
+  didReceiveAttrs: function(attrs) {
+    console.log(attrs);
+    console.log(arguments);
+
+    // boundsRect: the area of the image content to zoom to
+  },
   actions: {
     sectionDragStart: function(section, e) {
       this.sendAction('sectionDragStart', section, e);
@@ -112,61 +118,59 @@ export default Ember.Component.extend({
   },
 
   didInsertElement: function() {
+    const sdViewer = new OpenSeadragon({
+      hash: this.elementId,
+      element: this.$().find('.page-outer')[0],
+      tileSources: this.get('dziUrl'),
+      showNavigationControl: false,
+      showNavigator: false,
+      defaultZoomLevel: 1,
+      minZoomLevel: 1,
+      zoomPerClick: 1,
+      zoomPerScroll: 1
+    });
+
+    const imagingHelper = sdViewer.activateImagingHelper({
+
+      // sends an action that results in a timestamp change that
+      // helps the image bounds and sections stay in sync through
+      // zooming, etc.
+      onImageViewChanged: function(/* info */) {
+        if (this.isDestroying) {
+          return;
+        }
+        // Lazily runs the timestamp
+        Ember.run.debounce(this, this.notifyImageViewChanged, 200);
+      }.bind(this)
+    });
+
+    // Tracks the zoom level so that page-based controls can increase or reduce the zoom
+    sdViewer.addHandler('zoom', function(info) {
+      this.sendAction('sdZoom', info.zoom);
+    }.bind(this));
+
+    sdViewer.addHandler('canvas-click', function(info) {
+      this.sendAction('pageClick', this.sdViewport.pointFromPixel(info.position));
+    }.bind(this));
+
+    sdViewer.addHandler('open', function(viewer, source) {
+      this.sendAction('sdOpen', source);
+      this.set('sdViewport', this.get('sdViewer').viewport);
+    }.bind(this));
+
+    sdViewer.addHandler('close', function() {
+      Ember.Logger.debug("viewer closed");
+    }.bind(this));
+
+    this.set('sdViewer', sdViewer);
+    this.set('sdImagingHelper', imagingHelper);
+
     Ember.run.scheduleOnce('afterRender', this, function() {
-        var imagingHelper, sdViewer;
-        sdViewer = new OpenSeadragon({
-          hash: this.elementId,
-          element: this.$().find('.page-outer')[0],
-          tileSources: this.get('dziUrl'),
-          showNavigationControl: false,
-          showNavigator: false,
-          defaultZoomLevel: 1,
-          minZoomLevel: 1,
-          zoomPerClick: 1,
-          zoomPerScroll: 1
-        });
+      this.sizeTo();
+    });
 
-        imagingHelper = sdViewer.activateImagingHelper({
-
-          // sends an action that results in a timestamp change that
-          // helps the image bounds and sections stay in sync through
-          // zooming, etc.
-          onImageViewChanged: function(/* info */) {
-            if (this.isDestroying) {
-              return;
-            }
-            // Lazily runs the timestamp
-            Ember.run.debounce(this, this.notifyImageViewChanged, 200);
-          }.bind(this)
-        });
-
-        // Tracks the zoom level so that page-based controls can increase or reduce the zoom
-        sdViewer.addHandler('zoom', function(info) {
-          this.sendAction('sdZoom', info.zoom);
-        }.bind(this));
-
-        sdViewer.addHandler('canvas-click', function(info) {
-          this.sendAction('pageClick', this.sdViewport.pointFromPixel(info.position));
-        }.bind(this));
-
-        sdViewer.addHandler('open', function(viewer, source) {
-          this.sendAction('sdOpen', source);
-          this.set('sdViewport', this.get('sdViewer').viewport);
-        }.bind(this));
-
-        sdViewer.addHandler('close', function() {
-          Ember.Logger.debug("viewer closed");
-        }.bind(this));
-
-        this.set('sdViewer', sdViewer);
-        this.set('sdImagingHelper', imagingHelper);
-
-        Ember.run.scheduleOnce('afterRender', this, function() {
-          this.sizeTo();
-        });
-
-        window.sdViewer = sdViewer;
-      });
+    // for debugging
+    // window.sdViewer = sdViewer;
   },
 
   setZoom: (function() {
@@ -175,10 +179,11 @@ export default Ember.Component.extend({
 
   resizeContainer: function() {
     this.sizeTo();
-  }.observes('sizing-rect.width', 'sizing-rect.height'),
+    this.fitToBounds();
+  }.observes('sizingRect.width', 'sizingRect.height'),
 
   sizeTo: function() {
-    var rect = this.get('sizing-rect');
+    var rect = this.get('sizingRect');
     if(!rect) {
       return;
     }
@@ -187,23 +192,19 @@ export default Ember.Component.extend({
   },
 
   _fitTo: function() {
-    var bounds, newBounds, viewport;
-    bounds = this.get('bounds-rect');
-    viewport = this.get('sdViewport');
-    newBounds = new OpenSeadragon.Rect(bounds.x, bounds.y, bounds.width, bounds.height);
+    const bounds = this.get('boundsRect');
+    const viewport = this.get('sdViewport');
+    const newBounds = new OpenSeadragon.Rect(bounds.x, bounds.y, bounds.width, bounds.height);
+
     return viewport.fitBounds(newBounds);
   },
 
-  fitToBounds: (function() {
-    var bounds = this.get('bounds-rect'),
-        viewport = this.get('sdViewport'),
-        size = this.get('sizing-rect');
-
-    if (!(bounds && viewport && size)) {
-      return;
-    }
-
+  fitTo: function() {
     Ember.run.debounce(this, this._fitTo, 300);
-  }).observes('bounds-rect', 'sdViewport', 'sizing-rect.width', 'sizing-rect.height')
+  },
+
+  fitToBounds: function() {
+    this.fitTo();
+  }.observes('boundsRect', 'sdViewport')
 });
 

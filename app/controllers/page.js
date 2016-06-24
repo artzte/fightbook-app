@@ -21,10 +21,6 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    setBounds: function(bounds) {
-      this.timestampImageChangedAt();
-      this.set('boundsRect', bounds);
-    },
     imageViewChanged: function() {
       this.timestampImageChangedAt();
     },

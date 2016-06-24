@@ -1,6 +1,6 @@
 <h1>{{model.title}}</h1>
 <div class="section-content" class="all-sections">
-  {{#each section in model.sectionsSorted}}
+  {{#each model.sectionsSorted as |section| }}
   <div class="section-wrapper">
     <div class="translation" {{action 'sectionClicked' section}}>
       {{{section.formattedContent}}}

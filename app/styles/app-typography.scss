@@ -30,4 +30,64 @@ ul.inline-list {
   }
 }
 
+$section-right-padding: 0.5rem;
+
+.section-content {
+
+  &.all-sections {
+    hr {
+      border-width: 2px 0 0 0;
+      margin: 1rem auto;
+      border-color: #a8614B;
+      width: 10%;
+      border-style: dotted;
+      border-color: $accentColor;
+    }
+  }
+
+  .section-wrapper {
+    padding-right: $section-right-padding;
+    .section-link {
+      display: block;
+      float: left;
+      width: .75rem;
+      height: .75rem;
+      margin: 0.2rem 0.2rem 0 0;
+      background: $accentColor;
+      &:hover {
+        background: lighten($accentColor, 10);
+      }
+    }
+  }
+  .footnotes-wrapper li {
+    padding-right: $section-right-padding;
+    font-size: $small-font-size;
+    line-height: 1.4em;
+  }
+  .copyright {
+    padding-right: $section-right-padding;
+    clear: both;
+    margin-top: 5rem;
+    ul {
+      @extend .no-bullet;
+    }
+    li {
+      text-align: right;
+      color: $accentColor;
+      font-size: $small-font-size;
+    }
+  }
+
+}
+
+.checkbox-list-item {
+  list-style-type: none;
+  position: relative;
+  input[type='checkbox'] {
+    position: absolute;
+    left: -1.1rem;
+    top: .2rem;
+  }
+}
+
 

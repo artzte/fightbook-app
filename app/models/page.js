@@ -38,16 +38,16 @@ export default DS.Model.extend({
   }).property('slug', 'treatise.key'),
 
   bounds: (function() {
-    var bottom, bottoms, bounds, left, lefts, right, rights, top, tops;
-    bounds = this.get('sections.@each.bounds');
+    let bottom, bottoms, left, lefts, right, rights, top, tops;
+    const bounds = this.get('sections').map((s) => s.get('bounds'));
     if (bounds.get('length') > 0) {
       lefts = bounds.getEach('x');
       tops = bounds.getEach('y');
       rights = bounds.map(function(bound) {
-        return bound.get('x') + bound.get('width');
+        return bound.x + bound.width;
       });
       bottoms = bounds.map(function(bound) {
-        return bound.get('y') + bound.get('height');
+        return bound.y + bound.height;
       });
       top = tops.sort().shift();
       left = lefts.sort().shift();

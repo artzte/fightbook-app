@@ -18,8 +18,8 @@
   {{#if hasContent}}
     {{{contentHtml}}}
   {{/if}}
-  {{#render 'treatise/sequences/sequenceItems' sequenceItems}}
-    {{#each sequenceItem in content}}
+  {{#partial 'treatise/sequences/sequenceItems' sequenceItems}}
+    {{#each sequenceItems as |sequenceItem| }}
       <h4>
         {{sequenceItem.title}} &ndash; {{sequenceItem.pageSortPosition}}
         {{#link-to 'page.section' sequenceItem.page.slug sequenceItem.section.sortOrder}}
@@ -39,5 +39,5 @@
         {{partial 'sequences/sequence-item-editor'}}
       {{/if}}
     {{/each}}
-  {{/render}}
+  {{/partial}}
 </div>

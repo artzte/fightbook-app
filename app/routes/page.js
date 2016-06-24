@@ -5,7 +5,7 @@ var Route = BaseRoute.extend({
     var page, store, treatise;
     store = this.get('store');
     treatise = this.modelFor('treatise');
-    page = treatise.get('pages').findProperty('slug', params.pageId);
+    page = treatise.get('pages').findBy('slug', params.pageId);
 
     if (page.get('_detail')) {
       return page;
@@ -18,9 +18,9 @@ var Route = BaseRoute.extend({
       return promise;
     }
   },
-  setupController: function(controller, model) {
+  setupController: function(controller, page) {
     this._super.apply(this, arguments);
-    controller.set('page', model);
+    this.controller.set('boundsRect', page.get('bounds'));
   },
   renderTemplate: function() {
     this._super();
@@ -34,9 +34,20 @@ var Route = BaseRoute.extend({
     sectionClicked: function(section) {
       this.transitionTo('page.section', this.get('currentModel'), section.get('sortOrder'));
     },
+    didTransition: function() {
+      this.send('setTitle', this.modelFor('treatise').get('title'), this.modelFor('page').get('title'));
+    },
     willTransition: function() {
       this.send('flushUpdateQueue');
-    }
+    },
+    setSection: function(section) {
+      console.log('got section', section);
+      this.controller.set('section', section);
+    },
+    setBounds: function(bounds) {
+      console.log('got bounds', bounds);
+      this.controller.set('boundsRect', bounds);
+    },
   }
 });
 

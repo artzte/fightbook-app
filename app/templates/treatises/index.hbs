@@ -1,13 +1,13 @@
-{{#each treatise in content}}
-<div class="medium-left">
-  <h3>Treatises</h3>
-  <p>
-    {{#link-to 'treatise' treatise.key}}
-      {{treatise.title}}
-    {{/link-to}}
-  </p>
-  <div class="content">
-    {{treatise.content}}
+{{#each content as |treatise|}}
+  <div class="medium-left">
+    <h3>Treatises</h3>
+    <p>
+      {{#link-to 'treatise' treatise.key}}
+        {{treatise.title}}
+      {{/link-to}}
+    </p>
+    <div class="content">
+      {{treatise.content}}
+    </div>
   </div>
-</div>
 {{/each}}
