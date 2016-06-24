@@ -1,0 +1,32 @@
+<header class="app-header">
+  <div class="header" role="banner">
+    header [{{outlet 'header'}}]
+  </div>
+</header>
+<main class="app-body">
+  <article class="app-content">
+    <h1>H1 title: [{{ page.title }}]</h1>
+    {{outlet}}
+  </article>
+  expanded=[{{slidingPanelExpanded}}
+  {{#sliding-panel expand=(action 'expand') contract=(action 'contract') expanded=slidingPanelExpanded}}
+    <ul>
+      <li><a>Nav link</a></li>
+      <li><a>Nav link</a></li>
+      <li><a>Nav link</a></li>
+      <li><a>Nav link</a></li>
+      <li><a>Nav link</a></li>
+      <li><a>Nav link</a></li>
+      <li><a>Nav link</a></li>
+      <li><a>Nav link</a></li>
+      <li><a>Nav link</a></li>
+      <li><a>Nav link</a></li>
+    </ul>
+  {{/sliding-panel}}
+</main>
+<footer class="app-footer">
+  <div class="Footer">
+    footer [{{outlet 'footer'}}]
+  </div>
+</footer>
+{{sliding-panel-fade-screen visible=slidingPanelExpanded doClick=(action 'contract')}}

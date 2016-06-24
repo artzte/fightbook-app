@@ -1,0 +1,138 @@
+@import "bourbon";
+@import "base/base";
+
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ffffcc;
+}
+
+.app,
+.app-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: #ccc;
+  padding: 1rem;
+}
+
+.app-footer {
+  background: #888;
+  padding: 1rem;
+}
+
+.app-nav {
+  order: -1;
+}
+
+@media (min-width: 768px) {
+  .app-body {
+    flex-direction: row;
+    flex: 1;
+  }
+  .app-content {
+    flex: 1;
+  }
+  .app-nav {
+    /* 12em is the width of the columns */
+    flex: 0 0 12em;
+  }
+}
+
+
+///////////////////////
+// Sliding panel nav
+
+$sliding-panel-width: 220px;
+$sliding-panel-collapsed-width: 1px;
+
+$action-color: #477DCA !default;
+$dark-gray: #333 !default;
+$sliding-panel-border-color: $dark-gray;
+$sliding-panel-background: lighten($sliding-panel-border-color, 5%);
+$sliding-panel-color: #fff;
+$sliding-panel-border: 1px solid $sliding-panel-border-color;
+$sliding-panel-background-hover: $action-color;
+$sliding-panel-color-hover: #fff;
+$sliding-panel-background-focus: lighten($sliding-panel-background, 5%);
+
+.sliding-panel {
+  position: absolute;
+  z-index: 999999;
+  top: 0;
+  left: $sliding-panel-collapsed-width - $sliding-panel-width;
+  background: transparent;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  @include size($sliding-panel-width 100%);
+
+  height: 100%;
+  width: $sliding-panel-width;
+  cursor: pointer;
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  li a {
+    border-bottom: $sliding-panel-border;
+    color: $sliding-panel-color;
+    display: block;
+    font-weight: bold;
+    padding: 1em;
+    text-decoration: none;
+
+    &:focus {
+      background-color: $sliding-panel-background-focus;
+    }
+
+    &:hover {
+      background-color: $sliding-panel-background-hover;
+      color: $sliding-panel-color-hover;
+    }
+  }
+
+}
+
+.sliding-panel-expanded {
+  @include transform(translateX( $sliding-panel-width - $sliding-panel-collapsed-width));
+  @include transition(all 0.25s linear);
+  background: $sliding-panel-background;
+}
+
+.sliding-panel-fade-screen {
+  @include position(fixed, 0px 0px 0px 0px);
+  @include transition;
+  background: black;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999998;
+
+  &.sliding-panel-fade-screen-visible {
+    opacity: 0.4;
+    visibility: visible;
+  }
+}
+
+.sliding-panel-button {
+  padding: 10px 16px;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+
+  img {
+    height: 1.3em;
+  }
+}
+
+// Based on code by Diego Eis
