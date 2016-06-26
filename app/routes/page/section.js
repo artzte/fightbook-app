@@ -18,8 +18,17 @@ export default BaseRoute.extend({
     this.send('setSection', section);
     this.send('setBounds', section.get('osBounds'));
   },
-  renderTemplate: function() {
+  renderTemplate: function(controller, section) {
     this._super();
+    this.render('components/layout/header', {
+      into: 'application',
+      outlet: 'header',
+      controller: this.makeController({
+        treatise: this.modelFor('treatise'),
+        page: this.modelFor('page'),
+        section: section,
+      }),
+    });
     return this.render('page/section-title', {
       into: 'page',
       outlet: 'sectionTitle',

@@ -1,0 +1,23 @@
+<li>
+  {{#link-to 'application'}}la incrossada{{/link-to}}
+</li>
+{{#if treatise}}
+  <li>
+    {{#link-to 'treatise' treatise}}{{treatise.title}}{{/link-to}}
+  </li>
+{{/if}}
+{{#if page}}
+  <li>
+    {{#link-to 'page' page}}{{page.title}}{{/link-to}}
+  </li>
+{{/if}}
+{{#if section}}
+  <li>
+    {{#link-to 'page.section' page section}}{{section.sortOrder}}{{/link-to}}
+  </li>
+{{/if}}
+{{#if sequence}}
+  <li>
+    {{#link-to 'sequence' sequence}}{{sequence.title}}{{/link-to}}
+  </li>
+{{/if}}

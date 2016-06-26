@@ -4,7 +4,6 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const mergeTrees = require('broccoli-merge-trees');
 const pickFiles = require('broccoli-static-compiler');
 
-
 // Use `app.import` to add additional libraries to the generated
 // output files.
 //
@@ -22,8 +21,8 @@ module.exports = function(defaults) {
 
   defaults.sassOptions = {
     includePaths: [
-      'vendor'
-    ]
+      'vendor',
+    ],
   };
 
   var app = new EmberApp(defaults);
@@ -39,12 +38,12 @@ module.exports = function(defaults) {
   var icomoon = pickFiles('vendor/icomoon', {
       srcDir: '/',
       files: ['fonts/*.*'],
-      destDir: 'assets'
+      destDir: 'assets',
     });
 
   return mergeTrees([
     icomoon,
-    app.toTree()
+    app.toTree(),
   ]);
 };
 

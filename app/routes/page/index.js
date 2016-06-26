@@ -4,9 +4,9 @@ export default BaseRoute.extend({
   model: function() {
     return this.modelFor('page');
   },
-  setupController: function(controller, page) {
-    this.set('title', [page.get('treatise.title'), page.get('title')].join(' - '));
-    this._super(controller, page);
+  renderTemplate: function(controller, page) {
+    this._super.apply(this, arguments);
+    this.send('setBounds', page.get('bounds'));
   },
   actions: {
     // Hooks the page click event to navigate to the clicked section image

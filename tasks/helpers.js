@@ -18,24 +18,23 @@ var taskRequirements = {
   htmlmin: ['grunt-contrib-htmlmin'],
   fancySprites: ['grunt-fancy-sprites'],
   autoprefixer: ['grunt-autoprefixer'],
-  rev: ['grunt-rev']
+  rev: ['grunt-rev'],
 };
 
 // Task fallbacks
 // e.g. 'a': ['fallback-a-step-1', 'fallback-a-step-2']
 var taskFallbacks = {
-  'imagemin': 'copy:imageminFallback'
+  imagemin: 'copy:imageminFallback',
 };
 
-
-Helpers.filterAvailableTasks = function(tasks){
+Helpers.filterAvailableTasks = function(tasks) {
   tasks = tasks.map(function(taskName) {
     // Maps to task name or fallback if task is unavailable
 
     var baseName = taskName.split(':')[0]; // e.g. 'coffee' for 'coffee:compile'
     var reqs = taskRequirements[baseName];
     var isAvailable = Helpers.isPackageAvailable(reqs);
-    return isAvailable ? taskName : taskFallbacks[taskName]; 
+    return isAvailable ? taskName : taskFallbacks[taskName];
   });
 
   return _.flatten(_.compact(tasks)); // Remove undefined's and flatten it

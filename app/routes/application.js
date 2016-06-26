@@ -41,6 +41,13 @@ var Route = BaseRoute.extend({
     }
     this._super.apply(this, arguments);
   },
+  renderTemplate: function() {
+    this._super.apply(this, arguments);
+    this.render('components/layout/header', {
+      into: 'application',
+      outlet: 'header',
+    });
+  },
   clearSession: function() {
     this.set('session.currentUser', undefined);
     this.set('session.isAnon', true);

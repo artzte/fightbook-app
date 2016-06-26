@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Resolver from 'ember/resolver';
-import DS from "ember-data";
+import DS from 'ember-data';
 import loadInitializers from 'ember/load-initializers';
 import config from './config/environment';
 
@@ -9,63 +9,87 @@ Ember.MODEL_FACTORY_INJECTIONS = true;
 var App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
-  Resolver: Resolver
+  Resolver: Resolver,
 });
 
 DS.RESTAdapter.reopen({
-  namespace: 'api'
+  namespace: 'api',
 });
 
 var UpdateQueue = Ember.ArrayProxy.extend({
   addTask: function(item) {
-    if(!this.contains(item)) {
+    if (!this.contains(item)) {
       this.pushObject(item);
     }
-  }
+  },
 });
 
 Ember.Application.initializer({
   name: 'appInitializers',
-  initialize: function(container, app) {
+  initialize: function(app) {
     // Register a session object for routes and controllers
     app.Session = Ember.Object.extend();
     app.register('session:current', app.Session, {
-      singleton: true
+      singleton: true,
     });
     app.inject('controller', 'session', 'session:current');
     app.inject('route', 'session', 'session:current');
 
+    app.AttrHelpers = Ember.Object.extend({
+      didChange: function(attrs, ...attrsToTest) {
+        if (!attrs.oldAttrs) {
+          return false;
+        }
+
+        for (let i = 0, len = attrsToTest.length; i < len; i++) {
+          const attr = attrsToTest[i];
+          const newAttr = attrs.newAttrs[attr].value;
+          const oldAttr = attrs.oldAttrs[attr] && attrs.oldAttrs[attr].value;
+
+          if (oldAttr !== newAttr) {
+            return true;
+          }
+        }
+
+        return false;
+      },
+    });
+    app.register('attrHelpers:current', app.AttrHelpers, {
+      singleton: true,
+    });
+    app.inject('component', 'attrHelpers', 'attrHelpers:current');
+
     // Register a settings object for routes and controllers
     app.Settings = Ember.Object.extend({
-      thumbSizingRect: {width: '300px', height: '300px'}
+      thumbSizingRect: {width: '300px', height: '300px'},
     });
 
     app.register('settings:current', app.Settings, {
-      singleton: true
+      singleton: true,
     });
     app.inject('controller', 'settings', 'settings:current');
     app.inject('route', 'settings', 'settings:current');
 
     // Register the update queue, which holds page updates
     app.register('updateQueue:current', UpdateQueue, {
-      singleton: true
+      singleton: true,
     });
     app.inject('controller', 'updateQueue', 'updateQueue:current');
     app.inject('route', 'updateQueue', 'updateQueue:current');
-  }
+  },
 });
 
 App.responsive({
   media: {
-    medium: "(min-width: 40.063em)",
-    small: "(max-width: 40em)"
-  }
+    medium: '(min-width: 40.063em)',
+    small: '(max-width: 40em)',
+  },
 });
 
 loadInitializers(App, config.modulePrefix);
 
 DS.RESTSerializer.reopen({
-  primaryKey: '_id'
+  primaryKey: '_id',
 });
 
 export default App;

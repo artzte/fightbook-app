@@ -25,6 +25,13 @@ var Route = BaseRoute.extend({
   renderTemplate: function() {
     var controller = this.get('controller');
     this._super.apply(this, arguments);
+    this.render('components/layout/header', {
+      into: 'application',
+      outlet: 'header',
+      controller: this.makeController({
+        treatise: this.modelFor('treatise'),
+      }),
+    });
     this.render('page/menu', {
       into: 'application',
       outlet: 'leftMenu',

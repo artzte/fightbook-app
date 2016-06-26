@@ -10,22 +10,24 @@ module.exports = function(environment) {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-      }
+      },
     },
 
     APP: {
       dziBaseUrl: '//s3-us-west-2.amazonaws.com/media.incrossada.org',
       title: 'la incrossada',
-      keystonePath: '/keystone'
-    }
+      keystonePath: '/keystone',
+    },
   };
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     ENV.APP.LOG_ACTIVE_GENERATION = true;
     ENV.APP.LOG_TRANSITIONS = true;
+
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
+
     // override
     ENV.APP.dziBaseUrl = '//dev.media.incrossada.org';
   }

@@ -18,12 +18,16 @@ var Route = BaseRoute.extend({
       return promise;
     }
   },
-  setupController: function(controller, page) {
-    this._super.apply(this, arguments);
-    this.controller.set('boundsRect', page.get('bounds'));
-  },
   renderTemplate: function() {
     this._super();
+    this.render('components/layout/header', {
+      into: 'application',
+      outlet: 'header',
+      controller: this.makeController({
+        treatise: this.modelFor('treatise'),
+        page: this.modelFor('page'),
+      }),
+    });
     this.render('page/nav', {
       into: 'treatise',
       outlet: 'treatiseNav',
@@ -45,7 +49,6 @@ var Route = BaseRoute.extend({
       this.controller.set('section', section);
     },
     setBounds: function(bounds) {
-      console.log('got bounds', bounds);
       this.controller.set('boundsRect', bounds);
     },
   }

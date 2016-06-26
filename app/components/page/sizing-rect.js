@@ -8,18 +8,23 @@ import Ember from "ember";
 // sizingRectStyle - blank if small, otherwise sizeContentStyle
 
 export default Ember.Component.extend({
+  debounceInterval: 300,
+
   didInsertElement: function() {
     Ember.$(window).on('resize', this.calcPageRectangle.bind(this));
 
-    this.calcPageRectangle();
+    this._calcPageRectangle();
   },
-
 
   willDestroyElement: function() {
     Ember.$(window).off('resize', this.calcPageRectangle.bind(this));
   },
 
   calcPageRectangle: function() {
+    Ember.run.debounce(this, this._calcPageRectangle, this.get('debounceInterval'));
+  },
+
+  _calcPageRectangle: function() {
     const el = this.$();
     const header = Ember.$('header.top-nav');
     const remainingHeight = window.innerHeight - header.height();
