@@ -1,4 +1,7 @@
 <header class='top-nav'>
   <div class='icon icon-menu menu'></div>
   {{layout/bread-crumbs treatise=treatise page=page sequence=sequence section=section}}
+  {{#if page}}
+    {{layout/page-nav pages=pages page=page treatise=treatise}}
+  {{/if}}
 </header>

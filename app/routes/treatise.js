@@ -19,23 +19,19 @@ var Route = BaseRoute.extend({
       return promise;
     }
   },
-  afterModel: function() {
-    this.set('title', 'Magoo');
+  afterModel: function(model) {
+    this.set('title', model.get('title'));
   },
-  renderTemplate: function() {
-    var controller = this.get('controller');
+  renderTemplate: function(controller, model) {
     this._super.apply(this, arguments);
-    this.render('components/layout/header', {
-      into: 'application',
-      outlet: 'header',
-      controller: this.makeController({
-        treatise: this.modelFor('treatise'),
-      }),
-    });
+    this.renderHeader({
+        treatise: model,
+        pages: model.get('pagesSorted'),
+      });
     this.render('page/menu', {
       into: 'application',
       outlet: 'leftMenu',
-      controller: controller
+      controller: this.controller,
     });
   },
   actions: {

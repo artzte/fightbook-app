@@ -23,10 +23,10 @@ Router.map(function() {
       });
 
       this.route('page', {
-        path: '/p/:pageId',
+        path: '/p/:slug',
         resetNamespace: true,
       }, function() {
-        this.route('section', { path: '/sec/:sort_order' });
+        this.route('section', { path: '/sec/:sortOrder' });
       });
     });
   });

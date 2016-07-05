@@ -4,18 +4,6 @@ export default Ember.Controller.extend({
   needs: ['application', 'page/section', 'treatises', 'treatise'],
   zoomStops: [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 5],
 
-  nextPage: (function() {
-    var treatise;
-    treatise = this.get('treatise');
-    return this.get('treatise').nextPage(this.get('content'));
-  }).property('content', 'treatise.isSettled', 'treatise.pages.@each'),
-
-  prevPage: (function() {
-    var treatise;
-    treatise = this.get('treatise');
-    return this.get('treatise').prevPage(this.get('content'));
-  }).property('content', 'treatise.isSettled', 'treatise.pages.@each'),
-
   timestampImageChangedAt: function() {
     this.set('imageViewChangedAt', new Date().getTime());
   },

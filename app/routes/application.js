@@ -43,10 +43,7 @@ var Route = BaseRoute.extend({
   },
   renderTemplate: function() {
     this._super.apply(this, arguments);
-    this.render('components/layout/header', {
-      into: 'application',
-      outlet: 'header',
-    });
+    this.renderHeader();
   },
   clearSession: function() {
     this.set('session.currentUser', undefined);

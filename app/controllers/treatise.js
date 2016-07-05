@@ -1,5 +1,6 @@
 import Ember from "ember";
 
 export default Ember.Controller.extend({
-  needs: ['application','treatises']
+  sortOrder: ['sortOrder'],
+  pagesSorted: Ember.computed.sort('model.pages', 'sortOrder'),
 });

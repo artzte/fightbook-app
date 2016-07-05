@@ -4,7 +4,7 @@ export default BaseRoute.extend({
   model: function(params) {
     var page = this.modelFor('page');
 
-    return page.get('sections').findBy('sortOrder', parseInt(params.sort_order, 10));
+    return page.get('sections').findBy('sortOrder', parseInt(params.sortOrder, 10));
   },
   setupController: function(controller, section) {
     var page = this.modelFor('page');
@@ -18,21 +18,12 @@ export default BaseRoute.extend({
     this.send('setSection', section);
     this.send('setBounds', section.get('osBounds'));
   },
-  renderTemplate: function(controller, section) {
-    this._super();
-    this.render('components/layout/header', {
-      into: 'application',
-      outlet: 'header',
-      controller: this.makeController({
-        treatise: this.modelFor('treatise'),
-        page: this.modelFor('page'),
-        section: section,
-      }),
-    });
+  renderTemplate: function(controller) {
+    this._super(...arguments);
     return this.render('page/section-title', {
       into: 'page',
       outlet: 'sectionTitle',
-      controller: this.get('controller')
+      controller: controller,
     });
   },
   actions: {

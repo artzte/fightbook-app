@@ -2,36 +2,26 @@ import BaseRoute from './_base';
 
 var Route = BaseRoute.extend({
   model: function(params) {
-    var page, store, treatise;
-    store = this.get('store');
-    treatise = this.modelFor('treatise');
-    page = treatise.get('pages').findBy('slug', params.pageId);
+    const treatise = this.modelFor('treatise');
+    const page = treatise.get('pages').findBy('slug', params.slug);
 
     if (page.get('_detail')) {
       return page;
     }
-    else {
-      var promise = page.reload();
-      promise.then(function(page) {
-        page.set('_detail', true);
-      });
-      return promise;
-    }
-  },
-  renderTemplate: function() {
-    this._super();
-    this.render('components/layout/header', {
-      into: 'application',
-      outlet: 'header',
-      controller: this.makeController({
-        treatise: this.modelFor('treatise'),
-        page: this.modelFor('page'),
-      }),
+
+    var promise = page.reload();
+    promise.then(function(page) {
+      page.set('_detail', true);
+      return page;
     });
-    this.render('page/nav', {
-      into: 'treatise',
-      outlet: 'treatiseNav',
-      controller: this.controller
+    return promise;
+  },
+  renderTemplate: function(controller, page) {
+    this._super(...arguments);
+    this.renderHeader({
+      treatise: this.modelFor('treatise'),
+      page: page,
+      pages: this.controllerFor('treatise').get('pagesSorted'),
     });
   },
   actions: {

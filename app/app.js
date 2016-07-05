@@ -3,6 +3,7 @@ import Resolver from 'ember/resolver';
 import DS from 'ember-data';
 import loadInitializers from 'ember/load-initializers';
 import config from './config/environment';
+import 'ember-cli-responsive/responsive';
 
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
@@ -37,14 +38,10 @@ Ember.Application.initializer({
 
     app.AttrHelpers = Ember.Object.extend({
       didChange: function(attrs, ...attrsToTest) {
-        if (!attrs.oldAttrs) {
-          return false;
-        }
-
         for (let i = 0, len = attrsToTest.length; i < len; i++) {
           const attr = attrsToTest[i];
-          const newAttr = attrs.newAttrs[attr].value;
-          const oldAttr = attrs.oldAttrs[attr] && attrs.oldAttrs[attr].value;
+          const newAttr = attrs.newAttrs && attrs.newAttrs[attr] && attrs.newAttrs[attr].value;
+          const oldAttr = attrs.oldAttrs && attrs.oldAttrs[attr] && attrs.oldAttrs[attr].value;
 
           if (oldAttr !== newAttr) {
             return true;

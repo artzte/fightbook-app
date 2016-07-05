@@ -17,16 +17,10 @@ $sectionBorder: #fff;
 $sectionBorderSelected: #888;
 $backgroundScreen: rgba(255,255,255,0.5);
 
-
 $accentColor: #a8614B;
 $creamColor: lighten($accentColor, 80);
 $header-font-color: $accentColor;
 
 $small-font-size: 80%;
 
-// drag handles and section rectangles
-$handleSize: 0.6rem;
-$handleOffset: ($handleSize / 2 * -1);
-$sectionBorder: #fff;
-$sectionBorderSelected: #888;
 
