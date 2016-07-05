@@ -1,7 +1,6 @@
 {{#page/sizing-rect as |sizingRect|}}
   <div class="main-left page-image-container">
     {{page-image
-      sizingRect=sizingRect.imageSizingRect
       boundsRect=boundsRect
       sections=model.sections
       section=section
@@ -11,7 +10,7 @@
       sdZoom="sdZoom"
       pageClick="pageClick"
       sectionMoved="sectionMoved"
-      imagesizingRectChanged="imagesizingRectChanged"
+        imagesizingRectChanged="imagesizingRectChanged"
       editMode=settings.editMode
       sectionClicked="sectionClicked"
     }}

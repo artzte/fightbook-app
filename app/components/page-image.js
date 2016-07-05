@@ -9,7 +9,10 @@ export default Ember.Component.extend({
 
     // did dziUrl change? if so reload
     if (didChange(attrs, 'dziUrl')) {
-      this.get('sdViewer').open(attrs.newAttrs.dziUrl.value);
+      const sdViewer = this.get('sdViewer');
+      if (sdViewer) {
+        sdViewer.open(attrs.newAttrs.dziUrl.value);
+      }
       return;
     }
 

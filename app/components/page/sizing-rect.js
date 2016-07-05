@@ -24,8 +24,32 @@ export default Ember.Component.extend({
     Ember.run.debounce(this, this._calcPageRectangle, this.get('debounceInterval'));
   },
 
+  _computeImageSizingRect() {
+    const sizingRect = this.get('sizingRect');
+    const sizingRectStyle = `height: ${sizingRect.height}px`;
+
+    this.set('sizingRectStyle', sizingRectStyle);
+
+    this.set('imageSizingRect',  {
+      width: this.$('.page-image').width(),
+      height: sizingRect.height,
+    });
+
+    if(this.get('media.isSmall')) {
+      this.set('sizeContentStyle', '');
+    }
+    else {
+      this.set('sizeContentStyle', sizingRectStyle);
+    }
+  },
+
   _calcPageRectangle: function() {
     const el = this.$();
+
+    if (!el){
+      return;
+    }
+
     const header = Ember.$('header.top-nav');
     const remainingHeight = window.innerHeight - header.height();
 
@@ -36,25 +60,6 @@ export default Ember.Component.extend({
 
     this.set('sizingRect', sizingRect);
 
-    function computeImageSizingRect() {
-      const sizingRect = this.get('sizingRect');
-      const sizingRectStyle = `height: ${sizingRect.height}px`;
-
-      this.set('sizingRectStyle', sizingRectStyle);
-
-      this.set('imageSizingRect',  {
-        width: this.$('.page-image').width(),
-        height: sizingRect.height,
-      });
-
-      if(this.get('media.isSmall')) {
-        this.set('sizeContentStyle', '');
-      }
-      else {
-        this.set('sizeContentStyle', sizingRectStyle);
-      }
-    }
-
-    Ember.run.scheduleOnce('afterRender', this, computeImageSizingRect);
+    Ember.run.scheduleOnce('afterRender', this, this._computeImageSizingRect);
   },
 });
